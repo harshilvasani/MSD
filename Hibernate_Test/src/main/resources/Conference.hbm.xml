@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="resources.PublicationRecord.Conference" table="conference" catalog="dblp">
+    
+     	<id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity" />
+        </id> 
+        
+        <property name="confKey" type="string">
+            <column name="conf_key" length="500" not-null="true"/>           
+        </property>
+        
+        <property name="confName" type="string">
+            <column name="name" length="500" not-null="true"/>
+        </property>
+               
+        <property name="detail" type="string">
+            <column name="detail" length="1000" not-null="true"/>
+        </property>
+               
+    </class>
+</hibernate-mapping>
