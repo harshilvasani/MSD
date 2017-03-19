@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="resources.publicationRecord.Book" table="book" catalog="dblp2">
+    
+     	<id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity" />
+        </id> 
+        
+        <property name="key" type="string">
+            <column name="book_key" length="250" not-null="true"/>           
+        </property>
+        
+        <property name="editorName" type="string">
+            <column name="editor" length="250" not-null="true"/>
+        </property>
+               
+        <property name="title" type="string">
+            <column name="title" length="1000" not-null="true"/>
+        </property>
+        
+        <property name="year" type="string">
+            <column name="year" length="10" not-null="true"/>
+        </property>
+        
+        <property name="publisherName" type="string">
+            <column name="publisher" length="250" not-null="true"/>
+        </property>
+               
+    </class>
+</hibernate-mapping>
