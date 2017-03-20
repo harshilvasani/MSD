@@ -213,4 +213,38 @@ public class HibernateCRUD {
 	      }
 	}
 
+	public static void readTopXCommitteeMemberRows(int rowsCount){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		
+		session.beginTransaction();
+		
+		 try{
+	         tx = session.beginTransaction();
+	          
+	         Query queryResult = session.createQuery("from CommitteeMember");
+	         
+	         queryResult.setMaxResults(rowsCount);
+	            
+			 @SuppressWarnings("unchecked")
+			List<CommitteeMember> committeeMembers  = queryResult.list();
+	         
+	         for (Iterator<CommitteeMember> iterator = committeeMembers.iterator(); iterator.hasNext();){
+	        	 CommitteeMember committeeMember = iterator.next(); 
+	        	 
+		        System.out.println("author name: " + committeeMember.getMemberName()); 
+	         }
+	         System.out.println();
+
+	         tx.commit();
+	         
+	      }catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	         
+	      }finally {
+	         session.close(); 
+	      }
+	}
+
 }

@@ -20,14 +20,14 @@ public class Database {
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/dblp2?useServerPrepStmts=false&rewriteBatchedStatements=true";
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "";//ur password
+	private static final String DB_PASSWORD = "Vasani99";
 	
 	public static String insertTableSQL = null;
 
 	private static Connection dbConnection = null;
 	private static Statement statement = null;
 
-	public static void insertDblpData(DBLP dblpTag) throws SQLException {
+	public static void InsertDblpData(DBLP dblpTag) throws SQLException {
 
 		try {
 			if(dblpTag == null)
@@ -440,6 +440,76 @@ public class Database {
 			System.out.println(e.getMessage());
 
 		}
+	}
+
+	public static void InsertCommitteeData(List<CommitteeMember> committeeMembers) throws SQLException {
+
+		try {
+			if(committeeMembers == null || committeeMembers.isEmpty())
+				return;
+			
+			try {
+				Class.forName(DB_DRIVER);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			
+			dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+    		
+			statement = ((java.sql.Connection) dbConnection).createStatement();
+			
+			String insertSql = "INSERT INTO committee_member(conf_name, year, member_name, member_position) VALUES (?, ?, ?, ?)";
+			PreparedStatement pstmt = (PreparedStatement) dbConnection.prepareStatement(insertSql);
+
+			final int batchSize = 10000;
+			int i=0;
+			
+			for(CommitteeMember committeeMember:committeeMembers) {
+
+				String confName = committeeMember.getConfName();
+				String year = committeeMember.getYear();
+				String memberName = committeeMember.getMemberName();
+				String memberPosition = committeeMember.getPosition();
+				
+				if(confName == null || confName.isEmpty() || year == null || year.isEmpty() 
+						|| memberName == null || memberName.isEmpty()){
+					//had school null
+					continue;
+				}
+
+				pstmt.setString(1, confName); 
+				pstmt.setString(2, year);
+				pstmt.setString(3, memberName);	
+				pstmt.setString(4, memberPosition);
+					
+				pstmt.addBatch();
+				
+				if(++i % batchSize == 0) {
+					pstmt.executeBatch();
+				}
+				
+			}
+			pstmt.executeBatch();
+			System.out.println("Records is inserted into committee_member table!");
+						
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+
+		}
+		finally {
+
+			if (statement != null) {
+				statement.close();
+			}
+
+			if (dbConnection != null) {
+				((java.sql.Connection) dbConnection).close();
+			}
+
+		}
+
 	}
 
 	

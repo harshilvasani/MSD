@@ -18,5 +18,6 @@
 		<mapping resource="hibernateXml/Inproceeding.hbm.xml"></mapping>
 		<mapping resource="hibernateXml/PhdThesis.hbm.xml"></mapping>
 		<mapping resource="hibernateXml/Proceeding.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/CommitteeMember.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>

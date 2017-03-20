@@ -9,7 +9,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dblp2</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">ur password</property>
+        <property name="hibernate.connection.password">Vasani99</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">false</property>
         <mapping resource="hibernateXml/Article.hbm.xml"></mapping>
@@ -18,5 +18,6 @@
 		<mapping resource="hibernateXml/Inproceeding.hbm.xml"></mapping>
 		<mapping resource="hibernateXml/PhdThesis.hbm.xml"></mapping>
 		<mapping resource="hibernateXml/Proceeding.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/CommitteeMember.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>
