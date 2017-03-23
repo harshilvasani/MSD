@@ -23,7 +23,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		frontend.loadData(25);
+		frontend.loadData(20);
 		
 		App app = new App();
 		
