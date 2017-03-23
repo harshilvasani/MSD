@@ -1,4 +1,4 @@
-package frontEnd.parser.publicationRecord;
+package frontEnd.parser.publicationrecord;
 
 public class CommitteeMember {
 	

@@ -1,4 +1,4 @@
-package frontEnd.parser.publicationRecord;
+package frontEnd.parser.publicationrecord;
 
 import java.util.List;
 

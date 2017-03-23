@@ -1,4 +1,4 @@
-package frontEnd.parser.publicationRecord;
+package frontEnd.parser.publicationrecord;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;

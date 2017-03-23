@@ -8,10 +8,10 @@ import queryengine.interfaces.ISearch;
 import queryengine.query.utils.Title;
 import resources.personRecord.Author;
 import resources.personRecord.IPerson;
-import resources.publicationRecord.Article;
-import resources.publicationRecord.Incollection;
-import resources.publicationRecord.Inproceeding;
-import resources.publicationRecord.PhdThesis;
+import resources.publicationrecord.Article;
+import resources.publicationrecord.Incollection;
+import resources.publicationrecord.Inproceeding;
+import resources.publicationrecord.PhdThesis;
 
 public class SearchUtils {
 

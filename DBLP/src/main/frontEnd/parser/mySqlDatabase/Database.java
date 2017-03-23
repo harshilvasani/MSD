@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
 
-import frontEnd.parser.publicationRecord.*;
+import frontEnd.parser.publicationrecord.*;
 
 public class Database {
 

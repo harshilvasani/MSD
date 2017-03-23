@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 import javax.xml.bind.*;
 
-import frontEnd.parser.publicationRecord.*;
+import frontEnd.parser.publicationrecord.*;
 
 public class Parser {
 	private static Map<String, String> sMap = null;

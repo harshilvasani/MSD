@@ -6,7 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import frontEnd.parser.Parser;
-import frontEnd.parser.publicationRecord.DBLP;
+import frontEnd.parser.publicationrecord.DBLP;
 
 public class XmlParserTest {
 

@@ -11,8 +11,8 @@ import org.hibernate.Transaction;
 
 import frontEnd.parser.Parser;
 import frontEnd.parser.mySqlDatabase.Database;
-import frontEnd.parser.publicationRecord.CommitteeMember;
-import frontEnd.parser.publicationRecord.DBLP;
+import frontEnd.parser.publicationrecord.CommitteeMember;
+import frontEnd.parser.publicationrecord.DBLP;
 import persistence.Data;
 import persistence.HibernateUtil;
 

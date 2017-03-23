@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import frontEnd.parser.Parser;
-import frontEnd.parser.publicationRecord.CommitteeMember;
+import frontEnd.parser.publicationrecord.CommitteeMember;
 
 public class ParseFilesForFolderTest {
 
