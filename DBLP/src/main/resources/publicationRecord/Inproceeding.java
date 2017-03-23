@@ -1,6 +1,6 @@
 package resources.publicationRecord;
 
-public class Inproceeding {
+public class Inproceeding{
 	
 	private int id;
 	private String key;

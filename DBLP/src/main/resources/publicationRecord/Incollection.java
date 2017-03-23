@@ -1,6 +1,6 @@
 package resources.publicationRecord;
 
-public class Incollection {
+public class Incollection{
 	
 	private int id;
 	private String key;

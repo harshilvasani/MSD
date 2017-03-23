@@ -1,6 +1,6 @@
 package resources.publicationRecord;
 
-public class PhdThesis {
+public class PhdThesis{
 	
 	private int id;
 	private String key;

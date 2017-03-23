@@ -1,6 +1,6 @@
 package resources.publicationRecord;
 
-public class Article {
+public class Article{
 		
 	private int id;
 	private String key;
