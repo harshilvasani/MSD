@@ -2,7 +2,7 @@ package persistence;
 
 import java.util.List;
 
-import resources.publicationrecord.*;
+import resources.publicationRecord.*;
 
 public class Data {
 

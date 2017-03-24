@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="resources.publicationrecord.Proceeding" table="proceeding" catalog="dblp2">
+    <class name="resources.publicationRecord.Proceeding" table="proceeding" catalog="dblp">
     
      	<id name="id" type="java.lang.Integer">
             <column name="id"/>

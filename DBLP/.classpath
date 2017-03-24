@@ -5,7 +5,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Harshil Vasani/Desktop/JAVA-Downloads/mysql-connector-java-5.1.41/mysql-connector-java-5.1.41/mysql-connector-java-5.1.41-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -23,5 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/akash/Desktop/MSD_Cancel/dblp-parser-master/lib/mysql-connector-java-6.0-bin.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,4 +1,4 @@
-package resources.publicationrecord;
+package resources.publicationRecord;
 
 public class Book {
 	
