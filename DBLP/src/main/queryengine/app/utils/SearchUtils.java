@@ -99,6 +99,7 @@ public class SearchUtils {
 			Author author = new Author(article.getAuthorName(),
 										article.getId(),
 										article.getTitle(),
+										article.getJournalName(),
 										article.getYear(),
 										PublicationType.ARTICLE);
 			
@@ -127,6 +128,7 @@ public class SearchUtils {
 			Author author = new Author(incollection.getAuthorName(),
 										incollection.getId(),
 										incollection.getTitle(),
+										"",
 										incollection.getYear(),
 										PublicationType.INCOLLECTION);
 			searchedAuthor.add(author);
@@ -155,6 +157,7 @@ public class SearchUtils {
 			Author author = new Author(inproceeding.getAuthorName(),
 										inproceeding.getId(),
 										inproceeding.getTitle(),
+										"",
 										inproceeding.getYear(),
 										PublicationType.INPROCEEDING);
 
@@ -184,6 +187,7 @@ public class SearchUtils {
 			Author author = new Author(phdThesis.getAuthorName(),
 										phdThesis.getId(),
 										phdThesis.getTitle(),
+										"",
 										phdThesis.getYear(),
 										PublicationType.PHDTHESIS);
 			searchedAuthor.add(author);

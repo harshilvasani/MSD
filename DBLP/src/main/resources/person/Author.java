@@ -7,19 +7,21 @@ public class Author implements IPerson{
 	private String name;
 	private Integer publicationId;// can be article, incollection, inproceeding or phdthesis
 	private String publicationTitle;
+	private String journalName;
 	private int publicationYear;
 	private PublicationType publicationType;
 
-	public Author(String name, int publicationId, String publicationTitle,
+	public Author(String name, int publicationId, String publicationTitle, String journalName,
 					String publicationYear, String publicationType) {
 		this.id = id;
 		this.name = name;
 		this.publicationId = publicationId;
 		this.publicationTitle = publicationTitle;
+		this.journalName = journalName;
 		this.publicationYear = Integer.parseInt(publicationYear);
 		this.publicationType = PublicationType.valueOf(publicationType);
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -50,6 +52,14 @@ public class Author implements IPerson{
 		this.publicationTitle = publicationTitle;
 	}
 	
+	public String getJournalName() {
+		return journalName;
+	}
+
+	public void setJournalName(String journalName) {
+		this.journalName = journalName;
+	}
+	
 	public int getPublicationYear() {
 		return publicationYear;
 	}
@@ -70,6 +80,7 @@ public class Author implements IPerson{
 				" Name: " + this.name +
 				" Publication ID: " + this.publicationId +
 				" Publication Year: " + this.publicationYear +
+				" Journal Name: " + this.journalName +
 				" Publication Title: " + this.publicationTitle +
 				" Publication Type: " + this.publicationType;
 				

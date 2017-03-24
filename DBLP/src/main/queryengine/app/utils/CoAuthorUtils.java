@@ -39,6 +39,7 @@ public class CoAuthorUtils {
 				Author author = new Author(a.getAuthorName(),
 											a.getId(), 
 											a.getTitle(), 
+											a.getJournalName(),
 											a.getYear(),
 											PublicationType.ARTICLE);
 				searchedAuthor.add(author);
