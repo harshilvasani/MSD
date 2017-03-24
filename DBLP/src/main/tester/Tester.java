@@ -8,6 +8,7 @@ import queryengine.app.App;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Title;
+import queryengine.query.utils.Year;
 import resources.personRecord.Author;
 import resources.personRecord.Editor;
 import resources.personRecord.IPerson;
@@ -24,14 +25,14 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		frontend.loadData(30);
+		frontend.loadData(200);
 		
 		App app = new App();
 		
 		// From front end
 		List<ISearch> searchCriteria = new ArrayList<ISearch>();
 		searchCriteria.add(new Title("proc"));
-		
+		searchCriteria.add(new Year(2007));
 		List<IPerson> searchPerson = app.search(searchCriteria);
 		
 		for(IPerson person: searchPerson){

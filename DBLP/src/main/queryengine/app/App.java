@@ -2,10 +2,13 @@ package queryengine.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import antlr.debug.SemanticPredicateAdapter;
 import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
 import queryengine.query.utils.AuthorName;
+import queryengine.query.utils.Year;
+import resources.personRecord.Author;
 import resources.personRecord.IPerson;
 import resources.personRecord.User;
 
@@ -27,7 +30,21 @@ public class App implements IApp{
 
 		// PhdThesis Processing
 		searchedAuthor.addAll(SearchUtils.processPhdThesis(searchCriteria));
-
+		
+		// Publications after a year
+		List<IPerson> temp = new ArrayList<IPerson>();
+		for (ISearch s: searchCriteria) {
+			if (s instanceof Year) {
+				int pubYear = ((Year) s).getYear();
+				
+				for (IPerson p: searchedAuthor) {
+					if (p instanceof Author && ((Author) p).getPublicationYear() >= pubYear) {
+						temp.add(p);
+					}	
+				}
+			}
+		}
+		searchedAuthor = temp;
 		// Then Return authors -- From all refined results
 		return searchedAuthor;
 	}

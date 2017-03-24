@@ -7,7 +7,7 @@ public class Author implements IPerson{
 	private String name;
 	private Integer publicationId;// can be article, incollection, inproceeding or phdthesis
 	private String publicationTitle;
-	private String publicationYear;
+	private int publicationYear;
 	private PublicationType publicationType;
 
 	public Author(String name, int publicationId, String publicationTitle,
@@ -16,7 +16,7 @@ public class Author implements IPerson{
 		this.name = name;
 		this.publicationId = publicationId;
 		this.publicationTitle = publicationTitle;
-		this.publicationYear = publicationYear;
+		this.publicationYear = Integer.parseInt(publicationYear);
 		this.publicationType = PublicationType.valueOf(publicationType);
 	}
 	
@@ -50,11 +50,11 @@ public class Author implements IPerson{
 		this.publicationTitle = publicationTitle;
 	}
 	
-	public String getPublicationYear() {
+	public int getPublicationYear() {
 		return publicationYear;
 	}
 	public void setPublicationYear(String publicationYear) {
-		this.publicationYear = publicationYear;
+		this.publicationYear = Integer.parseInt(publicationYear);
 	}
 	
 	public PublicationType getPublicationType() {
