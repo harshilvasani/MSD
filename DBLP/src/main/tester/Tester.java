@@ -21,11 +21,11 @@ public class Tester {
 		//
 		/*object should not die*/
 		//
-		BackEnd frontend = new BackEnd();
+		BackEnd backend = new BackEnd();
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		frontend.loadData(30);
+		backend.loadData(30);
 		
 		App app = new App();
 		
