@@ -3,7 +3,7 @@ package tester;
 import java.util.ArrayList;
 import java.util.List;
 
-import backend.FrontEnd;
+import backend.BackEnd;
 import queryengine.app.App;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AuthorName;
@@ -21,7 +21,7 @@ public class Tester {
 		//
 		/*object should not die*/
 		//
-		FrontEnd frontend = new FrontEnd();
+		BackEnd frontend = new BackEnd();
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();

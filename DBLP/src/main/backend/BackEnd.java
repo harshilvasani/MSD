@@ -16,7 +16,7 @@ import backend.parser.pubrec.DBLP;
 import persistence.Data;
 import persistence.HibernateUtil;
 
-public class FrontEnd implements IFrontEnd {
+public class BackEnd implements IBackEnd {
 
 	private static String fileUri = "C:/Users/Harshil Vasani/Desktop/NEU/Sem - 3/MSD/Project/DATA/dblp.xml";
 	final static File folder = new File("C:/Users/Harshil Vasani/Desktop/NEU/Sem - 3/MSD/Project/DATA/committees");

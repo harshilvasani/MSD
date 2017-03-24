@@ -1,6 +1,6 @@
 package backend;
 
-public interface IFrontEnd {
+public interface IBackEnd {
 
 	void parseXMLAndInsertData();
 	void textParser();
