@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import antlr.debug.SemanticPredicateAdapter;
+import queryengine.app.utils.CoAuthorUtils;
+import queryengine.app.utils.SearchUtils;
 import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;

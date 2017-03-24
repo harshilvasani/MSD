@@ -1,4 +1,4 @@
-package queryengine.app;
+package queryengine.app.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,9 +84,7 @@ public class SearchUtils {
 		List<Article> filteredArticles = new ArrayList<Article>();
 
 		for (Article a: refinedArticleDataSet) {
-			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle())) {
-
+			if (keyWordMatchFound(a.getTitle(), t.getKeys())) {
 				filteredArticles.add(a);
 			}
 		}
@@ -97,10 +95,6 @@ public class SearchUtils {
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
-		/*
-		 * String name, int publicationId, String publicationTitle,
-					String publicationYear, PublicationType publicationType
-		 */
 		for(Article article:refinedArticleDataSet ){
 			Author author = new Author(article.getAuthorName(),
 										article.getId(),
@@ -117,11 +111,9 @@ public class SearchUtils {
 
 		List<Incollection> filteredIncollections = new ArrayList<Incollection>();
 
-		for (Incollection a: refinedIncollectionDataSet) {
-			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle())) {
-
-				filteredIncollections.add(a);
+		for (Incollection i: refinedIncollectionDataSet) {
+			if (keyWordMatchFound(i.getTitle(), t.getKeys())) {
+				filteredIncollections.add(i);
 			}
 		}
 		return filteredIncollections;
@@ -147,11 +139,9 @@ public class SearchUtils {
 
 		List<Inproceeding> filteredInproceedings = new ArrayList<Inproceeding>();
 
-		for (Inproceeding a: refinedInproceedingDataSet) {
-			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle())) {
-
-				filteredInproceedings.add(a);
+		for (Inproceeding i: refinedInproceedingDataSet) {
+			if (keyWordMatchFound(i.getTitle(), t.getKeys())) {
+				filteredInproceedings.add(i);
 			}
 		}
 		return filteredInproceedings;
@@ -178,11 +168,9 @@ public class SearchUtils {
 
 		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
 
-		for (PhdThesis a: refinedPhdThesisDataSet) {
-			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle())) {
-
-				filteredPhdTheses.add(a);
+		for (PhdThesis p: refinedPhdThesisDataSet) {
+			if (keyWordMatchFound(p.getTitle(), t.getKeys())) {
+				filteredPhdTheses.add(p);
 			}
 		}
 		return filteredPhdTheses;
@@ -204,10 +192,30 @@ public class SearchUtils {
 		return searchedAuthor;
 	}
 	
+	private static boolean keyWordMatchFound(String title, String[] keys) {
+		
+		if (title == null) {
+			return false;
+		}
+		
+		float  keySize = keys.length;
+		float matchingWords = 0;
+		title = title.toLowerCase();
+		for (String key: keys) {
+			if (title.contains(key)) {
+				matchingWords++;
+			}
+		}
+		
+		return ((matchingWords / keySize) >= MIN_MATCH_PERCENTAGE);
+	}
+	
 	public class PublicationType { 
 		public static final String ARTICLE = "article";
 		public static final String INCOLLECTION = "incollection";
 		public static final String INPROCEEDING = "inproceeding";
 		public static final String PHDTHESIS = "phdthesis";
 	}
+	
+	public static final float MIN_MATCH_PERCENTAGE = (float) 0.66;
 }

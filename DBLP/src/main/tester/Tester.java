@@ -25,14 +25,14 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		frontend.loadData(200);
+		frontend.loadData(30);
 		
 		App app = new App();
 		
 		// From front end
 		List<ISearch> searchCriteria = new ArrayList<ISearch>();
-		searchCriteria.add(new Title("proc"));
-		searchCriteria.add(new Year(2007));
+		searchCriteria.add(new Title("proc natural rkorter unsupv"));
+		searchCriteria.add(new Year(2000));
 		List<IPerson> searchPerson = app.search(searchCriteria);
 		
 		for(IPerson person: searchPerson){

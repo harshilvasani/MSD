@@ -1,4 +1,4 @@
-package queryengine.app;
+package queryengine.app.utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import persistence.Data;
-import queryengine.app.SearchUtils.PublicationType;
+import queryengine.app.utils.SearchUtils.PublicationType;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Title;
