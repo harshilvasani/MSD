@@ -1,5 +1,5 @@
 package queryengine.interfaces;
 
-public interface ICoAuthorSearch {
+public interface ICoAuthorSearch extends IQuery{
 
 }
