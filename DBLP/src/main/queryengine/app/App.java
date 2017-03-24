@@ -34,9 +34,9 @@ public class App implements IApp{
 		searchedAuthor.addAll(SearchUtils.processPhdThesis(searchCriteria));
 		
 		// Publications after a year
-		List<IPerson> temp = new ArrayList<IPerson>();
 		for (ISearch s: searchCriteria) {
 			if (s instanceof Year) {
+				List<IPerson> temp = new ArrayList<IPerson>();
 				int pubYear = ((Year) s).getYear();
 				
 				for (IPerson p: searchedAuthor) {
@@ -44,9 +44,9 @@ public class App implements IApp{
 						temp.add(p);
 					}	
 				}
+				searchedAuthor = temp;
 			}
 		}
-		searchedAuthor = temp;
 		// Then Return authors -- From all refined results
 		return searchedAuthor;
 	}
