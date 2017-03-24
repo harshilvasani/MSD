@@ -6,7 +6,7 @@ public class Title implements ISearch {
 	private String title;
 
 	public Title(String title) {
-		this.title = title;
+		this.title = title.toLowerCase();
 	}
 	
 	public String getTitle() {
@@ -14,6 +14,6 @@ public class Title implements ISearch {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title.toLowerCase();
 	}
 }

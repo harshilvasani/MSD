@@ -2,13 +2,14 @@ package queryengine.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
+import queryengine.query.utils.AuthorName;
 import resources.personRecord.IPerson;
 import resources.personRecord.User;
 
 public class App implements IApp{
-
 
 	public List<IPerson> search(List<ISearch> searchCriteria) {
 
@@ -46,6 +47,15 @@ public class App implements IApp{
 	@Override
 	public ResponseMessage updateProfile(User regInformation) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria) {
+		if (searchCriteria instanceof AuthorName) {
+			AuthorName authorName = (AuthorName) searchCriteria;
+			return CoAuthorUtils.processArticles(authorName);	
+		}
 		return null;
 	}
 }

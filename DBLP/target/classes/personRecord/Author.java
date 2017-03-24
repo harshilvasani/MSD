@@ -10,6 +10,16 @@ public class Author implements IPerson{
 	private String publicationYear;
 	private PublicationType publicationType;
 
+	public Author(String name, int publicationId, String publicationTitle,
+					String publicationYear, String publicationType) {
+		this.id = id;
+		this.name = name;
+		this.publicationId = publicationId;
+		this.publicationTitle = publicationTitle;
+		this.publicationYear = publicationYear;
+		this.publicationType = PublicationType.valueOf(publicationType);
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -53,4 +63,15 @@ public class Author implements IPerson{
 	public void setPublicationType(String publicationType) {
 		this.publicationType = PublicationType.valueOf(publicationType);
 	}	
+	
+	@Override
+	public String toString() {
+		return "ID: " + this.id +
+				" Name: " + this.name +
+				" Publication ID: " + this.publicationId +
+				" Publication Year: " + this.publicationYear +
+				" Publication Title: " + this.publicationTitle +
+				" Publication Type: " + this.publicationType;
+				
+	}
 }

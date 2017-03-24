@@ -66,4 +66,21 @@ public class Article{
 	public void setJournalName(String journalName) {
 		this.journalName = journalName;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Article) {
+			Article a = (Article) obj;
+			return a.title.equals(this.title) &&
+					a.journalName.equals(this.journalName) &&
+					a.year.equals(this.year);
+		}
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (this.title + this.journalName + this.year).hashCode();
+	}
 }

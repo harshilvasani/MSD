@@ -3,6 +3,7 @@ package queryengine.app;
 
 import java.util.List;
 
+import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
 import resources.personRecord.IPerson;
@@ -14,6 +15,7 @@ public interface IApp {
 	ResponseMessage register(User regInformation);
 	ResponseMessage updateProfile(User regInformation);
 	List<IPerson> search(List<ISearch> searchCriteria);
+	List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria);
 	/*List<IPerson> filter(List<?> criteria, List<?> filterData);
 	List<?> displayStatistic();
 	List<?> getSimilarPerson();

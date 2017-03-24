@@ -6,6 +6,7 @@ import java.util.List;
 import frontEnd.FrontEnd;
 import queryengine.app.App;
 import queryengine.interfaces.ISearch;
+import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Title;
 import resources.personRecord.Author;
 import resources.personRecord.Editor;
@@ -23,7 +24,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		frontend.loadData(20);
+		frontend.loadData(30);
 		
 		App app = new App();
 		
@@ -33,13 +34,9 @@ public class Tester {
 		
 		List<IPerson> searchPerson = app.search(searchCriteria);
 		
-		for(IPerson person:searchPerson){
+		for(IPerson person: searchPerson){
 			if(person instanceof Author){
-				System.out.println(((Author)person).getPersonName());
-				System.out.println(((Author)person).getPublicationTitle());
-				System.out.println(((Author)person).getPublicationType());
-				System.out.println(((Author)person).getPublicationYear());
-				System.out.println(((Author)person).getPublicationId());
+				System.out.println(((Author)person).toString());
 				System.out.println();
 			}
 			if(person instanceof Editor){
@@ -47,5 +44,21 @@ public class Tester {
 
 			}
 		}
+		System.out.println("---------------------------- COmmon Authors ---------");
+		// 
+		AuthorName aname = new AuthorName("Christian");
+		searchPerson = app.searchCoAuthors(aname);
+		for(IPerson person: searchPerson){
+			if(person instanceof Author){
+				System.out.println(((Author)person).toString());
+				System.out.println();
+			}
+			if(person instanceof Editor){
+				System.out.println(((Editor)person).getPersonName());
+
+			}
+		}
+		
+		//Victor Khomenko
 	}
 }

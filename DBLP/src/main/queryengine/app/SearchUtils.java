@@ -11,7 +11,7 @@ import resources.personRecord.IPerson;
 import resources.publicationRecord.*;
 
 public class SearchUtils {
-
+	
 	public static List<IPerson> processArticles(List<ISearch> searchCriteria){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
@@ -19,13 +19,13 @@ public class SearchUtils {
 		List<Article> refinedArticleDataSet = Data.getArticles();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedArticleDataSet = SearchUtils.processArticlesByTitle((Title) i, refinedArticleDataSet);
+				refinedArticleDataSet = processArticlesByTitle((Title) i, refinedArticleDataSet);
 			}
 			//TODO add other search criteria
 			
 		}
 		// after refinedArticleDataSet is final
-		searchedAuthor.addAll(SearchUtils.getAuthorFromRefinedArticleDataSet(refinedArticleDataSet));
+		searchedAuthor.addAll(getAuthorFromRefinedArticleDataSet(refinedArticleDataSet));
 		return searchedAuthor;
 	}
 
@@ -85,7 +85,7 @@ public class SearchUtils {
 
 		for (Article a: refinedArticleDataSet) {
 			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle().toLowerCase())) {
+					a.getTitle().toLowerCase().contains(t.getTitle())) {
 
 				filteredArticles.add(a);
 			}
@@ -97,18 +97,19 @@ public class SearchUtils {
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
+		/*
+		 * String name, int publicationId, String publicationTitle,
+					String publicationYear, PublicationType publicationType
+		 */
 		for(Article article:refinedArticleDataSet ){
-			Author author = new Author();
-
-			author.setPersonName(article.getAuthorName());
-			author.setPublicationType("article");
-			author.setPublicationId(article.getId());
-			author.setPublicationTitle(article.getTitle());
-			author.setPublicationYear(article.getYear());
-
+			Author author = new Author(article.getAuthorName(),
+										article.getId(),
+										article.getTitle(),
+										article.getYear(),
+										PublicationType.ARTICLE);
+			
 			searchedAuthor.add(author);
 		}
-
 		return searchedAuthor;
 	}
 
@@ -118,7 +119,7 @@ public class SearchUtils {
 
 		for (Incollection a: refinedIncollectionDataSet) {
 			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle().toLowerCase())) {
+					a.getTitle().toLowerCase().contains(t.getTitle())) {
 
 				filteredIncollections.add(a);
 			}
@@ -131,14 +132,11 @@ public class SearchUtils {
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
 		for(Incollection incollection:refinedIncollectionDataSet ){
-			Author author = new Author();
-
-			author.setPersonName(incollection.getAuthorName());
-			author.setPublicationType("incollection");
-			author.setPublicationId(incollection.getId());
-			author.setPublicationTitle(incollection.getTitle());
-			author.setPublicationYear(incollection.getYear());
-
+			Author author = new Author(incollection.getAuthorName(),
+										incollection.getId(),
+										incollection.getTitle(),
+										incollection.getYear(),
+										PublicationType.INCOLLECTION);
 			searchedAuthor.add(author);
 		}
 
@@ -151,7 +149,7 @@ public class SearchUtils {
 
 		for (Inproceeding a: refinedInproceedingDataSet) {
 			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle().toLowerCase())) {
+					a.getTitle().toLowerCase().contains(t.getTitle())) {
 
 				filteredInproceedings.add(a);
 			}
@@ -164,13 +162,11 @@ public class SearchUtils {
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
 		for(Inproceeding inproceeding:refinedInproceedingDataSet ){
-			Author author = new Author();
-
-			author.setPersonName(inproceeding.getAuthorName());
-			author.setPublicationType("inproceeding");
-			author.setPublicationId(inproceeding.getId());
-			author.setPublicationTitle(inproceeding.getTitle());
-			author.setPublicationYear(inproceeding.getYear());
+			Author author = new Author(inproceeding.getAuthorName(),
+										inproceeding.getId(),
+										inproceeding.getTitle(),
+										inproceeding.getYear(),
+										PublicationType.INPROCEEDING);
 
 			searchedAuthor.add(author);
 		}
@@ -184,7 +180,7 @@ public class SearchUtils {
 
 		for (PhdThesis a: refinedPhdThesisDataSet) {
 			if (a.getTitle() != null && 
-					a.getTitle().toLowerCase().contains(t.getTitle().toLowerCase())) {
+					a.getTitle().toLowerCase().contains(t.getTitle())) {
 
 				filteredPhdTheses.add(a);
 			}
@@ -197,18 +193,21 @@ public class SearchUtils {
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
 		for(PhdThesis phdThesis:refinedPhdThesisDataSet ){
-			Author author = new Author();
-
-			author.setPersonName(phdThesis.getAuthorName());
-			author.setPublicationType("phdthesis");
-			author.setPublicationId(phdThesis.getId());
-			author.setPublicationTitle(phdThesis.getTitle());
-			author.setPublicationYear(phdThesis.getYear());
-
+			Author author = new Author(phdThesis.getAuthorName(),
+										phdThesis.getId(),
+										phdThesis.getTitle(),
+										phdThesis.getYear(),
+										PublicationType.PHDTHESIS);
 			searchedAuthor.add(author);
 		}
 
 		return searchedAuthor;
 	}
-
+	
+	public class PublicationType { 
+		public static final String ARTICLE = "article";
+		public static final String INCOLLECTION = "incollection";
+		public static final String INPROCEEDING = "inproceeding";
+		public static final String PHDTHESIS = "phdthesis";
+	}
 }
