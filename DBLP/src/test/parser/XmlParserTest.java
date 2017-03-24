@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import frontEnd.parser.Parser;
-import frontEnd.parser.publicationRecord.DBLP;
+import backend.parser.Parser;
+import backend.parser.pubrec.DBLP;
 
 public class XmlParserTest {
 

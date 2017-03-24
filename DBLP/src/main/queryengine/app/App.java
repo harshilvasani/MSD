@@ -8,9 +8,9 @@ import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Year;
-import resources.personRecord.Author;
-import resources.personRecord.IPerson;
-import resources.personRecord.User;
+import resources.person.Author;
+import resources.person.IPerson;
+import resources.person.User;
 
 public class App implements IApp{
 

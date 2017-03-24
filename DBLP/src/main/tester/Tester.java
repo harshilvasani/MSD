@@ -3,15 +3,15 @@ package tester;
 import java.util.ArrayList;
 import java.util.List;
 
-import frontEnd.FrontEnd;
+import backend.FrontEnd;
 import queryengine.app.App;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Title;
 import queryengine.query.utils.Year;
-import resources.personRecord.Author;
-import resources.personRecord.Editor;
-import resources.personRecord.IPerson;
+import resources.person.Author;
+import resources.person.Editor;
+import resources.person.IPerson;
 
 
 public class Tester {

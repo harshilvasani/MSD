@@ -6,8 +6,8 @@ import java.util.List;
 import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
-import resources.personRecord.IPerson;
-import resources.personRecord.User;
+import resources.person.IPerson;
+import resources.person.User;
 
 public interface IApp {
 	

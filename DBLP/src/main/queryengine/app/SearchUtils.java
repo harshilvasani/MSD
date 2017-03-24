@@ -6,9 +6,9 @@ import java.util.List;
 import persistence.Data;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.Title;
-import resources.personRecord.Author;
-import resources.personRecord.IPerson;
-import resources.publicationRecord.*;
+import resources.person.Author;
+import resources.person.IPerson;
+import resources.pubrec.*;
 
 public class SearchUtils {
 	
