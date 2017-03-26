@@ -92,11 +92,11 @@ public class BackEnd implements IBackEnd {
 				queryResult.setMaxResults(rowsCount);
 			Data.setProceedings(queryResult.list());
 
-			/*queryResult = session.createQuery("from CommitteeMember");
+			queryResult = session.createQuery("from CommitteeMember");
 			if (rowsCount > 0)  
 				queryResult.setMaxResults(rowsCount);
 			Data.setCommitteeMembers(queryResult.list());
-			*/
+			
 			tx.commit();
 
 		}catch (HibernateException e) {
