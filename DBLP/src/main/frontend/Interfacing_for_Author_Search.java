@@ -5,9 +5,12 @@ import java.util.List;
 import queryengine.app.App;
 import queryengine.interfaces.IQuery;
 import queryengine.interfaces.ISearch;
+import queryengine.query.utils.AbsenceFromCommittees;
+import queryengine.query.utils.Conferences;
 import queryengine.query.utils.Title;
 import queryengine.query.utils.Year;
 import resources.person.IPerson;
+import validator.utils.Validator;
 
 public class Interfacing_for_Author_Search {
 	private String titleText;
@@ -18,6 +21,7 @@ public class Interfacing_for_Author_Search {
 	private String minimumPublications;
 	private String favoriteAuthor;
 	private List<IPerson> result;
+	
 	public Interfacing_for_Author_Search(String titleText, String searchYear,
 			String journalName, String absenceYears){
 		this.titleText = titleText;
@@ -25,14 +29,18 @@ public class Interfacing_for_Author_Search {
 		this.journalName = journalName;
 		this.absenceYears = absenceYears;
 	}
-	public void sendSearchCriteriaToApp(){
+	
+	public List<IPerson> sendSearchCriteriaToApp(){
 		App app = new App();
 		List<ISearch> searchCriteria = new ArrayList<ISearch>();
-		searchCriteria.add(new Title(titleText));
-		searchCriteria.add(new Year(Integer.parseInt(this.searchYear)));
-		searchCriteria.add(new JournalName(journalName));
-		searchCriteria.add(new Committee_Absence(Integer.parseInt(absenceYears)));
-		if (searchCriteria.size() > 0)
-			this.result = app.search(searchCriteria);
+		if (Validator.isNonEmptyString(this.titleText)) 
+			searchCriteria.add(new Title(this.titleText));
+		if (Validator.isValidN(this.searchYear)) 	
+			searchCriteria.add(new Year(this.searchYear));
+		if (Validator.isNonEmptyString(this.journalName)) 	
+			searchCriteria.add(new Conferences(this.journalName));
+		searchCriteria.add(new AbsenceFromCommittees(absenceYears));
+		this.result = app.search(searchCriteria);
+		return this.result;
 	}
 }

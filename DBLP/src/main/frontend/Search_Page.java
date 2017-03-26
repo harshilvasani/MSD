@@ -4,16 +4,22 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import resources.person.Author;
+import resources.person.IPerson;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JTextField;
 
 public class Search_Page {
 
@@ -26,17 +32,8 @@ public class Search_Page {
 	JButton btnSimilarAuthorSearch;
 	JLabel lblAuthorSearch;
 	JFormattedTextField ftfSearchCriteria;
-	JLabel lblSearchOption;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	JRadioButton radioButton_1;
-	JRadioButton radioButton_2;
-	JRadioButton radioButton_3;
-	JRadioButton radioButton_4;
-	Boolean R1;
-	Boolean R2;
-	Boolean R3;
-	Boolean R4;
 	JButton btnSearch;
+	JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -66,7 +63,7 @@ public class Search_Page {
 	 */
 	private void initialize() {
 		
-		R1=false; R2=false; R3=false; R4=false;
+	//	R1=false; R2=false; R3=false; R4=false;
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(0, 0, 1350, 725);
@@ -149,85 +146,95 @@ public class Search_Page {
 		
 		ftfSearchCriteria = new JFormattedTextField();
 		ftfSearchCriteria.setForeground(new Color(0, 255, 0));
-		ftfSearchCriteria.setText("Enter Search Criteria");
+		ftfSearchCriteria.setText("");
 		ftfSearchCriteria.setBounds(150, 120, 200, 20);
 		frame.getContentPane().add(ftfSearchCriteria);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setText("");
+		formattedTextField.setForeground(Color.GREEN);
+		formattedTextField.setBounds(150, 151, 200, 20);
+		frame.getContentPane().add(formattedTextField);
+		
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1.setText("");
+		formattedTextField_1.setForeground(Color.GREEN);
+		formattedTextField_1.setBounds(150, 182, 200, 20);
+		frame.getContentPane().add(formattedTextField_1);
+		
+		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
+		formattedTextField_2.setText("");
+		formattedTextField_2.setForeground(Color.GREEN);
+		formattedTextField_2.setBounds(150, 213, 200, 20);
+		frame.getContentPane().add(formattedTextField_2);
+		
 
-		lblSearchOption = new JLabel("Search Option");
-		lblSearchOption.setForeground(new Color(0, 255, 0));
-		lblSearchOption.setBounds(150, 160, 200, 20);
-		frame.getContentPane().add(lblSearchOption);
-		
-		radioButton_1 = new JRadioButton("R1");
-		radioButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				R1 = true;
-				R2 = false;
-				R3 = false;
-				R4 = false;
-			}
-		});
-		radioButton_1.setBackground(new Color(255, 255, 255));
-		radioButton_1.setForeground(new Color(0, 255, 0));
-		buttonGroup.add(radioButton_1);
-		radioButton_1.setBounds(150, 180, 200, 20);
-		frame.getContentPane().add(radioButton_1);
-		
-		radioButton_2 = new JRadioButton("R2");
-		radioButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				R1 = true;
-				R2 = false;
-				R3 = false;
-				R4 = false;
-			}
-		});
-		radioButton_2.setBackground(new Color(255, 255, 255));
-		radioButton_2.setForeground(new Color(0, 255, 0));
-		buttonGroup.add(radioButton_2);
-		radioButton_2.setBounds(150, 200, 200, 20);
-		frame.getContentPane().add(radioButton_2);
-		
-		radioButton_3 = new JRadioButton("R3");
-		radioButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				R1 = false;
-				R2 = false;
-				R3 = true;
-				R4 = false;
-			}
-		});
-		radioButton_3.setForeground(Color.GREEN);
-		radioButton_3.setBackground(Color.WHITE);
-		buttonGroup.add(radioButton_3);
-		radioButton_3.setBounds(150, 220, 200, 20);
-		frame.getContentPane().add(radioButton_3);
-		
-		radioButton_4 = new JRadioButton("R4");
-		radioButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				R1 = false;
-				R2 = false;
-				R3 = false;
-				R4 = true;
-			}
-		});
-		radioButton_4.setForeground(Color.GREEN);
-		radioButton_4.setBackground(Color.WHITE);
-		buttonGroup.add(radioButton_4);
-		radioButton_4.setBounds(150, 240, 200, 20);
-		frame.getContentPane().add(radioButton_4);
-		
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-				String SearchCriteria = ftfSearchCriteria.getText();
+				
+				String publicationTitle = ftfSearchCriteria.getText();
+				String journalName = formattedTextField.getText();
+				String minYear = formattedTextField_1.getText();
+				String absence = formattedTextField_2.getText();
+				
+				Interfacing_for_Author_Search authorSearchComm = new Interfacing_for_Author_Search(
+						publicationTitle, journalName, minYear, absence);
+				
+				List<IPerson> result = authorSearchComm.sendSearchCriteriaToApp();
+				
+				String display = "";
+				
+				for(int i=0; i<result.size(); i++){
+					IPerson person = result.get(i);
+					if(person instanceof Author){
+						Author a = (Author) person;
+						display += a.getPersonName();
+						display += "\n";
+					}
+				}
+				
+				textField.setText(display);
+				
 			}
 		});
 		btnSearch.setForeground(Color.GREEN);
 		btnSearch.setBackground(Color.WHITE);
-		btnSearch.setBounds(195, 270, 110, 25);
+		btnSearch.setBounds(192, 244, 110, 25);
 		frame.getContentPane().add(btnSearch);
+		
+		
+		textField = new JTextField();
+		textField.setBounds(150, 376, 200, 144);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+	/*	
+		JButton button = new JButton("Search");
+		button.setForeground(Color.GREEN);
+		button.setBackground(Color.WHITE);
+		button.setBounds(24, 305, 110, 25);
+		frame.getContentPane().add(button);
+		*/
+		JLabel lblDisplayingResults = new JLabel("Displaying Results");
+		lblDisplayingResults.setBounds(151, 345, 86, 14);
+		frame.getContentPane().add(lblDisplayingResults);
+		
+		JLabel lblPublicationTitle = new JLabel("Publication Title");
+		lblPublicationTitle.setBounds(24, 123, 116, 14);
+		frame.getContentPane().add(lblPublicationTitle);
+		
+		JLabel lblJournalName = new JLabel("Journal Name");
+		lblJournalName.setBounds(24, 154, 116, 14);
+		frame.getContentPane().add(lblJournalName);
+		
+		JLabel lblMinimumYear = new JLabel("Minimum Year");
+		lblMinimumYear.setBounds(24, 185, 116, 14);
+		frame.getContentPane().add(lblMinimumYear);
+		
+		JLabel lblAbsenceFromCommittee = new JLabel("Absence from Committee");
+		lblAbsenceFromCommittee.setBounds(24, 216, 116, 14);
+		frame.getContentPane().add(lblAbsenceFromCommittee);
 		
 		
 	}

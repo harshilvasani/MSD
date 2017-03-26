@@ -9,11 +9,11 @@ public class Year implements ISearch{
 		return year;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setYear(String year) {
+		this.year = Integer.parseInt(year);
 	}
 
-	public Year(int year) {
-		this.year = year;
+	public Year(String searchYear) {
+		this.year = Integer.parseInt(searchYear);
 	}
 }
