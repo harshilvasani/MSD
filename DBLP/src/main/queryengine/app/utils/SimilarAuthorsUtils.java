@@ -48,7 +48,6 @@ public class SimilarAuthorsUtils {
 		}
 		
 		if (!evalInner) {
-			System.out.println(similarAuthors.size());
 			List<IPerson> persons = new ArrayList<IPerson>();
 			persons.addAll(similarAuthors);
 			return persons;
