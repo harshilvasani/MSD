@@ -25,7 +25,7 @@ public class CoAuthorUtils {
 		return coAuthors;
 	}
 	
-	public static List<IPerson> processArticles(String authorName){
+	private static List<IPerson> processArticles(String authorName){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
 		// Article Processing
@@ -55,7 +55,7 @@ public class CoAuthorUtils {
 		return searchedAuthor;
 	}
 	
-	public static List<IPerson> processInproceedings(String authorName){
+	private static List<IPerson> processInproceedings(String authorName){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
 		List<Inproceeding> inproceedingsDataSet = Data.getInproceedings();
@@ -81,7 +81,7 @@ public class CoAuthorUtils {
 		return searchedAuthor;
 	}
 	
-	public static List<IPerson> processIncollections(String authorName){
+	private static List<IPerson> processIncollections(String authorName){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 		
 		List<Incollection> incollectionsDataSet = Data.getIncollections();

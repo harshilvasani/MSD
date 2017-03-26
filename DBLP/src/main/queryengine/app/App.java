@@ -6,9 +6,11 @@ import antlr.debug.SemanticPredicateAdapter;
 import queryengine.app.utils.CoAuthorUtils;
 import queryengine.app.utils.FilterUtils;
 import queryengine.app.utils.SearchUtils;
+import queryengine.app.utils.SimilarAuthorsUtils;
 import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.IFilter;
 import queryengine.interfaces.ISearch;
+import queryengine.interfaces.ISimAuthorSearch;
 import queryengine.miscellaneous.ResponseMessage;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.MinPublications;
@@ -39,7 +41,37 @@ public class App implements IApp{
 		// Then Return authors -- From all refined results
 		return searchedAuthor;
 	}
-
+	
+	public List<IPerson> filter(List<IFilter> filterCriteria, List<IPerson> searchResult) {
+		for (IFilter f: filterCriteria) {
+			if (f instanceof AuthorName) {
+				searchResult = FilterUtils.filterByAuthorName(((AuthorName) f).getAuthorName(), searchResult);
+			}
+			else if (f instanceof MinPublications) {
+				searchResult = FilterUtils.filterByMinPublications(((MinPublications) f).getMinPublications(), searchResult);
+			}
+		}
+		return searchResult;
+	}
+	
+	@Override
+	public List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria) {
+		if (searchCriteria instanceof AuthorName) {
+			AuthorName authorName = (AuthorName) searchCriteria;
+			return CoAuthorUtils.retrieveCoAuthors(authorName.getAuthorName());	
+		}
+		return null;
+	}
+	
+	@Override
+	public List<IPerson> searchSimilarAuthors(ISimAuthorSearch searchCriteria) {
+		if (searchCriteria instanceof AuthorName) {
+			AuthorName authorName = (AuthorName) searchCriteria;
+			return SimilarAuthorsUtils.retrieveSimilarAuthors(authorName.getAuthorName());	
+		}
+		return null;
+	}
+	
 	@Override
 	public ResponseMessage login(String username, String password) {
 		// TODO Auto-generated method stub
@@ -56,26 +88,5 @@ public class App implements IApp{
 	public ResponseMessage updateProfile(User regInformation) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria) {
-		if (searchCriteria instanceof AuthorName) {
-			AuthorName authorName = (AuthorName) searchCriteria;
-			return CoAuthorUtils.retrieveCoAuthors(authorName.getAuthorName());	
-		}
-		return null;
-	}
-	
-	public List<IPerson> filter(List<IFilter> filterCriteria, List<IPerson> searchResult) {
-		for (IFilter f: filterCriteria) {
-			if (f instanceof AuthorName) {
-				searchResult = FilterUtils.filterByAuthorName(((AuthorName) f).getAuthorName(), searchResult);
-			}
-			else if (f instanceof MinPublications) {
-				searchResult = FilterUtils.filterByMinPublications(((MinPublications) f).getMinPublications(), searchResult);
-			}
-		}
-		return searchResult;
 	}
 }
