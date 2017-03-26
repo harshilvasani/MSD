@@ -2,9 +2,11 @@ package queryengine.app.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import persistence.Data;
 import queryengine.interfaces.ISearch;
+import queryengine.query.utils.AbsenceFromCommittees;
 import queryengine.query.utils.Conferences;
 import queryengine.query.utils.Title;
 import queryengine.query.utils.Year;
@@ -29,6 +31,9 @@ public class SearchUtils {
 			else if (i instanceof Conferences) {
 				refinedArticleDataSet = processArticlesByConferences((((Conferences) i).getConferences()), refinedArticleDataSet);
 			}
+			else if (i instanceof AbsenceFromCommittees) {
+				refinedArticleDataSet = processArticlesByAbsence(((AbsenceFromCommittees) i).getInvalidCommitteeMembers(), refinedArticleDataSet);
+			}
 			//TODO add other search criteria
 			
 		}
@@ -51,8 +56,10 @@ public class SearchUtils {
 			else if (i instanceof Conferences) {
 				refinedIncollectionDataSet = processIncollectionsByConferences(((Conferences) i).getConferences(), refinedIncollectionDataSet);
 			}
+			else if (i instanceof AbsenceFromCommittees) {
+				refinedIncollectionDataSet = processIncollectionsByAbsence(((AbsenceFromCommittees) i).getInvalidCommitteeMembers(), refinedIncollectionDataSet);
+			}
 			//TODO add other search criteria
-
 		}
 		// after refinedInproceedingDataSet is final
 		searchedAuthor.addAll(SearchUtils.getAuthorFromRefinedIncollectionDataSet(refinedIncollectionDataSet));	
@@ -74,6 +81,9 @@ public class SearchUtils {
 			else if (i instanceof Conferences) {
 				refinedInproceedingDataSet = processInproceedingsByConferences((((Conferences) i).getConferences()), refinedInproceedingDataSet);
 			}
+			else if (i instanceof AbsenceFromCommittees) {
+				refinedInproceedingDataSet = processInproceedingsByAbsence(((AbsenceFromCommittees) i).getInvalidCommitteeMembers(), refinedInproceedingDataSet);
+			}
 			//TODO add other search criteria
 
 		}
@@ -86,16 +96,19 @@ public class SearchUtils {
 	public static List<IPerson> processPhdThesis(List<ISearch> searchCriteria){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
-		List<PhdThesis> refinedPhdThesisDataSet = Data.getPhdtheses();
+		List<PhdThesis> refinedPhdThesisDataSet = Data.getPhdthesis();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedPhdThesisDataSet = processPhdthesesByTitle(((Title) i).getKeys(), refinedPhdThesisDataSet);
+				refinedPhdThesisDataSet = processPhdthesisByTitle(((Title) i).getKeys(), refinedPhdThesisDataSet);
 			}
 			else if (i instanceof Year) {
-				refinedPhdThesisDataSet = processPhdthesesByYear(((Year) i).getYear(), refinedPhdThesisDataSet);
+				refinedPhdThesisDataSet = processPhdthesisByYear(((Year) i).getYear(), refinedPhdThesisDataSet);
 			}
 			else if (i instanceof Conferences) {
-				refinedPhdThesisDataSet = processPhdthesesByConferences(((Conferences) i).getConferences(), refinedPhdThesisDataSet);
+				refinedPhdThesisDataSet = processPhdthesisByConferences(((Conferences) i).getConferences(), refinedPhdThesisDataSet);
+			}
+			else if (i instanceof AbsenceFromCommittees) {
+				refinedPhdThesisDataSet = processPhdthesisByAbsence(((AbsenceFromCommittees) i).getInvalidCommitteeMembers(), refinedPhdThesisDataSet);
 			}
 			//TODO add other search criteria
 
@@ -133,6 +146,18 @@ public class SearchUtils {
 
 		for (Article a: refinedArticleDataSet) {
 			if (conferenceMatchFound(a.getJournalName(), conferences)) {
+				filteredArticles.add(a);
+			}
+		}
+		return filteredArticles;
+	}
+
+	private static List<Article> processArticlesByAbsence(Set<String> invalidCommitteeMembers, List<Article> refinedArticleDataSet) {
+		List<Article> filteredArticles = new ArrayList<Article>();
+
+		for (Article a: refinedArticleDataSet) {
+			if (a.getAuthorName() != null &&
+				!invalidCommitteeMembers.contains(a.getAuthorName())) {
 				filteredArticles.add(a);
 			}
 		}
@@ -184,6 +209,18 @@ public class SearchUtils {
 
 		for (Incollection i: refinedIncollectionDataSet) {
 			if (conferenceMatchFound(i.getKey(), conferences)) {
+					filteredIncollections.add(i);
+			}
+		}
+		return filteredIncollections;
+	}
+
+	private static List<Incollection> processIncollectionsByAbsence(Set<String> invalidCommitteeMembers, List<Incollection> refinedIncollectionDataSet) {
+		List<Incollection> filteredIncollections = new ArrayList<Incollection>();
+
+		for (Incollection i: refinedIncollectionDataSet) {
+			if (i.getAuthorName() != null &&
+				!invalidCommitteeMembers.contains(i.getAuthorName())) {
 					filteredIncollections.add(i);
 			}
 		}
@@ -243,6 +280,19 @@ public class SearchUtils {
 		return filteredInproceedings;
 	}
 
+	private static List<Inproceeding> processInproceedingsByAbsence(Set<String> invalidCommitteeMembers, List<Inproceeding> refinedInproceedingDataSet) {
+
+		List<Inproceeding> filteredInproceedings = new ArrayList<Inproceeding>();
+
+		for (Inproceeding i: refinedInproceedingDataSet) {
+			if (i.getAuthorName() != null &&
+				!invalidCommitteeMembers.contains(i.getAuthorName())) {
+				filteredInproceedings.add(i);
+			}
+		}
+		return filteredInproceedings;
+	}
+	
 	private static List<IPerson> getAuthorFromRefinedInproceedingDataSet(List<Inproceeding> refinedInproceedingDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
@@ -261,40 +311,53 @@ public class SearchUtils {
 		return searchedAuthor;
 	}
 
-	private static List<PhdThesis> processPhdthesesByTitle(String[] keys, List<PhdThesis> refinedPhdThesisDataSet) {
+	private static List<PhdThesis> processPhdthesisByTitle(String[] keys, List<PhdThesis> refinedPhdThesisDataSet) {
 
-		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
+		List<PhdThesis> filteredPhdthesis = new ArrayList<PhdThesis>();
 
 		for (PhdThesis p: refinedPhdThesisDataSet) {
 			if (keyWordMatchFound(p.getTitle(), keys)) {
-				filteredPhdTheses.add(p);
+				filteredPhdthesis.add(p);
 			}
 		}
-		return filteredPhdTheses;
+		return filteredPhdthesis;
 	}
 
-	private static List<PhdThesis> processPhdthesesByYear(int pubYear, List<PhdThesis> refinedPhdThesisDataSet) {
+	private static List<PhdThesis> processPhdthesisByYear(int pubYear, List<PhdThesis> refinedPhdThesisDataSet) {
 
-		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
+		List<PhdThesis> filteredPhdthesis = new ArrayList<PhdThesis>();
 
 		for (PhdThesis p: refinedPhdThesisDataSet) {
 			if (Integer.parseInt(p.getYear()) >= pubYear) {
-				filteredPhdTheses.add(p);
+				filteredPhdthesis.add(p);
 			}
 		}
-		return filteredPhdTheses;
+		return filteredPhdthesis;
 	}
 	
-	private static List<PhdThesis> processPhdthesesByConferences(String[] conferences, List<PhdThesis> refinedPhdThesisDataSet) {
+	private static List<PhdThesis> processPhdthesisByConferences(String[] conferences, List<PhdThesis> refinedPhdThesisDataSet) {
 
-		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
+		List<PhdThesis> filteredPhdthesis = new ArrayList<PhdThesis>();
 
 		for (PhdThesis p: refinedPhdThesisDataSet) {
 			if (conferenceMatchFound(p.getKey(), conferences)) {
-				filteredPhdTheses.add(p);
+				filteredPhdthesis.add(p);
 			}
 		}
-		return filteredPhdTheses;
+		return filteredPhdthesis;
+	}
+
+	private static List<PhdThesis> processPhdthesisByAbsence(Set<String> invalidCommitteeMembers, List<PhdThesis> refinedPhdThesisDataSet) {
+
+		List<PhdThesis> filteredPhdthesis = new ArrayList<PhdThesis>();
+
+		for (PhdThesis p: refinedPhdThesisDataSet) {
+			if (p.getAuthorName() != null &&
+				!invalidCommitteeMembers.contains(p.getAuthorName())) {
+				filteredPhdthesis.add(p);
+			}
+		}
+		return filteredPhdthesis;
 	}
 	
 	private static List<IPerson> getAuthorFromRefinedPhdThesisDataSet( List<PhdThesis> refinedPhdThesisDataSet){

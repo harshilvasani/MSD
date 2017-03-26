@@ -6,6 +6,7 @@ import java.util.List;
 import backend.BackEnd;
 import queryengine.app.App;
 import queryengine.interfaces.ISearch;
+import queryengine.query.utils.AbsenceFromCommittees;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Conferences;
 import queryengine.query.utils.Title;
@@ -26,7 +27,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		backend.loadData(20);
+		backend.loadData(3000);
 		System.out.println("Data loaded");
 		App app = new App();
 		
@@ -75,6 +76,11 @@ public class Tester {
 			if(person instanceof Editor){
 				System.out.println(((Editor)person).getPersonName());
 			}
-		}	
+		}
+		
+		
+		//
+		System.out.println("\n---------------\n");
+		AbsenceFromCommittees absence = new AbsenceFromCommittees("7");
 	}
 }

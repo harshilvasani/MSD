@@ -11,7 +11,7 @@ public class Data {
 	private static List<Inproceeding> inproceedings;
 	private static List<Book> books;
 	private static List<Incollection> incollections;
-	private static List<PhdThesis> phdtheses;
+	private static List<PhdThesis> phdthesis;
 	private static List<CommitteeMember> committeeMembers;
 
 	
@@ -55,12 +55,12 @@ public class Data {
 			Data.incollections = incollections;
 	}
 	
-	public static List<PhdThesis> getPhdtheses() {
-		return phdtheses;
+	public static List<PhdThesis> getPhdthesis() {
+		return phdthesis;
 	}
-	public static void setPhdtheses(List<PhdThesis> phdtheses) {
-		if (Data.phdtheses == null)
-			Data.phdtheses = phdtheses;
+	public static void setPhdthesis(List<PhdThesis> phdthesis) {
+		if (Data.phdthesis == null)
+			Data.phdthesis = phdthesis;
 	}
 	
 	public static List<CommitteeMember> getCommitteeMembers() {

@@ -85,7 +85,7 @@ public class BackEnd implements IBackEnd {
 			queryResult = session.createQuery("from PhdThesis");
 			if (rowsCount > 0)  
 				queryResult.setMaxResults(rowsCount);
-			Data.setPhdtheses(queryResult.list());
+			Data.setPhdthesis(queryResult.list());
 
 			queryResult = session.createQuery("from Proceeding");
 			if (rowsCount > 0)  
