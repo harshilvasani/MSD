@@ -1,6 +1,7 @@
 package queryengine.app.utils;
 
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 import persistence.Data;
@@ -19,7 +20,7 @@ import resources.pubrec.PhdThesis;
 public class SimilarAuthorsUtils {
 
 	private static HashMap<String, HashMap<String, Integer>> countMap = new HashMap<String, HashMap<String, Integer>>();
-	public static List<SimilarAuthor> retrieveSimilarAuthors(String authorName) {
+	public static List<IPerson> retrieveSimilarAuthors(String authorName) {
 		buildCountMap(authorName);
 		
 		List<IPerson> coAuthors = CoAuthorUtils.retrieveCoAuthors(authorName);
@@ -30,7 +31,7 @@ public class SimilarAuthorsUtils {
 		}
 		
 		HashMap<String, Integer> queryAuthorJournalMap = countMap.get(authorName);
-		List<SimilarAuthor> similarAuthors = new ArrayList<SimilarAuthor>();
+		List<IPerson> similarAuthors = new ArrayList<IPerson>();
 		
 		for (String coAuthor: coAuthorNames) {
 			// Continue here
@@ -44,8 +45,18 @@ public class SimilarAuthorsUtils {
 			similarAuthors.add(new SimilarAuthor(coAuthor, score));
 		}
 		// Sort Here -- You have to add Google Logic here -- Don't forget
-		Collections.sort(similarAuthors);
-		return similarAuthors;
+		//Collections.sort(similarAuthors);
+		PriorityQueue<IPerson> temp = new PriorityQueue<>();
+		for (IPerson simAuthor: similarAuthors)
+		{
+			temp.offer(simAuthor);
+		}
+		List<IPerson> resultSimAuthors = new ArrayList<IPerson>();
+		while (!temp.isEmpty()) {
+			resultSimAuthors.add(temp.poll());
+		}
+		//return similarAuthors;
+		return resultSimAuthors;
 	}
 	
 	private static void buildCountMap(String authorName) {

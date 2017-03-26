@@ -32,7 +32,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		backend.loadData(20);
+		backend.loadData(0);
 		System.out.println("Data loaded");
 		App app = new App();
 		
@@ -66,12 +66,12 @@ public class Tester {
 			}
 		}*/
 		System.out.println("\n---------------------------- Simiilar Authors ---------\n");
-		AuthorName a2name = new AuthorName("al");
+		AuthorName a2name = new AuthorName("Jan Vitek");
 		
-		List<SimilarAuthor> similarAuthors = app.searchSimilarAuthors(a2name);
+		List<IPerson> similarAuthors = app.searchSimilarAuthors(a2name);
 		
-		for (SimilarAuthor a: similarAuthors) {
-			System.out.println(a.getName() + " " + a.getScore());
+		for (IPerson a: similarAuthors) {
+			System.out.println(a.getPersonName() + " " + ((SimilarAuthor) a).getScore());
 		}
 		/*System.out.println("---------------------------- conferences ---------");
 		// 

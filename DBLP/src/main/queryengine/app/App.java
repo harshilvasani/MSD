@@ -65,7 +65,7 @@ public class App implements IApp{
 	}
 	
 	@Override
-	public List<SimilarAuthor> searchSimilarAuthors(ISimAuthorSearch searchCriteria) {
+	public List<IPerson> searchSimilarAuthors(ISimAuthorSearch searchCriteria) {
 		if (searchCriteria instanceof AuthorName) {
 			AuthorName authorName = (AuthorName) searchCriteria;
 			return SimilarAuthorsUtils.retrieveSimilarAuthors(authorName.getAuthorName());	
