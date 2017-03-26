@@ -1,9 +1,5 @@
 package validator.utils;
 
-import queryengine.app.utils.SimilarAuthor;
-import resources.person.Author;
-import resources.person.IPerson;
-
 public class Validator {
 
 	public static boolean isValidN(String s) {
@@ -17,6 +13,10 @@ public class Validator {
 		}
 		
 		return true;
+	}
+
+	public static boolean isNonEmptyString(String s) {
+		return !(s == null || s.length() == 0);
 	}
 	
 	public static boolean isValidPassword(String s) {
