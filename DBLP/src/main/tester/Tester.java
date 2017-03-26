@@ -7,6 +7,7 @@ import java.util.Set;
 
 import backend.BackEnd;
 import queryengine.app.App;
+import queryengine.app.utils.SimilarAuthor;
 import queryengine.interfaces.IFilter;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AbsenceFromCommittees;
@@ -52,7 +53,7 @@ public class Tester {
 		}
 		System.out.println("---------------------------- COmmon Authors ---------");
 		// 
-		AuthorName aname = new AuthorName("al");
+/*		AuthorName aname = new AuthorName("al");
 		searchPerson = app.searchCoAuthors(aname);
 		for(IPerson person: searchPerson){
 			if (person instanceof Author){
@@ -63,8 +64,15 @@ public class Tester {
 				System.out.println(((Editor)person).getPersonName());
 
 			}
+		}*/
+		System.out.println("\n---------------------------- Simiilar Authors ---------\n");
+		AuthorName a2name = new AuthorName("al");
+		
+		List<SimilarAuthor> similarAuthors = app.searchSimilarAuthors(a2name);
+		
+		for (SimilarAuthor a: similarAuthors) {
+			System.out.println(a.getName() + " " + a.getScore());
 		}
-
 		/*System.out.println("---------------------------- conferences ---------");
 		// 
 		searchCriteria = new ArrayList<ISearch>();

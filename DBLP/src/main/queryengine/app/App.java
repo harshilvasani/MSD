@@ -6,6 +6,7 @@ import antlr.debug.SemanticPredicateAdapter;
 import queryengine.app.utils.CoAuthorUtils;
 import queryengine.app.utils.FilterUtils;
 import queryengine.app.utils.SearchUtils;
+import queryengine.app.utils.SimilarAuthor;
 import queryengine.app.utils.SimilarAuthorsUtils;
 import queryengine.interfaces.ICoAuthorSearch;
 import queryengine.interfaces.IFilter;
@@ -64,7 +65,7 @@ public class App implements IApp{
 	}
 	
 	@Override
-	public List<IPerson> searchSimilarAuthors(ISimAuthorSearch searchCriteria) {
+	public List<SimilarAuthor> searchSimilarAuthors(ISimAuthorSearch searchCriteria) {
 		if (searchCriteria instanceof AuthorName) {
 			AuthorName authorName = (AuthorName) searchCriteria;
 			return SimilarAuthorsUtils.retrieveSimilarAuthors(authorName.getAuthorName());	

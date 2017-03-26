@@ -1,11 +1,13 @@
 package queryengine.app.utils;
 
+import resources.person.IPerson;
+
 public class SimilarAuthor implements Comparable{
 
 	private String name;
-	private Integer score;
+	private long score;
 
-	public SimilarAuthor(String name, Integer score) {
+	public SimilarAuthor(String name, long score) {
 		this.name = name;
 		this.score = score;
 	}
@@ -14,7 +16,7 @@ public class SimilarAuthor implements Comparable{
 		return name;
 	}
 
-	public Integer getScore() {
+	public long getScore() {
 		return score;
 	}
 

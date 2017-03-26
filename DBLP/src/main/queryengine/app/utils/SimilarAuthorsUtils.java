@@ -5,6 +5,8 @@ import java.util.Set;
 
 import persistence.Data;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -17,19 +19,33 @@ import resources.pubrec.PhdThesis;
 public class SimilarAuthorsUtils {
 
 	private static HashMap<String, HashMap<String, Integer>> countMap = new HashMap<String, HashMap<String, Integer>>();
-	public static List<IPerson> retrieveSimilarAuthors(String authorName) {
+	public static List<SimilarAuthor> retrieveSimilarAuthors(String authorName) {
 		buildCountMap(authorName);
 		
 		List<IPerson> coAuthors = CoAuthorUtils.retrieveCoAuthors(authorName);
 		Set<String> coAuthorNames = new HashSet<String>();
-		HashMap<String, Integer> queryAuthorJournalMap = countMap.get(authorName);
+		
 		for (IPerson coAuthor: coAuthors) {
 			coAuthorNames.add(coAuthor.getPersonName());
 		}
+		
+		HashMap<String, Integer> queryAuthorJournalMap = countMap.get(authorName);
+		List<SimilarAuthor> similarAuthors = new ArrayList<SimilarAuthor>();
+		
 		for (String coAuthor: coAuthorNames) {
 			// Continue here
+			HashMap<String, Integer> currentAuthorJournalMap = countMap.get(coAuthor);
+			long score = 0;
+			for (String key: queryAuthorJournalMap.keySet()) {
+				score += Math.abs(queryAuthorJournalMap.get(key) - 
+								((currentAuthorJournalMap.get(key) == null) ? 
+								  0 : currentAuthorJournalMap.get(key)));
+			}
+			similarAuthors.add(new SimilarAuthor(coAuthor, score));
 		}
-		return null;
+		// Sort Here -- You have to add Google Logic here -- Don't forget
+		Collections.sort(similarAuthors);
+		return similarAuthors;
 	}
 	
 	private static void buildCountMap(String authorName) {
