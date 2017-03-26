@@ -31,7 +31,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		backend.loadData(20);
+		backend.loadData(0);
 		System.out.println("Data loaded");
 		App app = new App();
 		

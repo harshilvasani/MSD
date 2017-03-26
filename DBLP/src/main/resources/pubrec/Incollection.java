@@ -9,6 +9,7 @@ public class Incollection{
 	private String year;
 	private String booktitle;
 	private String crossref;
+	private String journal;
 	
 	public Incollection(){
 		
@@ -19,6 +20,7 @@ public class Incollection{
 		super();
 		this.setId(id);
 		this.key = key;
+		this.journal = key.split("/")[1];
 		this.authorName = authorName;
 		this.title = title;
 		this.year = year;
@@ -31,6 +33,7 @@ public class Incollection{
 	}
 	public void setKey(String key) {
 		this.key = key;
+		this.journal = key.split("/")[1];
 	}
 	
 	public String getTitle() {
@@ -74,6 +77,10 @@ public class Incollection{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getJournal() {
+		return this.journal;
 	}
 	
 	@Override

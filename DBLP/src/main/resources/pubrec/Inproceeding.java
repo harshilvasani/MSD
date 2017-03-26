@@ -9,6 +9,7 @@ public class Inproceeding{
 	private String year;
 	private String crossref;
 	private String booktitle;
+	private String conference;
 	
 	public Inproceeding(){
 		
@@ -19,6 +20,7 @@ public class Inproceeding{
 		super();
 		this.id = id;
 		this.key = key;
+		this.conference = key.split("/")[1];
 		this.authorName = authorName;
 		this.title = title;
 		this.year = year;
@@ -31,6 +33,7 @@ public class Inproceeding{
 	}
 	public void setKey(String key) {
 		this.key = key;
+		this.conference = key.split("/")[1];
 	}
 	
 	public String getTitle() {
@@ -73,6 +76,9 @@ public class Inproceeding{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getConference() {
+		return this.conference;
 	}
 	
 	@Override

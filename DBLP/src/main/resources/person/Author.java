@@ -80,7 +80,7 @@ public class Author implements IPerson{
 				" Name: " + this.name +
 				" Publication ID: " + this.publicationId +
 				" Publication Year: " + this.publicationYear +
-				" Journal Name: " + this.journalName + "\n" +
+				" Journal/Publisher/Conf: " + this.journalName + "\n" +
 				" Publication Title: " + this.publicationTitle +
 				" Publication Type: " + this.publicationType;
 				

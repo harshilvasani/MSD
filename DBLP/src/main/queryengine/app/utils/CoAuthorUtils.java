@@ -72,7 +72,7 @@ public class CoAuthorUtils {
 				Author author = new Author(i.getAuthorName(),
 											i.getId(), 
 											i.getTitle(),
-											i.getKey(),
+											i.getConference(),
 											i.getYear(),
 											PublicationType.INPROCEEDING);
 				searchedAuthor.add(author);
@@ -98,7 +98,7 @@ public class CoAuthorUtils {
 				Author author = new Author(i.getAuthorName(),
 											i.getId(), 
 											i.getTitle(),
-											i.getKey(),
+											i.getJournal(),
 											i.getYear(),
 											PublicationType.INCOLLECTION);
 				searchedAuthor.add(author);

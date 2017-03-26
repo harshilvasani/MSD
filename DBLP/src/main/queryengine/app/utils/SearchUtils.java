@@ -235,7 +235,7 @@ public class SearchUtils {
 			Author author = new Author(incollection.getAuthorName(),
 										incollection.getId(),
 										incollection.getTitle(),
-										incollection.getKey(),
+										incollection.getJournal(),
 										incollection.getYear(),
 										PublicationType.INCOLLECTION);
 			searchedAuthor.add(author);
@@ -301,7 +301,7 @@ public class SearchUtils {
 			Author author = new Author(inproceeding.getAuthorName(),
 										inproceeding.getId(),
 										inproceeding.getTitle(),
-										inproceeding.getKey(),
+										inproceeding.getConference(),
 										inproceeding.getYear(),
 										PublicationType.INPROCEEDING);
 
@@ -368,7 +368,7 @@ public class SearchUtils {
 			Author author = new Author(phdThesis.getAuthorName(),
 										phdThesis.getId(),
 										phdThesis.getTitle(),
-										phdThesis.getKey(),
+										phdThesis.getPublisher(),
 										phdThesis.getYear(),
 										PublicationType.PHDTHESIS);
 			searchedAuthor.add(author);

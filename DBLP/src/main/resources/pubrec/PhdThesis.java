@@ -8,6 +8,7 @@ public class PhdThesis{
 	private String title;
 	private String year;
 	private String school;
+	private String publisher;
 	
 	public PhdThesis(){
 		
@@ -17,6 +18,7 @@ public class PhdThesis{
 		super();
 		this.setId(id);
 		this.key = key;
+		this.publisher = key.split("/")[1];
 		this.setAuthorName(authorName);
 		this.title = title;
 		this.year = year;
@@ -28,6 +30,7 @@ public class PhdThesis{
 	}
 	public void setKey(String key) {
 		this.key = key;
+		this.publisher = key.split("/")[1];
 	}
 	
 	public String getTitle() {
@@ -64,5 +67,9 @@ public class PhdThesis{
 
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
+	}
+	
+	public String getPublisher() {
+		return this.publisher;
 	}
 }
