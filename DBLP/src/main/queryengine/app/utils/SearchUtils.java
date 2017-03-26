@@ -6,6 +6,7 @@ import java.util.List;
 import persistence.Data;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.Title;
+import queryengine.query.utils.Year;
 import resources.person.Author;
 import resources.person.IPerson;
 import resources.pubrec.*;
@@ -19,7 +20,10 @@ public class SearchUtils {
 		List<Article> refinedArticleDataSet = Data.getArticles();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedArticleDataSet = processArticlesByTitle((Title) i, refinedArticleDataSet);
+				refinedArticleDataSet = processArticlesByTitle(((Title) i).getKeys(), refinedArticleDataSet);
+			}
+			else if (i instanceof Year) {
+				refinedArticleDataSet = processArticlesByYear(((Year) i).getYear(), refinedArticleDataSet);
 			}
 			//TODO add other search criteria
 			
@@ -35,8 +39,11 @@ public class SearchUtils {
 		List<Incollection> refinedIncollectionDataSet = Data.getIncollections();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedIncollectionDataSet = SearchUtils.processIncollectionsByTitle((Title) i, refinedIncollectionDataSet);
-			}	
+				refinedIncollectionDataSet = processIncollectionsByTitle(((Title) i).getKeys(), refinedIncollectionDataSet);
+			}
+			else if (i instanceof Year) {
+				refinedIncollectionDataSet = processIncollectionsByYear(((Year) i).getYear(), refinedIncollectionDataSet);
+			}
 			//TODO add other search criteria
 
 		}
@@ -52,7 +59,10 @@ public class SearchUtils {
 		List<Inproceeding> refinedInproceedingDataSet = Data.getInproceedings();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedInproceedingDataSet = SearchUtils.processInproceedingsByTitle((Title) i, refinedInproceedingDataSet);
+				refinedInproceedingDataSet = processInproceedingsByTitle(((Title) i).getKeys(), refinedInproceedingDataSet);
+			}
+			else if (i instanceof Year) {
+				refinedInproceedingDataSet = processInproceedingsByYear(((Year) i).getYear(), refinedInproceedingDataSet);
 			}
 			//TODO add other search criteria
 
@@ -69,7 +79,10 @@ public class SearchUtils {
 		List<PhdThesis> refinedPhdThesisDataSet = Data.getPhdtheses();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedPhdThesisDataSet = SearchUtils.processPhdthesesByTitle((Title) i, refinedPhdThesisDataSet);
+				refinedPhdThesisDataSet = SearchUtils.processPhdthesesByTitle(((Title) i).getKeys(), refinedPhdThesisDataSet);
+			}
+			else if (i instanceof Year) {
+				refinedPhdThesisDataSet = SearchUtils.processPhdthesesByYear(((Year) i).getYear(), refinedPhdThesisDataSet);
 			}
 			//TODO add other search criteria
 
@@ -80,17 +93,28 @@ public class SearchUtils {
 
 	}
 
-	private static List<Article> processArticlesByTitle(Title t, List<Article> refinedArticleDataSet) {
+	private static List<Article> processArticlesByTitle(String[] keys, List<Article> refinedArticleDataSet) {
 		List<Article> filteredArticles = new ArrayList<Article>();
 
 		for (Article a: refinedArticleDataSet) {
-			if (keyWordMatchFound(a.getTitle(), t.getKeys())) {
+			if (keyWordMatchFound(a.getTitle(), keys)) {
 				filteredArticles.add(a);
 			}
 		}
 		return filteredArticles;
 	}
 
+	private static List<Article> processArticlesByYear(int pubYear, List<Article> refinedArticleDataSet) {
+		List<Article> filteredArticles = new ArrayList<Article>();
+
+		for (Article a: refinedArticleDataSet) {
+			if (Integer.parseInt(a.getYear()) >= pubYear) {
+				filteredArticles.add(a);
+			}
+		}
+		return filteredArticles;
+	}
+	
 	private static List<IPerson> getAuthorFromRefinedArticleDataSet( List<Article> refinedArticleDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
@@ -108,18 +132,29 @@ public class SearchUtils {
 		return searchedAuthor;
 	}
 
-	private static List<Incollection> processIncollectionsByTitle(Title t, List<Incollection> refinedIncollectionDataSet) {
+	private static List<Incollection> processIncollectionsByTitle(String[] keys, List<Incollection> refinedIncollectionDataSet) {
 
 		List<Incollection> filteredIncollections = new ArrayList<Incollection>();
 
 		for (Incollection i: refinedIncollectionDataSet) {
-			if (keyWordMatchFound(i.getTitle(), t.getKeys())) {
+			if (keyWordMatchFound(i.getTitle(), keys)) {
 				filteredIncollections.add(i);
 			}
 		}
 		return filteredIncollections;
 	}
 
+	private static List<Incollection> processIncollectionsByYear(int pubYear, List<Incollection> refinedIncollectionDataSet) {
+		List<Incollection> filteredIncollections = new ArrayList<Incollection>();
+
+		for (Incollection i: refinedIncollectionDataSet) {
+			if (Integer.parseInt(i.getYear()) >= pubYear) {
+					filteredIncollections.add(i);
+			}
+		}
+		return filteredIncollections;
+	}
+	
 	private static List<IPerson> getAuthorFromRefinedIncollectionDataSet( List<Incollection> refinedIncollectionDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
@@ -137,19 +172,31 @@ public class SearchUtils {
 		return searchedAuthor;
 	}
 
-	private static List<Inproceeding> processInproceedingsByTitle(Title t, List<Inproceeding> refinedInproceedingDataSet) {
+	private static List<Inproceeding> processInproceedingsByTitle(String[] keys, List<Inproceeding> refinedInproceedingDataSet) {
 
 		List<Inproceeding> filteredInproceedings = new ArrayList<Inproceeding>();
 
 		for (Inproceeding i: refinedInproceedingDataSet) {
-			if (keyWordMatchFound(i.getTitle(), t.getKeys())) {
+			if (keyWordMatchFound(i.getTitle(), keys)) {
+				filteredInproceedings.add(i);
+			}
+		}
+		return filteredInproceedings;
+	}
+	
+	private static List<Inproceeding> processInproceedingsByYear(int pubYear, List<Inproceeding> refinedInproceedingDataSet) {
+
+		List<Inproceeding> filteredInproceedings = new ArrayList<Inproceeding>();
+
+		for (Inproceeding i: refinedInproceedingDataSet) {
+			if (Integer.parseInt(i.getYear()) >= pubYear) {
 				filteredInproceedings.add(i);
 			}
 		}
 		return filteredInproceedings;
 	}
 
-	private static List<IPerson> getAuthorFromRefinedInproceedingDataSet( List<Inproceeding> refinedInproceedingDataSet){
+	private static List<IPerson> getAuthorFromRefinedInproceedingDataSet(List<Inproceeding> refinedInproceedingDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
@@ -167,18 +214,30 @@ public class SearchUtils {
 		return searchedAuthor;
 	}
 
-	private static List<PhdThesis> processPhdthesesByTitle(Title t, List<PhdThesis> refinedPhdThesisDataSet) {
+	private static List<PhdThesis> processPhdthesesByTitle(String[] keys, List<PhdThesis> refinedPhdThesisDataSet) {
 
 		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
 
 		for (PhdThesis p: refinedPhdThesisDataSet) {
-			if (keyWordMatchFound(p.getTitle(), t.getKeys())) {
+			if (keyWordMatchFound(p.getTitle(), keys)) {
 				filteredPhdTheses.add(p);
 			}
 		}
 		return filteredPhdTheses;
 	}
 
+	private static List<PhdThesis> processPhdthesesByYear(int pubYear, List<PhdThesis> refinedPhdThesisDataSet) {
+
+		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
+
+		for (PhdThesis p: refinedPhdThesisDataSet) {
+			if (Integer.parseInt(p.getYear()) >= pubYear) {
+				filteredPhdTheses.add(p);
+			}
+		}
+		return filteredPhdTheses;
+	}
+	
 	private static List<IPerson> getAuthorFromRefinedPhdThesisDataSet( List<PhdThesis> refinedPhdThesisDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();

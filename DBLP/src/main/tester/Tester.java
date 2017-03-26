@@ -25,14 +25,14 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		backend.loadData(30);
-		
+		backend.loadData(20);
+		System.out.println("Data loaded");
 		App app = new App();
 		
 		// From front end
 		List<ISearch> searchCriteria = new ArrayList<ISearch>();
-		searchCriteria.add(new Title("proc"));
-		//searchCriteria.add(new Year(2007));
+		searchCriteria.add(new Title("proc supv signal"));
+		searchCriteria.add(new Year(2008));
 		List<IPerson> searchPerson = app.search(searchCriteria);
 		
 		for(IPerson person: searchPerson){

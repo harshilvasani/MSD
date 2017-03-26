@@ -33,20 +33,6 @@ public class App implements IApp{
 		// PhdThesis Processing
 		searchedAuthor.addAll(SearchUtils.processPhdThesis(searchCriteria));
 		
-		// Publications after a year
-		for (ISearch s: searchCriteria) {
-			if (s instanceof Year) {
-				List<IPerson> temp = new ArrayList<IPerson>();
-				int pubYear = ((Year) s).getYear();
-				
-				for (IPerson p: searchedAuthor) {
-					if (p instanceof Author && ((Author) p).getPublicationYear() >= pubYear) {
-						temp.add(p);
-					}	
-				}
-				searchedAuthor = temp;
-			}
-		}
 		// Then Return authors -- From all refined results
 		return searchedAuthor;
 	}
@@ -75,6 +61,10 @@ public class App implements IApp{
 			AuthorName authorName = (AuthorName) searchCriteria;
 			return CoAuthorUtils.processArticles(authorName);	
 		}
+		return null;
+	}
+	
+	public List<IPerson> filter(List<ISearch> searchCriteria, List<IPerson> searchResult) {
 		return null;
 	}
 }
