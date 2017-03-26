@@ -7,7 +7,6 @@ import java.util.Set;
 import persistence.Data;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -22,7 +21,10 @@ public class SimilarAuthorsUtils {
 	private static HashMap<String, HashMap<String, Integer>> countMap = new HashMap<String, HashMap<String, Integer>>();
 	public static List<IPerson> retrieveSimilarAuthors(String authorName) {
 		buildCountMap(authorName);
-		
+		return retrieveSimilarAuthors(authorName, true);
+	}
+	
+	public static List<IPerson> retrieveSimilarAuthors(String authorName, boolean evalInner) {
 		List<IPerson> coAuthors = CoAuthorUtils.retrieveCoAuthors(authorName);
 		Set<String> coAuthorNames = new HashSet<String>();
 		
@@ -31,7 +33,7 @@ public class SimilarAuthorsUtils {
 		}
 		
 		HashMap<String, Integer> queryAuthorJournalMap = countMap.get(authorName);
-		List<IPerson> similarAuthors = new ArrayList<IPerson>();
+		Set<IPerson> similarAuthors = new HashSet<IPerson>();
 		
 		for (String coAuthor: coAuthorNames) {
 			// Continue here
@@ -44,9 +46,22 @@ public class SimilarAuthorsUtils {
 			}
 			similarAuthors.add(new SimilarAuthor(coAuthor, score));
 		}
-		// Sort Here -- You have to add Google Logic here -- Don't forget
-		//Collections.sort(similarAuthors);
+		
 		PriorityQueue<IPerson> temp = new PriorityQueue<>();
+		
+		for (IPerson simAuthor: similarAuthors)
+		{
+			temp.offer(simAuthor);
+		}
+		
+		if (!temp.isEmpty() && evalInner) {
+			similarAuthors.addAll(retrieveSimilarAuthors(temp.poll().getPersonName(), false));
+			if (!temp.isEmpty()) {
+				similarAuthors.addAll(retrieveSimilarAuthors(temp.poll().getPersonName(), false));
+			}
+		}
+		temp = new PriorityQueue<>();
+		
 		for (IPerson simAuthor: similarAuthors)
 		{
 			temp.offer(simAuthor);
@@ -55,7 +70,6 @@ public class SimilarAuthorsUtils {
 		while (!temp.isEmpty()) {
 			resultSimAuthors.add(temp.poll());
 		}
-		//return similarAuthors;
 		return resultSimAuthors;
 	}
 	

@@ -43,4 +43,13 @@ public class SimilarAuthor implements Comparable, IPerson{
 	public void setPersonName(String name) {
 		this.name = name;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof SimilarAuthor) {
+			SimilarAuthor s = (SimilarAuthor) obj;
+			return this.name.equals(s.name);
+		}
+		return super.equals(obj);
+	}
 }
