@@ -1,7 +1,9 @@
 package tester;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import backend.BackEnd;
 import queryengine.app.App;
@@ -27,7 +29,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		backend.loadData(3000);
+		backend.loadData(100);
 		System.out.println("Data loaded");
 		App app = new App();
 		
@@ -64,8 +66,8 @@ public class Tester {
 		System.out.println("---------------------------- conferences ---------");
 		// 
 		searchCriteria = new ArrayList<ISearch>();
-		searchCriteria.add(new Conferences("lncs, ecoop"));
-		
+		//searchCriteria.add(new Conferences("lncs, ecoop"));
+		searchCriteria.add(new AbsenceFromCommittees("19"));
 		searchPerson = app.search(searchCriteria);
 		
 		for(IPerson person: searchPerson){
@@ -77,10 +79,23 @@ public class Tester {
 				System.out.println(((Editor)person).getPersonName());
 			}
 		}
-		
-		
-		//
 		System.out.println("\n---------------\n");
-		AbsenceFromCommittees absence = new AbsenceFromCommittees("7");
+		System.out.println(searchPerson.size());
+		
+		Set<String> temp = new HashSet<String>();
+		for (IPerson person: searchPerson) {
+			temp.add(((Author) person).toString());
+		}
+		searchCriteria = new ArrayList<ISearch>();
+		//searchCriteria.add(new Conferences("lncs, ecoop"));
+		searchPerson = app.search(searchCriteria);
+		System.out.println(searchPerson.size());
+		for (IPerson person: searchPerson) {
+			String name = person.getPersonName();
+			if (!temp.contains(((Author) person).toString())) {
+				System.out.println(((Author)person).toString());
+				// Should print only Rachid
+			}
+		}
 	}
 }
