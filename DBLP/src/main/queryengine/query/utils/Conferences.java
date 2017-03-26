@@ -10,11 +10,11 @@ public class Conferences implements ISearch{
 		this.conferences = conferencesCommaSep.toLowerCase().split("\\s*,\\s*");
 	}
 	
-	public void setJournals(String conferencesCommaSep) {
+	public void setConferences(String conferencesCommaSep) {
 		this.conferences = conferencesCommaSep.toLowerCase().split("\\s*,\\s*");
 	}
 	
-	public String[] getJournals() {
+	public String[] getConferences() {
 		return this.conferences;
 	}
 }
