@@ -4,8 +4,10 @@ import java.util.List;
 
 import antlr.debug.SemanticPredicateAdapter;
 import queryengine.app.utils.CoAuthorUtils;
+import queryengine.app.utils.FilterUtils;
 import queryengine.app.utils.SearchUtils;
 import queryengine.interfaces.ICoAuthorSearch;
+import queryengine.interfaces.IFilter;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
 import queryengine.query.utils.AuthorName;
@@ -64,7 +66,12 @@ public class App implements IApp{
 		return null;
 	}
 	
-	public List<IPerson> filter(List<ISearch> searchCriteria, List<IPerson> searchResult) {
-		return null;
+	public List<IPerson> filter(List<IFilter> filterCriteria, List<IPerson> searchResult) {
+		for (IFilter f: filterCriteria) {
+			if (f instanceof AuthorName) {
+				searchResult = FilterUtils.filterByAuthorName(((AuthorName) f).getAuthorName(), searchResult);
+			}
+		}
+		return searchResult;
 	}
 }
