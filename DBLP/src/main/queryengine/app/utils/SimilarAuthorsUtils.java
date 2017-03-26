@@ -20,11 +20,11 @@ public class SimilarAuthorsUtils {
 
 	private static HashMap<String, HashMap<String, Integer>> countMap = new HashMap<String, HashMap<String, Integer>>();
 	public static List<IPerson> retrieveSimilarAuthors(String authorName) {
-		buildCountMap(authorName);
 		return retrieveSimilarAuthors(authorName, true);
 	}
 	
 	public static List<IPerson> retrieveSimilarAuthors(String authorName, boolean evalInner) {
+		buildCountMap(authorName);
 		List<IPerson> coAuthors = CoAuthorUtils.retrieveCoAuthors(authorName);
 		Set<String> coAuthorNames = new HashSet<String>();
 		
@@ -47,7 +47,14 @@ public class SimilarAuthorsUtils {
 			similarAuthors.add(new SimilarAuthor(coAuthor, score));
 		}
 		
-		PriorityQueue<IPerson> temp = new PriorityQueue<>();
+		if (!evalInner) {
+			System.out.println(similarAuthors.size());
+			List<IPerson> persons = new ArrayList<IPerson>();
+			persons.addAll(similarAuthors);
+			return persons;
+		}
+		
+		PriorityQueue<IPerson> temp = new PriorityQueue<IPerson>();
 		
 		for (IPerson simAuthor: similarAuthors)
 		{
@@ -55,16 +62,27 @@ public class SimilarAuthorsUtils {
 		}
 		
 		if (!temp.isEmpty() && evalInner) {
-			similarAuthors.addAll(retrieveSimilarAuthors(temp.poll().getPersonName(), false));
-			if (!temp.isEmpty()) {
-				similarAuthors.addAll(retrieveSimilarAuthors(temp.poll().getPersonName(), false));
+			int i = 0;
+			while (!temp.isEmpty() && 
+					i < INCLUDE_NEXT_X_AUTHORS) {
+				IPerson thisPerson = temp.poll();
+				List<IPerson> tempAuthors = retrieveSimilarAuthors(thisPerson.getPersonName().toLowerCase(),
+											false);
+				for (IPerson tempAuthor: tempAuthors) {
+					if (!similarAuthors.contains(tempAuthor)) {
+						similarAuthors.add(tempAuthor);
+					}
+				}
+				i++;
 			}
 		}
-		temp = new PriorityQueue<>();
+		temp = new PriorityQueue<IPerson>();
 		
 		for (IPerson simAuthor: similarAuthors)
 		{
-			temp.offer(simAuthor);
+			if (!simAuthor.getPersonName().toLowerCase().contains(authorName)) {
+				temp.offer(simAuthor);
+			}
 		}
 		List<IPerson> resultSimAuthors = new ArrayList<IPerson>();
 		while (!temp.isEmpty()) {
@@ -169,4 +187,6 @@ public class SimilarAuthorsUtils {
 			}
 		}
 	}
+	
+	private static int INCLUDE_NEXT_X_AUTHORS = 3;
 }

@@ -73,6 +73,7 @@ public class Tester {
 		for (IPerson a: similarAuthors) {
 			System.out.println(a.getPersonName() + " " + ((SimilarAuthor) a).getScore());
 		}
+		System.out.println(similarAuthors.size());
 		/*System.out.println("---------------------------- conferences ---------");
 		// 
 		searchCriteria = new ArrayList<ISearch>();

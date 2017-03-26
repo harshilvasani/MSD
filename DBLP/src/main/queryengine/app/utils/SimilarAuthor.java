@@ -52,4 +52,9 @@ public class SimilarAuthor implements Comparable, IPerson{
 		}
 		return super.equals(obj);
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
 }
