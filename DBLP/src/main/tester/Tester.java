@@ -31,7 +31,7 @@ public class Tester {
 		
 		//frontend.parseXMLAndInsertData();
 		//frontend.textParser();
-		backend.loadData(100);
+		backend.loadData(20);
 		System.out.println("Data loaded");
 		App app = new App();
 		
@@ -52,7 +52,7 @@ public class Tester {
 		}
 		System.out.println("---------------------------- COmmon Authors ---------");
 		// 
-		AuthorName aname = new AuthorName("alex");
+		AuthorName aname = new AuthorName("al");
 		searchPerson = app.searchCoAuthors(aname);
 		for(IPerson person: searchPerson){
 			if (person instanceof Author){
@@ -65,7 +65,7 @@ public class Tester {
 			}
 		}
 
-		System.out.println("---------------------------- conferences ---------");
+		/*System.out.println("---------------------------- conferences ---------");
 		// 
 		searchCriteria = new ArrayList<ISearch>();
 		//searchCriteria.add(new Conferences("lncs, ecoop"));
@@ -132,6 +132,6 @@ public class Tester {
 			if(person instanceof Editor){
 				System.out.println(((Editor)person).getPersonName());
 			}
-		}
+		}*/
 	}
 }

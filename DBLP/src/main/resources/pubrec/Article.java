@@ -78,7 +78,7 @@ public class Article{
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return (this.title + this.journalName + this.year).hashCode();

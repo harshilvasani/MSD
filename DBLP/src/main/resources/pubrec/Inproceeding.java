@@ -74,4 +74,22 @@ public class Inproceeding{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Inproceeding) {
+			Inproceeding i = (Inproceeding) obj;
+			return this.key.equals(i.key) &&
+					this.title.equals(i.title);
+		}
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+	
+	@Override
+	public int hashCode() {
+		//System.out.println(this.key.hashCode());
+		return (this.key + this.title).hashCode();
+	}
 }

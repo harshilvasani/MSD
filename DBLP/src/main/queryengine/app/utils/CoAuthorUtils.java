@@ -7,18 +7,25 @@ import java.util.Set;
 
 import persistence.Data;
 import queryengine.app.utils.SearchUtils.PublicationType;
-import queryengine.interfaces.ISearch;
-import queryengine.query.utils.AuthorName;
-import queryengine.query.utils.Title;
 import resources.person.Author;
 import resources.person.IPerson;
 import resources.pubrec.Article;
 import resources.pubrec.Incollection;
 import resources.pubrec.Inproceeding;
-import resources.pubrec.PhdThesis;
 
 public class CoAuthorUtils {
-	public static List<IPerson> processArticles(AuthorName authorName){
+	
+	public static List<IPerson> retrieveCoAuthors(String authorName){
+		List<IPerson> coAuthors = new ArrayList<IPerson>();
+		
+		coAuthors.addAll(processArticles(authorName));
+		coAuthors.addAll(processInproceedings(authorName));
+		coAuthors.addAll(processIncollections(authorName));
+		
+		return coAuthors;
+	}
+	
+	public static List<IPerson> processArticles(String authorName){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
 		// Article Processing
@@ -27,7 +34,7 @@ public class CoAuthorUtils {
 		
 		for (Article a: articleDataSet) {
 			if (a.getAuthorName() != null &&
-				a.getAuthorName().toLowerCase().contains(authorName.getAuthorName())) {
+				a.getAuthorName().toLowerCase().contains(authorName)) {
 				authorArticles.add(a);
 			}
 		}
@@ -35,7 +42,7 @@ public class CoAuthorUtils {
 		
 		for (Article a: articleDataSet) {
 			if (authorArticles.contains(a) &&
-				!a.getAuthorName().toLowerCase().contains(authorName.getAuthorName())) {
+				!a.getAuthorName().toLowerCase().contains(authorName)) {
 				Author author = new Author(a.getAuthorName(),
 											a.getId(), 
 											a.getTitle(), 
@@ -47,55 +54,56 @@ public class CoAuthorUtils {
 		}
 		return searchedAuthor;
 	}
-
-	/*public static List<IPerson> processIncollection(List<ISearch> searchCriteria){
+	
+	public static List<IPerson> processInproceedings(String authorName){
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
 
-		List<Incollection> refinedIncollectionDataSet = Data.getIncollections();
-		for (ISearch i: searchCriteria) {
-			if (i instanceof Title) {
-				refinedIncollectionDataSet = SearchUtils.processIncollectionsByTitle((Title) i, refinedIncollectionDataSet);
-			}	
-			//TODO add other search criteria
-
-		}
-		// after refinedInproceedingDataSet is final
-		searchedAuthor.addAll(SearchUtils.getAuthorFromRefinedIncollectionDataSet(refinedIncollectionDataSet));	
-		return searchedAuthor;
-
-	}
-
-	public static List<IPerson> processInproceeding(List<ISearch> searchCriteria){
-		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
-
-		List<Inproceeding> refinedInproceedingDataSet = Data.getInproceedings();
-		for (ISearch i: searchCriteria) {
-			if (i instanceof Title) {
-				refinedInproceedingDataSet = SearchUtils.processInproceedingsByTitle((Title) i, refinedInproceedingDataSet);
+		List<Inproceeding> inproceedingsDataSet = Data.getInproceedings();
+		Set<Inproceeding> authorInproceedings = new HashSet<Inproceeding>();
+		for (Inproceeding i: inproceedingsDataSet) {
+			if (i.getAuthorName() != null &&
+				i.getAuthorName().toLowerCase().contains(authorName)) {
+				authorInproceedings.add(i);
 			}
-			//TODO add other search criteria
-
 		}
-		// after refinedInproceedingDataSet is final
-		searchedAuthor.addAll(SearchUtils.getAuthorFromRefinedInproceedingDataSet(refinedInproceedingDataSet));	
-		return searchedAuthor;
-
-	}
-
-	public static List<IPerson> processPhdThesis(List<ISearch> searchCriteria){
-		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
-
-		List<PhdThesis> refinedPhdThesisDataSet = Data.getPhdtheses();
-		for (ISearch i: searchCriteria) {
-			if (i instanceof Title) {
-				refinedPhdThesisDataSet = SearchUtils.processPhdthesesByTitle((Title) i, refinedPhdThesisDataSet);
+		for (Inproceeding i: inproceedingsDataSet) {
+			if (authorInproceedings.contains(i) &&
+				!i.getAuthorName().toLowerCase().contains(authorName)) {
+				Author author = new Author(i.getAuthorName(),
+											i.getId(), 
+											i.getTitle(),
+											i.getKey(),
+											i.getYear(),
+											PublicationType.INPROCEEDING);
+				searchedAuthor.add(author);
 			}
-			//TODO add other search criteria
-
 		}
-		// after refinedPhdThesisDataSet is final
-		searchedAuthor.addAll(SearchUtils.getAuthorFromRefinedPhdThesisDataSet(refinedPhdThesisDataSet));	
 		return searchedAuthor;
-
-	}*/
+	}
+	
+	public static List<IPerson> processIncollections(String authorName){
+		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
+		
+		List<Incollection> incollectionsDataSet = Data.getIncollections();
+		Set<Incollection> authorIncollections = new HashSet<Incollection>();
+		for (Incollection i: incollectionsDataSet) {
+			if (i.getAuthorName() != null &&
+				i.getAuthorName().toLowerCase().contains(authorName)) {
+				authorIncollections.add(i);
+			}
+		}
+		for (Incollection i: incollectionsDataSet) {
+			if (authorIncollections.contains(i) &&
+				!i.getAuthorName().toLowerCase().contains(authorName)) {
+				Author author = new Author(i.getAuthorName(),
+											i.getId(), 
+											i.getTitle(),
+											i.getKey(),
+											i.getYear(),
+											PublicationType.INCOLLECTION);
+				searchedAuthor.add(author);
+			}
+		}
+		return searchedAuthor;
+	}
 }

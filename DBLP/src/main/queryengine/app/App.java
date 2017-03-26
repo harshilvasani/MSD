@@ -62,7 +62,7 @@ public class App implements IApp{
 	public List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria) {
 		if (searchCriteria instanceof AuthorName) {
 			AuthorName authorName = (AuthorName) searchCriteria;
-			return CoAuthorUtils.processArticles(authorName);	
+			return CoAuthorUtils.retrieveCoAuthors(authorName.getAuthorName());	
 		}
 		return null;
 	}
