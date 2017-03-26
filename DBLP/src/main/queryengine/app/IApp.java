@@ -18,7 +18,7 @@ public interface IApp {
 	List<IPerson> search(List<ISearch> searchCriteria);
 	List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria);
 	List<IPerson> filter(List<IFilter> searchCriteria, List<IPerson> searchResult);
-		
+	
 	/*List<IPerson> filter(List<?> criteria, List<?> filterData);
 	List<?> displayStatistic();
 	List<?> getSimilarPerson();

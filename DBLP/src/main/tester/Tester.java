@@ -7,10 +7,12 @@ import java.util.Set;
 
 import backend.BackEnd;
 import queryengine.app.App;
+import queryengine.interfaces.IFilter;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AbsenceFromCommittees;
 import queryengine.query.utils.AuthorName;
 import queryengine.query.utils.Conferences;
+import queryengine.query.utils.MinPublications;
 import queryengine.query.utils.Title;
 import queryengine.query.utils.Year;
 import resources.person.Author;
@@ -79,7 +81,7 @@ public class Tester {
 				System.out.println(((Editor)person).getPersonName());
 			}
 		}
-		System.out.println("\n---------------\n");
+		System.out.println("\n------Absence from committee---------\n");
 		System.out.println(searchPerson.size());
 		
 		Set<String> temp = new HashSet<String>();
@@ -94,7 +96,41 @@ public class Tester {
 			String name = person.getPersonName();
 			if (!temp.contains(((Author) person).toString())) {
 				System.out.println(((Author)person).toString());
-				// Should print only Rachid
+				// Should print only Rachid for load data param = 100
+			}
+		}
+		System.out.println("\n------Min Publications---------\n");
+		searchCriteria = new ArrayList<ISearch>();
+		searchCriteria.add(new Year(1995));
+		searchPerson = app.search(searchCriteria);
+		List<IFilter> filterCriteria = new ArrayList<IFilter>();
+		filterCriteria.add(new MinPublications("3"));
+		
+		searchPerson = app.filter(filterCriteria, searchPerson);
+		
+		for(IPerson person: searchPerson){
+			if(person instanceof Author){
+				System.out.println(((Author)person).toString());
+				System.out.println();
+			}
+			if(person instanceof Editor){
+				System.out.println(((Editor)person).getPersonName());
+			}
+		}
+		System.out.println("\n------Filter Name---------\n");
+		
+		// Filter using name as well
+		filterCriteria.add(new AuthorName("james"));
+		
+		searchPerson = app.filter(filterCriteria, searchPerson);
+		
+		for(IPerson person: searchPerson){
+			if(person instanceof Author){
+				System.out.println(((Author)person).toString());
+				System.out.println();
+			}
+			if(person instanceof Editor){
+				System.out.println(((Editor)person).getPersonName());
 			}
 		}
 	}

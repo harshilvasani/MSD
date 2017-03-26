@@ -11,6 +11,7 @@ import queryengine.interfaces.IFilter;
 import queryengine.interfaces.ISearch;
 import queryengine.miscellaneous.ResponseMessage;
 import queryengine.query.utils.AuthorName;
+import queryengine.query.utils.MinPublications;
 import queryengine.query.utils.Year;
 import resources.person.Author;
 import resources.person.IPerson;
@@ -70,6 +71,9 @@ public class App implements IApp{
 		for (IFilter f: filterCriteria) {
 			if (f instanceof AuthorName) {
 				searchResult = FilterUtils.filterByAuthorName(((AuthorName) f).getAuthorName(), searchResult);
+			}
+			else if (f instanceof MinPublications) {
+				searchResult = FilterUtils.filterByMinPublications(((MinPublications) f).getMinPublications(), searchResult);
 			}
 		}
 		return searchResult;
