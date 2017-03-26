@@ -5,6 +5,7 @@ import java.util.List;
 
 import persistence.Data;
 import queryengine.interfaces.ISearch;
+import queryengine.query.utils.Conferences;
 import queryengine.query.utils.Title;
 import queryengine.query.utils.Year;
 import resources.person.Author;
@@ -25,6 +26,9 @@ public class SearchUtils {
 			else if (i instanceof Year) {
 				refinedArticleDataSet = processArticlesByYear(((Year) i).getYear(), refinedArticleDataSet);
 			}
+			else if (i instanceof Conferences) {
+				refinedArticleDataSet = processArticlesByConferences((((Conferences) i).getConferences()), refinedArticleDataSet);
+			}
 			//TODO add other search criteria
 			
 		}
@@ -43,6 +47,9 @@ public class SearchUtils {
 			}
 			else if (i instanceof Year) {
 				refinedIncollectionDataSet = processIncollectionsByYear(((Year) i).getYear(), refinedIncollectionDataSet);
+			}
+			else if (i instanceof Conferences) {
+				refinedIncollectionDataSet = processIncollectionsByConferences(((Conferences) i).getConferences(), refinedIncollectionDataSet);
 			}
 			//TODO add other search criteria
 
@@ -64,6 +71,9 @@ public class SearchUtils {
 			else if (i instanceof Year) {
 				refinedInproceedingDataSet = processInproceedingsByYear(((Year) i).getYear(), refinedInproceedingDataSet);
 			}
+			else if (i instanceof Conferences) {
+				refinedInproceedingDataSet = processInproceedingsByConferences((((Conferences) i).getConferences()), refinedInproceedingDataSet);
+			}
 			//TODO add other search criteria
 
 		}
@@ -79,10 +89,13 @@ public class SearchUtils {
 		List<PhdThesis> refinedPhdThesisDataSet = Data.getPhdtheses();
 		for (ISearch i: searchCriteria) {
 			if (i instanceof Title) {
-				refinedPhdThesisDataSet = SearchUtils.processPhdthesesByTitle(((Title) i).getKeys(), refinedPhdThesisDataSet);
+				refinedPhdThesisDataSet = processPhdthesesByTitle(((Title) i).getKeys(), refinedPhdThesisDataSet);
 			}
 			else if (i instanceof Year) {
-				refinedPhdThesisDataSet = SearchUtils.processPhdthesesByYear(((Year) i).getYear(), refinedPhdThesisDataSet);
+				refinedPhdThesisDataSet = processPhdthesesByYear(((Year) i).getYear(), refinedPhdThesisDataSet);
+			}
+			else if (i instanceof Conferences) {
+				refinedPhdThesisDataSet = processPhdthesesByConferences(((Conferences) i).getConferences(), refinedPhdThesisDataSet);
 			}
 			//TODO add other search criteria
 
@@ -109,6 +122,17 @@ public class SearchUtils {
 
 		for (Article a: refinedArticleDataSet) {
 			if (Integer.parseInt(a.getYear()) >= pubYear) {
+				filteredArticles.add(a);
+			}
+		}
+		return filteredArticles;
+	}
+	
+	private static List<Article> processArticlesByConferences(String conferences[], List<Article> refinedArticleDataSet) {
+		List<Article> filteredArticles = new ArrayList<Article>();
+
+		for (Article a: refinedArticleDataSet) {
+			if (conferenceMatchFound(a.getJournalName(), conferences)) {
 				filteredArticles.add(a);
 			}
 		}
@@ -155,6 +179,17 @@ public class SearchUtils {
 		return filteredIncollections;
 	}
 	
+	private static List<Incollection> processIncollectionsByConferences(String[] conferences, List<Incollection> refinedIncollectionDataSet) {
+		List<Incollection> filteredIncollections = new ArrayList<Incollection>();
+
+		for (Incollection i: refinedIncollectionDataSet) {
+			if (conferenceMatchFound(i.getKey(), conferences)) {
+					filteredIncollections.add(i);
+			}
+		}
+		return filteredIncollections;
+	}
+	
 	private static List<IPerson> getAuthorFromRefinedIncollectionDataSet( List<Incollection> refinedIncollectionDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
@@ -163,7 +198,7 @@ public class SearchUtils {
 			Author author = new Author(incollection.getAuthorName(),
 										incollection.getId(),
 										incollection.getTitle(),
-										"",
+										incollection.getKey(),
 										incollection.getYear(),
 										PublicationType.INCOLLECTION);
 			searchedAuthor.add(author);
@@ -195,6 +230,18 @@ public class SearchUtils {
 		}
 		return filteredInproceedings;
 	}
+	
+	private static List<Inproceeding> processInproceedingsByConferences(String[] conferences, List<Inproceeding> refinedInproceedingDataSet) {
+
+		List<Inproceeding> filteredInproceedings = new ArrayList<Inproceeding>();
+
+		for (Inproceeding i: refinedInproceedingDataSet) {
+			if (conferenceMatchFound(i.getKey(), conferences)) {
+				filteredInproceedings.add(i);
+			}
+		}
+		return filteredInproceedings;
+	}
 
 	private static List<IPerson> getAuthorFromRefinedInproceedingDataSet(List<Inproceeding> refinedInproceedingDataSet){
 
@@ -204,7 +251,7 @@ public class SearchUtils {
 			Author author = new Author(inproceeding.getAuthorName(),
 										inproceeding.getId(),
 										inproceeding.getTitle(),
-										"",
+										inproceeding.getKey(),
 										inproceeding.getYear(),
 										PublicationType.INPROCEEDING);
 
@@ -238,6 +285,18 @@ public class SearchUtils {
 		return filteredPhdTheses;
 	}
 	
+	private static List<PhdThesis> processPhdthesesByConferences(String[] conferences, List<PhdThesis> refinedPhdThesisDataSet) {
+
+		List<PhdThesis> filteredPhdTheses = new ArrayList<PhdThesis>();
+
+		for (PhdThesis p: refinedPhdThesisDataSet) {
+			if (conferenceMatchFound(p.getKey(), conferences)) {
+				filteredPhdTheses.add(p);
+			}
+		}
+		return filteredPhdTheses;
+	}
+	
 	private static List<IPerson> getAuthorFromRefinedPhdThesisDataSet( List<PhdThesis> refinedPhdThesisDataSet){
 
 		List<IPerson> searchedAuthor = new ArrayList<IPerson>();
@@ -246,7 +305,7 @@ public class SearchUtils {
 			Author author = new Author(phdThesis.getAuthorName(),
 										phdThesis.getId(),
 										phdThesis.getTitle(),
-										"",
+										phdThesis.getKey(),
 										phdThesis.getYear(),
 										PublicationType.PHDTHESIS);
 			searchedAuthor.add(author);
@@ -271,6 +330,19 @@ public class SearchUtils {
 		}
 		
 		return ((matchingWords / keySize) >= MIN_MATCH_PERCENTAGE);
+	}
+	
+	private static boolean conferenceMatchFound(String conference, String[] conferences) {
+		if (conference == null)
+			return false;
+		
+		conference = conference.toLowerCase();
+		for (String c: conferences) {
+			if (conference.contains(c))
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public class PublicationType { 

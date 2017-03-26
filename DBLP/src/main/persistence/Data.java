@@ -70,5 +70,4 @@ public class Data {
 		if (Data.committeeMembers == null)
 			Data.committeeMembers = committeeMembers;
 	}
-
 }

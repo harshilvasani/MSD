@@ -7,6 +7,7 @@ import backend.BackEnd;
 import queryengine.app.App;
 import queryengine.interfaces.ISearch;
 import queryengine.query.utils.AuthorName;
+import queryengine.query.utils.Conferences;
 import queryengine.query.utils.Title;
 import queryengine.query.utils.Year;
 import resources.person.Author;
@@ -58,7 +59,22 @@ public class Tester {
 
 			}
 		}
+
+		System.out.println("---------------------------- conferences ---------");
+		// 
+		searchCriteria = new ArrayList<ISearch>();
+		searchCriteria.add(new Conferences("lncs, ecoop"));
 		
-		//Victor Khomenko
+		searchPerson = app.search(searchCriteria);
+		
+		for(IPerson person: searchPerson){
+			if(person instanceof Author){
+				System.out.println(((Author)person).toString());
+				System.out.println();
+			}
+			if(person instanceof Editor){
+				System.out.println(((Editor)person).getPersonName());
+			}
+		}	
 	}
 }
