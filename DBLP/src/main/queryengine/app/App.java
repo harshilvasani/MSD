@@ -9,6 +9,7 @@ import queryengine.app.utils.SearchUtils;
 import queryengine.app.utils.SimilarAuthor;
 import queryengine.app.utils.SimilarAuthorsUtils;
 import queryengine.interfaces.ICoAuthorSearch;
+import queryengine.interfaces.IFavorite;
 import queryengine.interfaces.IFilter;
 import queryengine.interfaces.ISearch;
 import queryengine.interfaces.ISimAuthorSearch;
@@ -71,6 +72,16 @@ public class App implements IApp{
 			return SimilarAuthorsUtils.retrieveSimilarAuthors(authorName.getAuthorName());	
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean addFavorites(IFavorite favoriteCriteria) {
+		return false;
+	}
+	
+	@Override
+	public boolean removeFavorites(IFavorite favoriteCriteria) {
+		return false;
 	}
 	
 	@Override
