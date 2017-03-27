@@ -50,6 +50,11 @@ public class Search_Page {
 	JLabel lblMinimumYear;
 	JLabel lblAbsenceFromCommittee;
 	JButton btnSearch;
+	JScrollPane scroller;
+	Boolean scrollerFlag;
+	Boolean authorNameContainsFlag;
+	Boolean minimumPublicationFlag;
+	Boolean displayingResultsFlag;
 
 	/**
 	 * Launch the application.
@@ -84,6 +89,13 @@ public class Search_Page {
 		frame.setBounds(0, 0, 1350, 725);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		scroller = new JScrollPane();
+		scrollerFlag = true;
+		authorNameContainsFlag = false;
+		minimumPublicationFlag = false;
+		displayingResultsFlag = false;
+
 
 		btnLogout = new JButton("Logout");
 		btnLogout.setBackground(new Color(255, 255, 255));
@@ -197,17 +209,15 @@ public class Search_Page {
 				Interfacing_for_Author_Search authorSearchComm = new Interfacing_for_Author_Search(
 						publicationTitle, journalName, minYear, absence);
 
-				List<IPerson> result = authorSearchComm.sendSearchCriteriaToApp();
+			//	List<IPerson> result = authorSearchComm.sendSearchCriteriaToApp();
 
-		/*		List<IPerson> result = new ArrayList<IPerson>();
+				List<IPerson> result = new ArrayList<IPerson>();
 				for(int i=1;i<=50;i++){
 					result.add(new Author("abc", i, "abc", "abc", "6", "article"));
 					result.add(new Author("abc", i, "abc", "abc", "7", "article"));
-				} */
+				} 
 				
-				if(result != null && result.size() > 0){
-					displaySearchResults(result,authorSearchComm);
-				}
+				displaySearchResults(result,authorSearchComm);
 			}
 		});
 		btnSearch.setForeground(Color.GREEN);
@@ -235,10 +245,17 @@ public class Search_Page {
 	}
 
 	public void displaySearchResults(List<IPerson> result, Interfacing_for_Author_Search authorSearchComm){
-
-		JLabel lblAuthorNameContains = new JLabel("Author Name Contains:");
-		lblAuthorNameContains.setBounds(192, 300, 150, 25);
-		frame.getContentPane().add(lblAuthorNameContains);
+		if(scrollerFlag){
+			frame.getContentPane().remove(scroller);
+			scrollerFlag = false;
+		}
+		
+		if(authorNameContainsFlag == false){
+			JLabel lblAuthorNameContains = new JLabel("Author Name Contains:");
+			lblAuthorNameContains.setBounds(192, 300, 150, 25);
+			frame.getContentPane().add(lblAuthorNameContains);
+			authorNameContainsFlag = true;
+		}
 
 		JFormattedTextField ftfAuthorNameContains = new JFormattedTextField();
 		ftfAuthorNameContains.setForeground(new Color(0, 255, 0));
@@ -246,26 +263,33 @@ public class Search_Page {
 		ftfAuthorNameContains.setBounds(352, 300, 200, 25);
 		frame.getContentPane().add(ftfAuthorNameContains);
 
-		JLabel lblMinimumPublication = new JLabel("Minimum Publication:");
-		lblMinimumPublication.setBounds(572, 300, 150, 25);
-		frame.getContentPane().add(lblMinimumPublication);
-
+		if(minimumPublicationFlag == false){
+			JLabel lblMinimumPublication = new JLabel("Minimum Publication:");
+			lblMinimumPublication.setBounds(572, 300, 150, 25);
+			frame.getContentPane().add(lblMinimumPublication);
+			minimumPublicationFlag = true;
+		}
+			
 		JFormattedTextField ftfMinimumPublication = new JFormattedTextField();
 		ftfMinimumPublication.setForeground(new Color(0, 255, 0));
 		ftfMinimumPublication.setText("");
 		ftfMinimumPublication.setBounds(732, 300, 200, 25);
 		frame.getContentPane().add(ftfMinimumPublication);
-
-		lblDisplayingResults = new JLabel("Displaying Results");
-		lblDisplayingResults.setBounds(150, 345, 200, 14);
-		frame.getContentPane().add(lblDisplayingResults);
-
+		
+		if(displayingResultsFlag == false){
+			lblDisplayingResults = new JLabel("Displaying Results");
+			lblDisplayingResults.setBounds(150, 345, 200, 14);
+			frame.getContentPane().add(lblDisplayingResults);
+			displayingResultsFlag = true;
+		}
+		
 		JPanel authorDisplayArea = new JPanel();
 		authorDisplayArea.setLayout(new BoxLayout(authorDisplayArea, BoxLayout.Y_AXIS));
 
-		JScrollPane scroller = new JScrollPane(authorDisplayArea,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroller = new JScrollPane(authorDisplayArea,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroller.setBounds(150, 370, 1000, 300);
 		frame.getContentPane().add(scroller);
+		scrollerFlag = true;
 		
 		JButton btnFilter = new JButton("Apply Filters");
 		btnFilter.setBackground(new Color(255, 255, 255));
@@ -275,17 +299,14 @@ public class Search_Page {
 				authorSearchComm.setFilters(ftfAuthorNameContains.getText(),
 						ftfMinimumPublication.getText());
 
-				List<IPerson> filterSet = authorSearchComm.sendFiltersToApp();
-			/*	List<IPerson> filterSet = new ArrayList<IPerson>();
+			//	List<IPerson> filterSet = authorSearchComm.sendFiltersToApp();
+				List<IPerson> filterSet = new ArrayList<IPerson>();
 				for(int i=1;i<=50;i++){
 					filterSet.add(new Author("abc", i, "abc", "abc", "8", "article"));
 					filterSet.add(new Author("abc", i, "abc", "abc", "9", "article"));
-				} */
+				} 
 				
-				frame.getContentPane().remove(scroller);
-				if(result != null && result.size() > 0){
-					displaySearchResults(filterSet,authorSearchComm);
-				}
+				displaySearchResults(filterSet,authorSearchComm);
 
 			}
 		});
@@ -302,10 +323,13 @@ public class Search_Page {
 		btnaddFavoriteAuthor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = searchResults.getSelectedRow();
-				System.out.println(searchResults.getValueAt(row,0)+" "+
-						searchResults.getValueAt(row,1)+" "+searchResults.getValueAt(row,2)+" "+
-						searchResults.getValueAt(row,3)
-						);
+				if(row>0){
+					System.out.println(row+" "+searchResults.getValueAt(row,0)+" "+
+							searchResults.getValueAt(row,1)+" "+searchResults.getValueAt(row,2)+" "+
+							searchResults.getValueAt(row,3)+" "+searchResults.getValueAt(row,4)
+							);
+					System.out.println(result.get(row-1));
+				}
 			}
 		});
 		btnaddFavoriteAuthor.setForeground(new Color(0, 255, 0));
@@ -316,9 +340,10 @@ public class Search_Page {
 		model.addColumn("Publication Title");
 		model.addColumn("Publication Type");
 		model.addColumn("Publication Year");
+		model.addColumn("Journal/Publication/Conference");
 
 		model.addRow(new Object[]{"Person Name","Publication Title",
-				"Publication Type", "Publication Year"});
+				"Publication Type", "Publication Year", "Journal/Publication/Conference"});
 
 		if(result != null && result.size() > 0){
 			for( int i = 0; i < result.size() ; i++ ){
@@ -330,8 +355,8 @@ public class Search_Page {
 					Author a = (Author) person;
 
 					model.addRow(new Object[]{a.getPersonName(),a.getPublicationTitle(),
-							a.getPublicationType(), a.getPublicationYear()});
-
+							a.getPublicationType(), a.getPublicationYear(), a.getJournalName()});
+					
 
 				}
 			}
