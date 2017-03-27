@@ -11,14 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import backend.BackEnd;
 import resources.person.Author;
 import resources.person.IPerson;
 
 import javax.swing.JFormattedTextField;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 
 public class Search_Page {
@@ -32,6 +29,9 @@ public class Search_Page {
 	JButton btnSimilarAuthorSearch;
 	JLabel lblAuthorSearch;
 	JFormattedTextField ftfSearchCriteria;
+	JFormattedTextField formattedTextField;
+	JFormattedTextField formattedTextField_1;
+	JFormattedTextField formattedTextField_2;
 	JButton btnSearch;
 	JTextField textField;
 
@@ -39,6 +39,9 @@ public class Search_Page {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		BackEnd b = new BackEnd();
+		b.loadData(0);
+		System.out.println("Data LoADED");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -150,19 +153,19 @@ public class Search_Page {
 		ftfSearchCriteria.setBounds(150, 120, 200, 20);
 		frame.getContentPane().add(ftfSearchCriteria);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField = new JFormattedTextField();
 		formattedTextField.setText("");
 		formattedTextField.setForeground(Color.GREEN);
 		formattedTextField.setBounds(150, 151, 200, 20);
 		frame.getContentPane().add(formattedTextField);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1 = new JFormattedTextField();
 		formattedTextField_1.setText("");
 		formattedTextField_1.setForeground(Color.GREEN);
 		formattedTextField_1.setBounds(150, 182, 200, 20);
 		frame.getContentPane().add(formattedTextField_1);
 		
-		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
+		formattedTextField_2 = new JFormattedTextField();
 		formattedTextField_2.setText("");
 		formattedTextField_2.setForeground(Color.GREEN);
 		formattedTextField_2.setBounds(150, 213, 200, 20);
@@ -190,8 +193,8 @@ public class Search_Page {
 					IPerson person = result.get(i);
 					if(person instanceof Author){
 						Author a = (Author) person;
-						display += a.getPersonName();
-						display += "\n";
+						display += a.toString();
+						display += ";\n";
 					}
 				}
 				

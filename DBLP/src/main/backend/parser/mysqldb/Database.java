@@ -20,7 +20,7 @@ public class Database {
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/dblp2?useServerPrepStmts=false&rewriteBatchedStatements=true";
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "tiger";
+	private static final String DB_PASSWORD = "Vasani99";
 	
 	public static String insertTableSQL = null;
 

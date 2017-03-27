@@ -39,7 +39,7 @@ public class Tester {
 		// From front end
 		List<ISearch> searchCriteria = new ArrayList<ISearch>();
 		searchCriteria.add(new Title("proc supv signal"));
-		searchCriteria.add(new Year(2008));
+		searchCriteria.add(new Year("2008"));
 		List<IPerson> searchPerson = app.search(searchCriteria);
 		
 		for(IPerson person: searchPerson){

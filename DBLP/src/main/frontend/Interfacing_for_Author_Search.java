@@ -35,11 +35,12 @@ public class Interfacing_for_Author_Search {
 		List<ISearch> searchCriteria = new ArrayList<ISearch>();
 		if (Validator.isNonEmptyString(this.titleText)) 
 			searchCriteria.add(new Title(this.titleText));
-		if (Validator.isValidN(this.searchYear)) 	
+		if (Validator.isValidYear(this.searchYear)) 	
 			searchCriteria.add(new Year(this.searchYear));
 		if (Validator.isNonEmptyString(this.journalName)) 	
 			searchCriteria.add(new Conferences(this.journalName));
-		searchCriteria.add(new AbsenceFromCommittees(absenceYears));
+		if (Validator.isValidN(this.absenceYears))
+			searchCriteria.add(new AbsenceFromCommittees(this.absenceYears));
 		this.result = app.search(searchCriteria);
 		return this.result;
 	}

@@ -15,6 +15,19 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isValidYear(String s) {
+		if (s == null || s.length() != 4)
+			return false;
+		
+		for (char c: s.toCharArray())
+		{
+			if (c < 48 || c > 57)
+				return false;
+		}
+		
+		return true;
+	}
+	
 	public static boolean isNonEmptyString(String s) {
 		return !(s == null || s.length() == 0);
 	}
