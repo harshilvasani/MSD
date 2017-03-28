@@ -10,7 +10,7 @@ import resources.personrecord.IPerson;
 public class SimilarAuthorSearchUtils {
 
 	public List<IPerson> getSimilarAuthors(String authorName){
-		App app = App.getTestAppInstance(20);
+		App app = App.getAppInstance();	
 		ISimAuthorSearch searchCriteria = new AuthorName(authorName);
 		
 		List<IPerson> searchResult = app.searchSimilarAuthors(searchCriteria);

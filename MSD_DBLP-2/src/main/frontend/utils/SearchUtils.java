@@ -16,7 +16,7 @@ public class SearchUtils {
 
 	public static List<IPerson> getSearchResult(String publicationTitle, String minYear, String journalName, String absenceYears){
 		
-		App app = App.getTestAppInstance(10);
+		App app = App.getAppInstance();	
 		List<ISearch> searchCriteria = createSearchCriteria(publicationTitle, minYear, journalName, absenceYears);
 				
 		List<IPerson> searchResult = app.search(searchCriteria);

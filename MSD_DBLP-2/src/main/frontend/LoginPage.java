@@ -64,7 +64,7 @@ public class LoginPage {
 	 */
 	public LoginPage(){
 
-		app = App.getTestAppInstance(10);
+		app = App.getAppInstance();
 
 		initialize();
 	}

@@ -19,7 +19,7 @@ import validator.utils.Validator;
 
 public class RegisterPage {
 
-	private App aap;
+	private App app;
 
 	private JFrame frame;
 
@@ -49,7 +49,7 @@ public class RegisterPage {
 	private JLabel lblError;
 
 	public RegisterPage() {
-		aap = App.getTestAppInstance(10);
+		app = App.getAppInstance();
 		initialize();
 	}
 
@@ -173,7 +173,7 @@ public class RegisterPage {
 				newUser.setPhoneNumber(ftfPhoneNumber.getText());
 
 				if(isValidFullName && isValidEmailID && isValidUsername && isValidPassword && isValidVerifyPassword && isValidPhoneNumber){
-					ResponseMessage rm = aap.register(newUser);
+					ResponseMessage rm = app.register(newUser);
 					if(rm.isSuccess()){
 						LoginPage lp = new LoginPage();
 

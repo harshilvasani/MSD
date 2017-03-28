@@ -11,7 +11,7 @@ public class Tester {
 		/*object should not die*/
 		//
 	
-		App app = App.getTestAppInstance(20);
+		App app = App.getAppInstance();	
 		System.out.println("----------------------------");
 		
 		System.out.println(app.insertFavoriteAuthor(new FavouriteAuthor(-1, "a", "u")).getMessage());

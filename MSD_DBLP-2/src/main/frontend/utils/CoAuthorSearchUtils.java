@@ -11,7 +11,7 @@ public class CoAuthorSearchUtils {
 	
 	public static List<IPerson> getCoAuthorSearchResults(String authorName){
 		
-		App app = App.getTestAppInstance(20);	
+		App app = App.getAppInstance();	
 		ICoAuthorSearch searchCriteria = new AuthorName(authorName);
 	
 		List<IPerson> searchResult = app.searchCoAuthors(searchCriteria);

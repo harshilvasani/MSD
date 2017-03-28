@@ -12,10 +12,8 @@ import resources.personrecord.User;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FavouriteAuthorTest {
 
-	private App app = App.getTestAppInstance(20);
-	
+	private App app = App.getAppInstance();	
 	private int favAuthorsCount;
-
 	
 	@Test
 	public void Test1_AddFavouriteAuthorSuccess() {

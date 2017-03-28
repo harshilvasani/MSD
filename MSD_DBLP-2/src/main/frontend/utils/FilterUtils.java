@@ -14,7 +14,7 @@ public class FilterUtils {
 
 	public static List<IPerson> getFilteredResult(String authorNameContains, String minPublicationCount, List<IPerson> searchResult){
 		
-		App app = App.getTestAppInstance(10);
+		App app = App.getAppInstance();	
 		
 		List<IFilter> filterCriteria = new ArrayList<IFilter>();
 

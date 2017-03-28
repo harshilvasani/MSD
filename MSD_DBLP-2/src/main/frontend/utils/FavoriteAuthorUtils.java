@@ -10,7 +10,8 @@ import validator.utils.Validator;
 
 public class FavoriteAuthorUtils {
 
-	private static App app = App.getTestAppInstance(20);
+	private static App app = App.getAppInstance();	
+
 
 	public static List<FavouriteAuthor> getFavoriteAuthors() {
 		return app.getAllFavoriteAuthorsForLoggedInUser();

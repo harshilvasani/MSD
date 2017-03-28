@@ -23,7 +23,7 @@ import resources.personrecord.User;
 public class App implements IApp{
 
 	private static App app;
-	private static App testApp;
+/*	private static App testApp;*/
 	private BackEnd backend ;
 	private User loggedInUser; 
 
@@ -62,16 +62,15 @@ public class App implements IApp{
 		return app;
 	}
 
-	public static App getTestAppInstance(int rows) {
+	/*public static App getTestAppInstance(int rows) {
 		if (null == testApp) {
-			/*if(rows == 0)
-				rows = 20;*/
-			rows = 0;
+			if(rows == 0)
+				rows = 20;
 			testApp = new App(rows);
 		}
 		return testApp;
 	}
-
+*/
 	@Override
 	public ResponseMessage login(String username, String password) {
 

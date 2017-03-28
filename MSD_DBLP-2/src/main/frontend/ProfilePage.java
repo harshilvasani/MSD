@@ -55,7 +55,7 @@ public class ProfilePage{
 	private JLabel lblError;
 
 	public ProfilePage() {
-		app = App.getTestAppInstance(10);
+		app = App.getAppInstance();
 		loggedInUser = app.getLoggedInUser();
 		initialize();
 	}
