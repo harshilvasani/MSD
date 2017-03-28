@@ -22,5 +22,5 @@ public interface IBackEnd {
 	
 	ResponseMessage insertFavoriteAuthor(FavouriteAuthor favouriteAuthor);
 	ResponseMessage deleteFavoriteAuthor(FavouriteAuthor favouriteAuthor);
-	List<FavouriteAuthor> getAllFavoriteAuthors();
+	List<FavouriteAuthor> getAllFavoriteAuthorsForLoggedInUser(String username);
 }

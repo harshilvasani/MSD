@@ -9,6 +9,7 @@ public class Incollection{
 	private String year;
 	private String booktitle;
 	private String crossref;
+	private String journal;
 	
 	public Incollection(){
 		
@@ -19,6 +20,7 @@ public class Incollection{
 		super();
 		this.setId(id);
 		this.key = key;
+		this.journal = key.split("/")[1];
 		this.authorName = authorName;
 		this.title = title;
 		this.year = year;
@@ -31,6 +33,7 @@ public class Incollection{
 	}
 	public void setKey(String key) {
 		this.key = key;
+		this.journal = key.split("/")[1];
 	}
 	
 	public String getTitle() {
@@ -74,5 +77,24 @@ public class Incollection{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getJournal() {
+		return this.journal;
+	}
+	
+	@Override
+	public int hashCode() {
+		return (this.key + this.title).hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Incollection) {
+			Incollection i = (Incollection) obj;
+			return this.key.equals(i.key) && this.title.equals(i.title);
+		}
+		// TODO Auto-generated method stub
+		return super.equals(obj);
 	}
 }

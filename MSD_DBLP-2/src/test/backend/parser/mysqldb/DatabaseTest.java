@@ -8,6 +8,7 @@ import org.hibernate.*;
 import org.junit.Test;
 
 import persistence.HibernateUtil;
+import resources.personrecord.FavouriteAuthor;
 import resources.personrecord.User;
 import resources.pubrec.*;
 
@@ -121,15 +122,15 @@ public class DatabaseTest {
 		assertTrue(users != null);
 	}
 	
-	/*@Test
+	@Test
 	public void favoriteListTableExists(){
-		List<FavoriteList> favoriteLists = null;
+		List<FavouriteAuthor> favoriteLists = null;
 		try{
-			Query query = session.createQuery("from FavoriteList");
+			Query query = session.createQuery("from FavouriteAuthor");
 			favoriteLists = query.list();
 		}catch(Exception e){
 			
 		}
 		assertTrue(favoriteLists != null);
-	}*/
+	}
 }

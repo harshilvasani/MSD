@@ -111,10 +111,7 @@ public class ProfilePage{
 
 		btnProfile = new JButton("Profile");
 		btnProfile.setBackground(new Color(255, 255, 255));
-		btnProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnProfile.setForeground(new Color(0, 255, 0));
 		btnProfile.setBounds(875, 10, 200, 25);
 		frame.getContentPane().add(btnProfile);
@@ -123,6 +120,13 @@ public class ProfilePage{
 		btnFavorites.setBackground(new Color(255, 255, 255));
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FavoriteAuthorPage fap = new FavoriteAuthorPage();
+				JFrame favoriteAuthorPageFrame = fap.getFrame();
+
+				if(favoriteAuthorPageFrame != null){
+					favoriteAuthorPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
 			}
 		});
 		btnFavorites.setForeground(new Color(0, 255, 0));
@@ -133,9 +137,15 @@ public class ProfilePage{
 		btnAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				SearchPage sp = new SearchPage();
-				sp.getFrame().setVisible(true);
-				frame.setVisible(false);
+				JFrame searchPageFrame = sp.getFrame();
+
+				if(searchPageFrame != null){
+					searchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
+				
 			}
 		});
 		btnAuthorSearch.setForeground(new Color(0, 255, 0));
@@ -146,6 +156,15 @@ public class ProfilePage{
 		btnCoAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnCoAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				CoAuthorSearchPage casp = new CoAuthorSearchPage();
+				JFrame coAuthorSearchPageFrame = casp.getFrame();
+
+				if(coAuthorSearchPageFrame != null){
+					coAuthorSearchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
+				
 			}
 		});
 		btnCoAuthorSearch.setForeground(new Color(0, 255, 0));
@@ -156,6 +175,15 @@ public class ProfilePage{
 		btnSimilarAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnSimilarAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				SimilarAuthorSearchPage sasp = new SimilarAuthorSearchPage();
+				JFrame similarAuthorSearchPageFrame = sasp.getFrame();
+
+				if(similarAuthorSearchPageFrame != null){
+					similarAuthorSearchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
+				
 			}
 		});
 		btnSimilarAuthorSearch.setForeground(new Color(0, 255, 0));

@@ -8,11 +8,14 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import frontend.utils.FavoriteAuthorUtils;
 import frontend.utils.FilterUtils;
 import frontend.utils.SearchUtils;
+import queryengine.miscellaneous.ResponseMessage;
 import resources.personrecord.Author;
 import resources.personrecord.IPerson;
 
@@ -134,6 +137,13 @@ public class SearchPage {
 		btnFavorites.setBackground(new Color(255, 255, 255));
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FavoriteAuthorPage fap = new FavoriteAuthorPage();
+				JFrame favoriteAuthorPageFrame = fap.getFrame();
+
+				if(favoriteAuthorPageFrame != null){
+					favoriteAuthorPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
 			}
 		});
 		btnFavorites.setForeground(new Color(0, 255, 0));
@@ -142,10 +152,7 @@ public class SearchPage {
 
 		btnAuthorSearch = new JButton("Author Search");
 		btnAuthorSearch.setBackground(new Color(255, 255, 255));
-		btnAuthorSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnAuthorSearch.setForeground(new Color(0, 255, 0));
 		btnAuthorSearch.setBounds(475, 10, 200, 25);
 		frame.getContentPane().add(btnAuthorSearch);
@@ -154,6 +161,13 @@ public class SearchPage {
 		btnCoAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnCoAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CoAuthorSearchPage casp = new CoAuthorSearchPage();
+				JFrame coAuthorSearchPageFrame = casp.getFrame();
+
+				if(coAuthorSearchPageFrame != null){
+					coAuthorSearchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
 			}
 		});
 		btnCoAuthorSearch.setForeground(new Color(0, 255, 0));
@@ -164,6 +178,15 @@ public class SearchPage {
 		btnSimilarAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnSimilarAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				SimilarAuthorSearchPage sasp = new SimilarAuthorSearchPage();
+				JFrame similarAuthorSearchPageFrame = sasp.getFrame();
+
+				if(similarAuthorSearchPageFrame != null){
+					similarAuthorSearchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
+				
 			}
 		});
 		btnSimilarAuthorSearch.setForeground(new Color(0, 255, 0));
@@ -322,12 +345,15 @@ public class SearchPage {
 		btnaddFavoriteAuthor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = searchResultTable.getSelectedRow();
-				if(row > 0){
-					System.out.println(row+" "+searchResultTable.getValueAt(row,0)+" "+
-							searchResultTable.getValueAt(row,1)+" "+searchResultTable.getValueAt(row,2)+" "+
-							searchResultTable.getValueAt(row,3)+" "+searchResultTable.getValueAt(row,4)
-							);
-					System.out.println(searchResult.get(row-1));
+
+				if(row == 1){
+					String authorName = (String) searchResultTable.getValueAt(row,0);
+					
+					ResponseMessage rm = FavoriteAuthorUtils.addAuthorToFavouriteList(authorName);
+					if(!rm.isSuccess())
+						JOptionPane.showMessageDialog(getFrame(), rm.getMessage());
+					else
+						JOptionPane.showMessageDialog(getFrame(), authorName + " added!!");
 				}
 			}
 		});
@@ -345,6 +371,7 @@ public class SearchPage {
 				"Publication Type", "Publication Year", "Journal/Publication/Conference"});
 
 		List<IPerson> displayResult = (filterResult == null) ? searchResult : filterResult;
+		
 		if(displayResult != null && displayResult.size() > 0){
 			for( int i = 0; i < displayResult.size() ; i++ ){
 

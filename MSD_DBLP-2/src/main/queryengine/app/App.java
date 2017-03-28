@@ -125,8 +125,8 @@ public class App implements IApp{
 	}
 
 	@Override
-	public List<FavouriteAuthor> getAllFavoriteAuthors() {
-		return backend.getAllFavoriteAuthors();
+	public List<FavouriteAuthor> getAllFavoriteAuthorsForLoggedInUser() {
+		return backend.getAllFavoriteAuthorsForLoggedInUser(loggedInUser.getUsername());
 	}
 
 	public User getLoggedInUser() {

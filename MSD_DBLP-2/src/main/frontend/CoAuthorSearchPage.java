@@ -1,11 +1,9 @@
-/*package frontend;
+package frontend;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -13,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,50 +19,63 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import queryengine.app.App;
-import queryengine.query.utils.AuthorName;
+import frontend.utils.CoAuthorSearchUtils;
+import frontend.utils.FavoriteAuthorUtils;
+import frontend.utils.FilterUtils;
+import queryengine.miscellaneous.ResponseMessage;
 import resources.personrecord.Author;
 import resources.personrecord.IPerson;
-import validator.utils.Validator;
 
 public class CoAuthorSearchPage {
 
-	JFrame frame;
-	JButton btnLogout;
-	JButton btnProfile;
-	JButton btnFavorites;
-	JButton btnAuthorSearch;
-	JButton btnCoAuthorSearch;
-	JButton btnSimilarAuthorSearch;
-	JLabel lblCoAuthorSearch;
-	JFormattedTextField ftfAuthorName;
-	JLabel lblDisplayingResults;
-	JLabel lblAuthorName;
-	JButton btnSearch;
-	JScrollPane scroller;
-	JButton btnaddFavoriteAuthor;
-	JFormattedTextField ftfAuthorNameContains;
-	JFormattedTextField ftfMinimumPublication;
-	JButton btnFilter;
-	Boolean scrollerFlag;
-	Boolean authorNameContainsFlag;
-	Boolean minimumPublicationFlag;
-	Boolean displayingResultsFlag;
+	private JFrame frame;
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	private JButton btnLogout;
+	private JButton btnProfile;
+	private JButton btnFavorites;
+	private JButton btnAuthorSearch;
+	private JButton btnCoAuthorSearch;
+	private JButton btnSimilarAuthorSearch;
+	private JLabel lblCoAuthorSearch;
+	private JFormattedTextField ftfAuthorName;
+	private JLabel lblDisplayingResults;
+	private JLabel lblAuthorName;
+	private JButton btnSearch;
+	private JScrollPane scroller;
+	private JButton btnaddFavoriteAuthor;
+	private JFormattedTextField ftfAuthorNameContains;
+	private JFormattedTextField ftfMinimumPublication;
+	private JButton btnFilter;
+	private Boolean scrollerFlag;
+	private Boolean authorNameContainsFlag;
+	private Boolean minimumPublicationFlag;
+	private Boolean displayingResultsFlag;
+	private JTable searchResultTable;
+	private List<IPerson> searchResult;
+	private List<IPerson> filterResult;
 
 	public CoAuthorSearchPage() {
 		initialize();
 	}
 
-	*//**
-	 * Initialize the contents of the frame.
-	 *//*
+	//**
+	// Initialize the contents of the frame.
+	//*
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(0, 0, 1350, 725);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		scroller = new JScrollPane();
 		scrollerFlag = true;
 		authorNameContainsFlag = false;
@@ -78,9 +90,14 @@ public class CoAuthorSearchPage {
 		btnLogout.setBackground(new Color(255, 255, 255));
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login_Page lp = new Login_Page();
-				lp.frame.setVisible(true);
-				frame.setVisible(false);
+				LoginPage lp = new LoginPage();
+
+				JFrame loginPageFrame = lp.getFrame();
+
+				if(loginPageFrame != null){
+					loginPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
 			}
 		});
 		frame.getContentPane().setLayout(null);
@@ -92,9 +109,14 @@ public class CoAuthorSearchPage {
 		btnProfile.setBackground(new Color(255, 255, 255));
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Profile_Page pp = new Profile_Page();
-				pp.frame.setVisible(true);
-				frame.setVisible(false);
+				ProfilePage pp = new ProfilePage();
+
+				JFrame profilePageFrame = pp.getFrame();
+
+				if(profilePageFrame != null){
+					profilePageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
 			}
 		});
 		btnProfile.setForeground(new Color(0, 255, 0));
@@ -105,6 +127,15 @@ public class CoAuthorSearchPage {
 		btnFavorites.setBackground(new Color(255, 255, 255));
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				FavoriteAuthorPage fap = new FavoriteAuthorPage();
+				JFrame favoriteAuthorPageFrame = fap.getFrame();
+
+				if(favoriteAuthorPageFrame != null){
+					favoriteAuthorPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
+				
 			}
 		});
 		btnFavorites.setForeground(new Color(0, 255, 0));
@@ -115,6 +146,13 @@ public class CoAuthorSearchPage {
 		btnAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SearchPage sp = new SearchPage();
+				JFrame searchPageFrame = sp.getFrame();
+
+				if(searchPageFrame != null){
+					searchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
 			}
 		});
 		btnAuthorSearch.setForeground(new Color(0, 255, 0));
@@ -123,10 +161,7 @@ public class CoAuthorSearchPage {
 
 		btnCoAuthorSearch = new JButton("Co-Author Search");
 		btnCoAuthorSearch.setBackground(new Color(255, 255, 255));
-		btnCoAuthorSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnCoAuthorSearch.setForeground(new Color(0, 255, 0));
 		btnCoAuthorSearch.setBounds(275, 10, 200, 25);
 		frame.getContentPane().add(btnCoAuthorSearch);
@@ -135,12 +170,21 @@ public class CoAuthorSearchPage {
 		btnSimilarAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnSimilarAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				SimilarAuthorSearchPage sasp = new SimilarAuthorSearchPage();
+				JFrame similarAuthorSearchPageFrame = sasp.getFrame();
+
+				if(similarAuthorSearchPageFrame != null){
+					similarAuthorSearchPageFrame.setVisible(true);
+					getFrame().setVisible(false);
+				}
+				
 			}
 		});
 		btnSimilarAuthorSearch.setForeground(new Color(0, 255, 0));
 		btnSimilarAuthorSearch.setBounds(75, 10, 200, 25);
 		frame.getContentPane().add(btnSimilarAuthorSearch);
-		
+
 		lblCoAuthorSearch = new JLabel("Co Author Search");
 		lblCoAuthorSearch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCoAuthorSearch.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -153,7 +197,7 @@ public class CoAuthorSearchPage {
 		ftfAuthorName.setText("");
 		ftfAuthorName.setBounds(150, 120, 200, 20);
 		frame.getContentPane().add(ftfAuthorName);
-		
+
 		btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnSearch.addActionListener(new ActionListener() {
@@ -162,17 +206,10 @@ public class CoAuthorSearchPage {
 
 				String authorName = ftfAuthorName.getText();
 
-				InterfacingForCoAuthorSearch coAuthorSearchComm = new InterfacingForCoAuthorSearch(authorName);
-				
-			//	List<IPerson> result = coAuthorSearchComm.sendCoAuthorCriteriaToApp();
+				searchResult = CoAuthorSearchUtils.getCoAuthorSearchResults(authorName);
+				filterResult = null;
 
-				List<IPerson> result = new ArrayList<IPerson>();
-				for(int i=1;i<=50;i++){
-					result.add(new Author("abc", i, "abc", "abc", "6", "article"));
-					result.add(new Author("abc", i, "abc", "abc", "7", "article"));
-				} 
-				
-				displaySearchResults(result,coAuthorSearchComm);
+				displayAndFilterSearchResults();
 			}
 		});
 		btnSearch.setForeground(new Color(0, 0, 0));
@@ -187,8 +224,8 @@ public class CoAuthorSearchPage {
 		frame.getContentPane().add(lblAuthorName);
 
 	}
-	
-	public void displaySearchResults(List<IPerson> result, InterfacingForCoAuthorSearch coAuthorSearchComm){
+
+	public void displayAndFilterSearchResults(){
 		if(scrollerFlag){
 			frame.getContentPane().remove(scroller);
 			frame.getContentPane().remove(btnaddFavoriteAuthor);
@@ -197,7 +234,7 @@ public class CoAuthorSearchPage {
 			frame.getContentPane().remove(btnFilter);
 			scrollerFlag = false;
 		}
-		
+
 		if(authorNameContainsFlag == false){
 			JLabel lblAuthorNameContains = new JLabel("Author Name Contains:");
 			lblAuthorNameContains.setBounds(192, 300, 150, 25);
@@ -217,20 +254,20 @@ public class CoAuthorSearchPage {
 			frame.getContentPane().add(lblMinimumPublication);
 			minimumPublicationFlag = true;
 		}
-			
+
 		ftfMinimumPublication = new JFormattedTextField();
 		ftfMinimumPublication.setForeground(new Color(0, 255, 0));
 		ftfMinimumPublication.setText("");
 		ftfMinimumPublication.setBounds(732, 300, 200, 25);
 		frame.getContentPane().add(ftfMinimumPublication);
-		
+
 		if(displayingResultsFlag == false){
 			lblDisplayingResults = new JLabel("Displaying Results");
 			lblDisplayingResults.setBounds(150, 345, 200, 14);
 			frame.getContentPane().add(lblDisplayingResults);
 			displayingResultsFlag = true;
 		}
-		
+
 		JPanel authorDisplayArea = new JPanel();
 		authorDisplayArea.setLayout(new BoxLayout(authorDisplayArea, BoxLayout.Y_AXIS));
 
@@ -238,53 +275,49 @@ public class CoAuthorSearchPage {
 		scroller.setBounds(150, 370, 1000, 300);
 		frame.getContentPane().add(scroller);
 		scrollerFlag = true;
-		
+
 		btnFilter = new JButton("Apply Filters");
 		btnFilter.setBackground(new Color(255, 255, 255));
 		btnFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				coAuthorSearchComm.setFilters(ftfAuthorNameContains.getText(),
-						ftfMinimumPublication.getText());
+				filterResult = FilterUtils.getFilteredResult(ftfAuthorNameContains.getText(), ftfMinimumPublication.getText(), searchResult);
 
-			//	List<IPerson> filterSet = coAuthorSearchComm.sendFiltersToApp();
-				List<IPerson> filterSet = new ArrayList<IPerson>();
-				for(int i=1;i<=50;i++){
-					filterSet.add(new Author("abc", i, "abc", "abc", "8", "article"));
-					filterSet.add(new Author("abc", i, "abc", "abc", "9", "article"));
-				} 
-				
-				displaySearchResults(filterSet,coAuthorSearchComm);
-
+				displayAndFilterSearchResults();
 			}
 		});
 		btnFilter.setForeground(new Color(0, 255, 0));
 		btnFilter.setBounds(952, 300, 200, 25);
 		frame.getContentPane().add(btnFilter);
 
+		@SuppressWarnings("serial")
 		DefaultTableModel model = new DefaultTableModel(){
 
-		    @Override
-		    public boolean isCellEditable(int i, int i1) {
-		        return false; //To change body of generated methods, choose Tools | Templates.
-		    }
+			@Override
+			public boolean isCellEditable(int i, int i1) {
+				return false; //To change body of generated methods, choose Tools | Templates.
+			}
 
-		   };
-		   
-		JTable searchResults = new JTable(model);
-		authorDisplayArea.add(searchResults);  
+		};
+
+		searchResultTable = new JTable(model);
+		searchResultTable.setRowSelectionAllowed(false);
+		authorDisplayArea.add(searchResultTable);  
 
 		btnaddFavoriteAuthor = new JButton("Add to Favorites");
 		btnaddFavoriteAuthor.setBackground(new Color(255, 255, 255));
 		btnaddFavoriteAuthor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int row = searchResults.getSelectedRow();
-				if(row>0){
-					System.out.println(row+" "+searchResults.getValueAt(row,0)+" "+
-							searchResults.getValueAt(row,1)+" "+searchResults.getValueAt(row,2)+" "+
-							searchResults.getValueAt(row,3)+" "+searchResults.getValueAt(row,4)
-							);
-					System.out.println(result.get(row-1));
+				int row = searchResultTable.getSelectedRow();
+
+				if(row == 1){
+					String authorName = (String) searchResultTable.getValueAt(row,0);
+					
+					ResponseMessage rm = FavoriteAuthorUtils.addAuthorToFavouriteList(authorName);
+					if(!rm.isSuccess())
+						JOptionPane.showMessageDialog(getFrame(), rm.getMessage());
+					else
+						JOptionPane.showMessageDialog(getFrame(), authorName + " added!!");
 				}
 			}
 		});
@@ -301,10 +334,12 @@ public class CoAuthorSearchPage {
 		model.addRow(new Object[]{"Person Name","Publication Title",
 				"Publication Type", "Publication Year", "Journal/Publication/Conference"});
 
-		if(result != null && result.size() > 0){
-			for( int i = 0; i < result.size() ; i++ ){
+		List<IPerson> displayResult = (filterResult == null) ? searchResult : filterResult;
 
-				IPerson person = result.get(i);
+		if(displayResult != null && displayResult.size() > 0){
+			for( int i = 0; i < displayResult.size() ; i++ ){
+
+				IPerson person = displayResult.get(i);
 
 				if( person instanceof Author ){
 
@@ -312,8 +347,6 @@ public class CoAuthorSearchPage {
 
 					model.addRow(new Object[]{a.getPersonName(),a.getPublicationTitle(),
 							a.getPublicationType(), a.getPublicationYear(), a.getJournalName()});
-					
-
 				}
 			}
 		}
@@ -322,4 +355,3 @@ public class CoAuthorSearchPage {
 
 	}
 }
-*/

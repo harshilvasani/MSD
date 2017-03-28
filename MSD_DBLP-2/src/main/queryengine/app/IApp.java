@@ -21,7 +21,7 @@ public interface IApp {
 	
 	ResponseMessage insertFavoriteAuthor(FavouriteAuthor favouriteAuthor);
 	ResponseMessage deleteFavoriteAuthor(FavouriteAuthor favouriteAuthor);
-	List<FavouriteAuthor> getAllFavoriteAuthors();
+	List<FavouriteAuthor> getAllFavoriteAuthorsForLoggedInUser();
 	List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria);
 	List<IPerson> searchSimilarAuthors(ISimAuthorSearch searchCriteria);
 	List<IPerson> filter(List<IFilter> filterCriteria, List<IPerson> searchResult);

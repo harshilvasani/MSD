@@ -2,7 +2,7 @@ package queryengine.app.utils;
 
 import resources.personrecord.IPerson;
 
-public class SimilarAuthor implements Comparable, IPerson{
+public class SimilarAuthor implements Comparable<Object>, IPerson{
 
 	private String name;
 	private long score;

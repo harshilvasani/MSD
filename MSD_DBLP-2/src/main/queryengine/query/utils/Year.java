@@ -5,6 +5,11 @@ import queryengine.interfaces.ISearch;
 public class Year implements ISearch{
 	private int year;
 	
+	public Year(int year) {
+		super();
+		this.year = year;
+	}
+
 	public int getYear() {
 		return year;
 	}

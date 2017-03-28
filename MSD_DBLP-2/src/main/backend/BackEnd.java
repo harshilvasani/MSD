@@ -2,6 +2,7 @@ package backend;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -342,17 +343,18 @@ public class BackEnd implements IBackEnd {
 	}
 
 	@Override
-	public List<FavouriteAuthor> getAllFavoriteAuthors() {
+	public List<FavouriteAuthor> getAllFavoriteAuthorsForLoggedInUser(String username) {
 		try{
 			if(session == null || !session.isOpen())
 				session = HibernateUtil.getSessionFactory().openSession();
 
-			queryResult = session.createQuery("from FavouriteAuthor");
-
+			queryResult = session.createQuery("from FavouriteAuthor where username = :username")
+					.setParameter("username", username);
+			
 			return queryResult.list();
 
 		}catch(Exception e){
-			return null;
+			return new ArrayList<FavouriteAuthor>();
 		}
 	}
 }
