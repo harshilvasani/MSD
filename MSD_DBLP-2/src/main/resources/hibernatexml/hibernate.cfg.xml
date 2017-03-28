@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://mysql-server.cyiy68i5rl4p.us-west-2.rds.amazonaws.com:3306/dblp?createDatabaseIfNotExist=true</property>
+        <property name="hibernate.connection.username">MSD_TEAM10</property>
+        <property name="hibernate.connection.password">MSD_TEAM10</property> 
+        <!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dblp?createDatabaseIfNotExist=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Vasani99</property> -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="show_sql">false</property>
+        <mapping resource="hibernateXml/Article.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/Book.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/Incollection.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/Inproceeding.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/PhdThesis.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/Proceeding.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/CommitteeMember.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/User.hbm.xml"></mapping>
+		<mapping resource="hibernateXml/FavouriteAuthor.hbm.xml"></mapping>
+    </session-factory>
+</hibernate-configuration>
