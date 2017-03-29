@@ -16,7 +16,7 @@ public class FavoriteStat implements IPerson{
 		return this.totalPublications;
 	}
 	
-	public String mostPublications() {
+	public String getMostPublications() {
 		return this.mostPublications;
 	}
 	
