@@ -1,6 +1,4 @@
-package queryengine.app.utils;
-
-import resources.personrecord.IPerson;
+package resources.personrecord;
 
 public class SimilarAuthor implements Comparable<Object>, IPerson{
 

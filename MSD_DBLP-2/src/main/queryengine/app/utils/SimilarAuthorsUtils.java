@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import resources.personrecord.IPerson;
+import resources.personrecord.SimilarAuthor;
 import resources.pubrec.Article;
 import resources.pubrec.Incollection;
 import resources.pubrec.Inproceeding;

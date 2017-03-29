@@ -25,6 +25,7 @@ public interface IApp {
 	List<IPerson> searchCoAuthors(ICoAuthorSearch searchCriteria);
 	List<IPerson> searchSimilarAuthors(ISimAuthorSearch searchCriteria);
 	List<IPerson> filter(List<IFilter> filterCriteria, List<IPerson> searchResult);
+	List<IPerson> getFavoriteAuthorsStatistics();
 
 	/*List<?> displayStatistic();*/
 }

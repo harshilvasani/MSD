@@ -6,6 +6,7 @@ import java.util.List;
 import backend.BackEnd;
 import persistence.Data;
 import queryengine.app.utils.CoAuthorUtils;
+import queryengine.app.utils.FavoriteAuthorUtils;
 import queryengine.app.utils.FilterUtils;
 import queryengine.app.utils.SearchUtils;
 import queryengine.app.utils.SimilarAuthorsUtils;
@@ -188,4 +189,9 @@ public class App implements IApp{
 		return null;
 	}
 	
+	@Override
+	public List<IPerson> getFavoriteAuthorsStatistics() {
+		List<FavouriteAuthor> favorites = backend.getAllFavoriteAuthorsForLoggedInUser(loggedInUser.getUsername());
+		return FavoriteAuthorUtils.getFavoriteAuthorStatistics(favorites);
+	}	
 }
