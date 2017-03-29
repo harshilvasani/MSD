@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="resources.pubrec.CommitteeMember" table="committee_member" catalog="dblp">
+    
+     	<id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity" />
+        </id> 
+        
+        <property name="confName" type="string">
+            <column name="conf_name" length="50" not-null="true"/>           
+        </property>
+        
+        <property name="year" type="string">
+            <column name="year" length="10" not-null="true"/>
+        </property>
+               
+        <property name="memberName" type="string">
+            <column name="member_name" length="200" not-null="true"/>
+        </property>
+        
+        <property name="position" type="string">
+            <column name="member_position" length="100" not-null="false"/>
+        </property>
+               
+    </class>
+</hibernate-mapping>
