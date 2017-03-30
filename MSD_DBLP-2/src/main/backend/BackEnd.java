@@ -23,14 +23,14 @@ import resources.pubrec.Article;
 @SuppressWarnings("unchecked")
 public class BackEnd implements IBackEnd {
 
-	private static String fileUri = "C:/Users/Harshil Vasani/Desktop/NEU/Sem - 3/MSD/Project/DATA/dblp.xml";
-	final static File folder = new File("C:/Users/Harshil Vasani/Desktop/NEU/Sem - 3/MSD/Project/DATA/committees");
+	public static String dblpXmlFileUri;// = "C:/Users/Harshil Vasani/Desktop/NEU/Sem - 3/MSD/Project/DATA/dblp.xml";
+	public static File committeFolder;// = new File("C:/Users/Harshil Vasani/Desktop/NEU/Sem - 3/MSD/Project/DATA/committees");
 	private static Session session = null;
 	private static Query queryResult = null;
 
 	public void parseXMLAndInsertData(){
 
-		DBLP dblpTag = Parser.XmlParser(fileUri);
+		DBLP dblpTag = Parser.XmlParser(dblpXmlFileUri);
 
 		try {
 			Database.InsertDblpData(dblpTag);
@@ -42,7 +42,7 @@ public class BackEnd implements IBackEnd {
 
 	public void textParserAndInsertData(){
 
-		List<CommitteeMember> committeeMembers = Parser.ParseFilesForFolder(folder);
+		List<CommitteeMember> committeeMembers = Parser.ParseFilesForFolder(committeFolder);
 		System.out.println(committeeMembers.size());
 		try {
 			Database.InsertCommitteeData(committeeMembers);

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import queryengine.app.App;
 import queryengine.miscellaneous.ResponseMessage;
@@ -65,29 +66,21 @@ public class ProfilePage{
 	 */
 	private void initialize() {
 
-		int Y = 100;
 		int WIDTH = 1350;
 		int HEIGHT = 725;
-		int HALF_WIDTH = WIDTH/2;
-		int TEXT_FIELD_WIDTH = 360;
-		int TEXT_FIELD_HEIGHT = 20;
 		int LABEL_WIDTH = 360;
 		int LABEL_HEIGHT = 20;
-		int BUTTON_WIDTH = 80;
-		int BUTTON_HEIGHT = 20;
-		int TEXT_FIELD_X = HALF_WIDTH-(TEXT_FIELD_WIDTH/2);
-		int LABEL_X = HALF_WIDTH-(TEXT_FIELD_WIDTH/2);
-		int BUTTON_X = HALF_WIDTH-(BUTTON_WIDTH/2);
-
+		
 		frame = new JFrame();
-		frame.getContentPane().setFont(new Font("Calibri", Font.PLAIN, 14));
+		frame.getContentPane().setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(0, 0, WIDTH, HEIGHT);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		btnLogout = new JButton("Logout");
+		btnLogout = new JButton("LOGOUT");
+		btnLogout.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnLogout.setBackground(new Color(255, 255, 255));
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,26 +93,29 @@ public class ProfilePage{
 					getFrame().setVisible(false);
 				}
 				else
-					lblError.setText("Error in creating Login Page");
+					lblError.setText("ERROR IN CREATING LOGIN PAGE");
 
 			}
 		});
 		frame.getContentPane().setLayout(null);
-		btnLogout.setForeground(new Color(0, 255, 0));
+		btnLogout.setForeground(new Color(0, 0, 102));
 		btnLogout.setBounds(1075, 10, 200, 25);
 		frame.getContentPane().add(btnLogout);
 
-		btnProfile = new JButton("Profile");
-		btnProfile.setBackground(new Color(255, 255, 255));
-		
-		btnProfile.setForeground(new Color(0, 255, 0));
+		btnProfile = new JButton(loggedInUser.getFullName().toUpperCase());//("PROFILE");
+		btnProfile.setBorder(new LineBorder(new Color(0, 0, 102)));
+		btnProfile.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
+		btnProfile.setBackground(new Color(0, 0, 102));
+		btnProfile.setForeground(new Color(0, 0, 102));
 		btnProfile.setBounds(875, 10, 200, 25);
 		frame.getContentPane().add(btnProfile);
 
-		btnFavorites = new JButton("Favorites List");
+		btnFavorites = new JButton("FAVORITES LIST");
+		btnFavorites.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnFavorites.setBackground(new Color(255, 255, 255));
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				FavoriteAuthorPage fap = new FavoriteAuthorPage();
 				JFrame favoriteAuthorPageFrame = fap.getFrame();
 
@@ -127,13 +123,17 @@ public class ProfilePage{
 					favoriteAuthorPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
+				else
+					lblError.setText("ERROR IN CREATING FAVORITES LIST PAGE");
+				
 			}
 		});
-		btnFavorites.setForeground(new Color(0, 255, 0));
+		btnFavorites.setForeground(new Color(0, 0, 102));
 		btnFavorites.setBounds(675, 10, 200, 25);
 		frame.getContentPane().add(btnFavorites);
 
-		btnAuthorSearch = new JButton("Author Search");
+		btnAuthorSearch = new JButton("AUTHOR SEARCH");
+		btnAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,18 +145,21 @@ public class ProfilePage{
 					searchPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
-				
+				else
+					lblError.setText("ERROR IN CREATING AUTHOR SEARCH PAGE");
+
 			}
 		});
-		btnAuthorSearch.setForeground(new Color(0, 255, 0));
-		btnAuthorSearch.setBounds(475, 10, 200, 25);
+		btnAuthorSearch.setForeground(new Color(0, 0, 102));
+		btnAuthorSearch.setBounds(75, 10, 200, 25);
 		frame.getContentPane().add(btnAuthorSearch);
 
-		btnCoAuthorSearch = new JButton("Co-Author Search");
+		btnCoAuthorSearch = new JButton("CO AUTHOR SEARCH");
+		btnCoAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnCoAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnCoAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				CoAuthorSearchPage casp = new CoAuthorSearchPage();
 				JFrame coAuthorSearchPageFrame = casp.getFrame();
 
@@ -164,18 +167,21 @@ public class ProfilePage{
 					coAuthorSearchPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
-				
+				else
+					lblError.setText("ERROR IN CREATING CO AUTHOR PAGE");
+
 			}
 		});
-		btnCoAuthorSearch.setForeground(new Color(0, 255, 0));
+		btnCoAuthorSearch.setForeground(new Color(0, 0, 102));
 		btnCoAuthorSearch.setBounds(275, 10, 200, 25);
 		frame.getContentPane().add(btnCoAuthorSearch);
 
-		btnSimilarAuthorSearch = new JButton("Similar Author Search");
+		btnSimilarAuthorSearch = new JButton("SIMILAR AUTHOR SEARCH");
+		btnSimilarAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnSimilarAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnSimilarAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				SimilarAuthorSearchPage sasp = new SimilarAuthorSearchPage();
 				JFrame similarAuthorSearchPageFrame = sasp.getFrame();
 
@@ -183,87 +189,109 @@ public class ProfilePage{
 					similarAuthorSearchPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
-				
+				else
+					lblError.setText("ERROR IN CREATING SIMILAR AUTHOR PAGE");
+
 			}
 		});
-		btnSimilarAuthorSearch.setForeground(new Color(0, 255, 0));
-		btnSimilarAuthorSearch.setBounds(75, 10, 200, 25);
+		btnSimilarAuthorSearch.setForeground(new Color(0, 0, 102));
+		btnSimilarAuthorSearch.setBounds(475, 10, 200, 25);
 		frame.getContentPane().add(btnSimilarAuthorSearch);
 
 		ftfFullName = new JFormattedTextField();
-		ftfFullName.setBounds(TEXT_FIELD_X, Y+120, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+		ftfFullName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		ftfFullName.setForeground(new Color(0, 0, 102));
+		ftfFullName.setBounds(495, 160, 360, 30);
 		frame.getContentPane().add(ftfFullName);
 		ftfFullName.setColumns(10);
 
 		ftfEmailID = new JFormattedTextField();
-		ftfEmailID.setBounds(TEXT_FIELD_X, Y+170, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+		ftfEmailID.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		ftfEmailID.setForeground(new Color(0, 0, 102));
+		ftfEmailID.setBounds(495, 220, 360, 30);
 		frame.getContentPane().add(ftfEmailID);
 		ftfEmailID.setColumns(10);
 
 		ftfUsername = new JFormattedTextField();
-		ftfUsername.setBounds(TEXT_FIELD_X, Y+220, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+		ftfUsername.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		ftfUsername.setForeground(new Color(0, 0, 102));
+		ftfUsername.setBounds(495, 280, 360, 30);
 		frame.getContentPane().add(ftfUsername);
 		ftfUsername.setColumns(10);
 
 		pwdPassword = new JPasswordField();
-		pwdPassword.setBounds(TEXT_FIELD_X, Y+270, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+		pwdPassword.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		pwdPassword.setForeground(new Color(0, 0, 102));
+		pwdPassword.setBounds(495, 340, 360, 30);
 		frame.getContentPane().add(pwdPassword);
 
 		pwdVerifyPassword = new JPasswordField();
-		pwdVerifyPassword.setBounds(TEXT_FIELD_X, Y+320, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+		pwdVerifyPassword.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		pwdVerifyPassword.setForeground(new Color(0, 0, 102));
+		pwdVerifyPassword.setBounds(495, 400, 360, 30);
 		frame.getContentPane().add(pwdVerifyPassword);
 
 		ftfPhoneNumber = new JFormattedTextField();
-		ftfPhoneNumber.setBounds(TEXT_FIELD_X, Y+370, TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
+		ftfPhoneNumber.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		ftfPhoneNumber.setForeground(new Color(0, 0, 102));
+		ftfPhoneNumber.setBounds(495, 460, 360, 30);
 		frame.getContentPane().add(ftfPhoneNumber);
 		ftfPhoneNumber.setColumns(10);
 
 		lblProfile = new JLabel("PROFILE");
 		lblProfile.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProfile.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblProfile.setForeground(new Color(0, 255, 0));
-		lblProfile.setBounds(603, 135, 144, 28);
+		lblProfile.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 30));
+		lblProfile.setForeground(new Color(0, 0, 102));
+		lblProfile.setBounds(495, 65, 360, 40);
 		frame.getContentPane().add(lblProfile);
 
-		lblFullName = new JLabel("Full Name");
-		lblFullName.setForeground(new Color(0, 255, 0));
-		lblFullName.setBounds(LABEL_X, Y+100, LABEL_WIDTH, LABEL_HEIGHT);
+		lblFullName = new JLabel("FULL NAME");
+		lblFullName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		lblFullName.setForeground(new Color(0, 0, 102));
+		lblFullName.setBounds(495, 140, LABEL_WIDTH, LABEL_HEIGHT);
 		frame.getContentPane().add(lblFullName);
 
-		lblEmailID = new JLabel("Email ID");
-		lblEmailID.setForeground(new Color(0, 255, 0));
-		lblEmailID.setBounds(LABEL_X, Y+150, LABEL_WIDTH, LABEL_HEIGHT);
+		lblEmailID = new JLabel("EMAIL ID");
+		lblEmailID.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		lblEmailID.setForeground(new Color(0, 0, 102));
+		lblEmailID.setBounds(495, 200, LABEL_WIDTH, LABEL_HEIGHT);
 		frame.getContentPane().add(lblEmailID);
 
-		lblUsername = new JLabel("Username");
-		lblUsername.setForeground(new Color(0, 255, 0));
-		lblUsername.setBounds(LABEL_X, Y+200, LABEL_WIDTH, LABEL_HEIGHT);
+		lblUsername = new JLabel("USERNAME");
+		lblUsername.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		lblUsername.setForeground(new Color(0, 0, 102));
+		lblUsername.setBounds(495, 260, LABEL_WIDTH, LABEL_HEIGHT);
 		frame.getContentPane().add(lblUsername);
 
-		lblPassword = new JLabel("Password");
-		lblPassword.setForeground(new Color(0, 255, 0));
-		lblPassword.setBounds(LABEL_X, Y+250, LABEL_WIDTH, LABEL_HEIGHT);
+		lblPassword = new JLabel("PASSWORD");
+		lblPassword.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		lblPassword.setForeground(new Color(0, 0, 102));
+		lblPassword.setBounds(495, 320, LABEL_WIDTH, LABEL_HEIGHT);
 		frame.getContentPane().add(lblPassword);
 
-		lblVerifyPassword = new JLabel("Verify Password");
-		lblVerifyPassword.setForeground(new Color(0, 255, 0));
-		lblVerifyPassword.setBounds(LABEL_X, Y+300, LABEL_WIDTH, LABEL_HEIGHT);
+		lblVerifyPassword = new JLabel("VERIFY PASSWORD");
+		lblVerifyPassword.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		lblVerifyPassword.setForeground(new Color(0, 0, 102));
+		lblVerifyPassword.setBounds(495, 380, LABEL_WIDTH, LABEL_HEIGHT);
 		frame.getContentPane().add(lblVerifyPassword);
 
-		lblPhoneNumber = new JLabel("Phone Number");
-		lblPhoneNumber.setForeground(new Color(0, 255, 0));
-		lblPhoneNumber.setBounds(LABEL_X, Y+350, LABEL_WIDTH, LABEL_HEIGHT);
+		lblPhoneNumber = new JLabel("PHONE NUMBER");
+		lblPhoneNumber.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		lblPhoneNumber.setForeground(new Color(0, 0, 102));
+		lblPhoneNumber.setBounds(495, 440, LABEL_WIDTH, LABEL_HEIGHT);
 		frame.getContentPane().add(lblPhoneNumber);
 
 		lblError = new JLabel("");
-		lblError.setForeground(new Color(0, 255, 0));
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblError.setBounds(LABEL_X, Y+400, LABEL_WIDTH, LABEL_HEIGHT);
+		lblError.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		lblError.setForeground(new Color(255, 0, 51));
+		lblError.setBounds(495, 575, 360, 40);
 		frame.getContentPane().add(lblError);
 
-		btnUpdate = new JButton("Update");
+		btnUpdate = new JButton("UPDATE");
+		btnUpdate.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		btnUpdate.setBackground(new Color(255, 255, 255));
-		btnUpdate.setForeground(new Color(0, 255, 0));
+		btnUpdate.setForeground(new Color(0, 0, 102));
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -297,7 +325,7 @@ public class ProfilePage{
 		
 		btnUpdate.setVerticalTextPosition(AbstractButton.CENTER);
 		btnUpdate.setHorizontalTextPosition(AbstractButton.CENTER);
-		btnUpdate.setBounds(BUTTON_X, Y+435, BUTTON_WIDTH, BUTTON_HEIGHT);
+		btnUpdate.setBounds(495, 515, 360, 40);
 		frame.getContentPane().add(btnUpdate);
 		
 
@@ -311,19 +339,61 @@ public class ProfilePage{
 	}
 	private void changeLabels(Boolean isValidFullName, Boolean isValidEmailID, Boolean isValidUsername, Boolean isValidPassword, 
 			Boolean isValidVerifyPassword, Boolean isValidPhoneNumber){
-
-		if(isValidFullName)	lblFullName.setText("Full Name");
-		else	lblFullName.setText("Full Name <Please enter valid full name>");
-		if(isValidEmailID)	lblEmailID.setText("Email ID");
-		else	lblEmailID.setText("Email ID <Please enter valid Email ID>");
-		if(isValidUsername)	lblUsername.setText("Username");
-		else	lblUsername.setText("Username <Should contain only letters, digits or '_'>");
-		if(isValidPassword)	lblPassword.setText("Password");
-		else	lblPassword.setText("Password <Should contain letters and digits. Length>7>");
-		if(isValidVerifyPassword)	lblVerifyPassword.setText("Verify Password");
-		else	lblVerifyPassword.setText("Verify Password <Did not match Password>");
-		if(isValidPhoneNumber)	lblPhoneNumber.setText("Phone Number");
-		else	lblPhoneNumber.setText("Phone Number <Should contain 10 digits>");
+		
+		if(isValidFullName){	
+			lblFullName.setText("FULL NAME");
+			lblFullName.setForeground(new Color(0, 0, 102));
+		}
+		else{
+			lblFullName.setText("FULL NAME <PLEASE ENTER VALID FULL NAME>");
+			lblFullName.setForeground(new Color(255, 0, 51));
+		}
+		
+		if(isValidEmailID){
+			lblEmailID.setText("EMAIL ID");
+			lblEmailID.setForeground(new Color(0, 0, 102));
+		}
+		else{
+			lblEmailID.setText("EMAIL ID <PLEASE ENTER VALID EMAIL ID>");
+			lblEmailID.setForeground(new Color(255, 0, 51));
+		}
+		
+		if(isValidUsername){
+			lblUsername.setText("USERNAME");
+			lblUsername.setForeground(new Color(0, 0, 102));
+		}
+		else{
+			lblUsername.setText("USERNAME <SHOULD CONTAIN ONLY LETTERS, DIGITS OR '_'>");
+			lblUsername.setForeground(new Color(255, 0, 51));
+		}
+		
+		if(isValidPassword){
+			lblPassword.setText("PASSWORD");
+			lblError.setForeground(new Color(0, 0, 102));
+		}
+		else{
+			lblPassword.setText("PASSWORD <SHOULD CONTAIN LETTERS AND DIGITS. LENGTH > 7>");
+			lblPassword.setForeground(new Color(255, 0, 51));
+		}
+		
+		if(isValidVerifyPassword){
+			lblVerifyPassword.setText("VERIFY PASSWORD");
+			lblVerifyPassword.setForeground(new Color(0, 0, 102));
+		}
+		else{
+			lblVerifyPassword.setText("VERIFY PASSWORD <DID NOT MATCH PASSWORD>");
+			lblVerifyPassword.setForeground(new Color(255, 0, 51));
+		}
+		
+		if(isValidPhoneNumber){
+			lblPhoneNumber.setText("PHONE NUMBER");
+			lblPhoneNumber.setForeground(new Color(0, 0, 102));
+		}
+		else{
+			lblPhoneNumber.setText("PHONE NUMBER <SHOULD CONTAIN EXACTLY 10 DIGITS>");
+			lblPhoneNumber.setForeground(new Color(255, 0, 51));
+		}
+		
 		lblError.setText("");
 
 	}

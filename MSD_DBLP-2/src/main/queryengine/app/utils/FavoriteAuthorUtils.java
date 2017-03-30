@@ -36,7 +36,7 @@ public class FavoriteAuthorUtils {
 					}
 				}
 				
-				favoriteStatistics.add(new FavoriteStat(favAuthor.getAuthorName(), publicationCount, maxPublications + " ; " + journal));
+				favoriteStatistics.add(new FavoriteStat(favAuthor.getAuthorName(), publicationCount, maxPublications, journal));
 			}
 		}
 		return favoriteStatistics;

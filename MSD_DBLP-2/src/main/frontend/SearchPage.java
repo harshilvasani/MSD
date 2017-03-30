@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -10,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import frontend.utils.FavoriteAuthorUtils;
@@ -78,10 +81,12 @@ public class SearchPage {
 	private void initialize() {
 
 		frame = new JFrame();
+		frame.getContentPane().setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(0, 0, 1350, 725);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		scroller = new JScrollPane();
 		scrollerFlag = true;
@@ -93,31 +98,34 @@ public class SearchPage {
 		ftfMinimumPublication = new JFormattedTextField();
 		btnFilter = new JButton("");
 
-		btnLogout = new JButton("Logout");
+		btnLogout = new JButton("LOGOUT");
+		btnLogout.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnLogout.setBackground(new Color(255, 255, 255));
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				LoginPage lp = new LoginPage();
-
 				JFrame loginPageFrame = lp.getFrame();
 
 				if(loginPageFrame != null){
 					loginPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
-				/*else
-					lblError.setText("Error in creating Login Page");*/
+			/*	else
+					lblError.setText("ERROR IN CREATING LOGIN PAGE"); */
 			}
 		});
 		frame.getContentPane().setLayout(null);
-		btnLogout.setForeground(new Color(0, 255, 0));
+		btnLogout.setForeground(new Color(0, 0, 102));
 		btnLogout.setBounds(1075, 10, 200, 25);
 		frame.getContentPane().add(btnLogout);
 
-		btnProfile = new JButton("Profile");
+		btnProfile = new JButton("PROFILE");
+		btnProfile.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnProfile.setBackground(new Color(255, 255, 255));
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				ProfilePage pp = new ProfilePage();
 				JFrame profilePageFrame = pp.getFrame();
 
@@ -125,18 +133,21 @@ public class SearchPage {
 					profilePageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
-				/*else
-					lblError.setText("Error in creating Profile Page");*/
+			/*	else
+					lblError.setText("ERROR IN CREATING PROFILE PAGE"); */
+				
 			}
 		});
-		btnProfile.setForeground(new Color(0, 255, 0));
+		btnProfile.setForeground(new Color(0, 0, 102));
 		btnProfile.setBounds(875, 10, 200, 25);
 		frame.getContentPane().add(btnProfile);
 
-		btnFavorites = new JButton("Favorites List");
+		btnFavorites = new JButton("FAVORTIES LIST");
+		btnFavorites.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnFavorites.setBackground(new Color(255, 255, 255));
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				FavoriteAuthorPage fap = new FavoriteAuthorPage();
 				JFrame favoriteAuthorPageFrame = fap.getFrame();
 
@@ -144,23 +155,29 @@ public class SearchPage {
 					favoriteAuthorPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
+			/*	else
+					lblError.setText("ERROR IN CREATING FAVORITES LIST PAGE"); */
+				
 			}
 		});
-		btnFavorites.setForeground(new Color(0, 255, 0));
+		btnFavorites.setForeground(new Color(0, 0, 102));
 		btnFavorites.setBounds(675, 10, 200, 25);
 		frame.getContentPane().add(btnFavorites);
 
-		btnAuthorSearch = new JButton("Author Search");
-		btnAuthorSearch.setBackground(new Color(255, 255, 255));
-		
-		btnAuthorSearch.setForeground(new Color(0, 255, 0));
-		btnAuthorSearch.setBounds(475, 10, 200, 25);
+		btnAuthorSearch = new JButton("AUTHOR SEARCH");
+		btnAuthorSearch.setBorder(new LineBorder(new Color(0, 0, 102)));
+		btnAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
+		btnAuthorSearch.setBackground(new Color(0, 0, 102));
+		btnAuthorSearch.setForeground(new Color(0, 0, 102));
+		btnAuthorSearch.setBounds(75, 10, 200, 25);
 		frame.getContentPane().add(btnAuthorSearch);
 
-		btnCoAuthorSearch = new JButton("Co-Author Search");
+		btnCoAuthorSearch = new JButton("CO AUTHOR SEARCH");
+		btnCoAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnCoAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnCoAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				CoAuthorSearchPage casp = new CoAuthorSearchPage();
 				JFrame coAuthorSearchPageFrame = casp.getFrame();
 
@@ -168,17 +185,21 @@ public class SearchPage {
 					coAuthorSearchPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
+			/*	else
+					lblError.setText("ERROR IN CREATING CO AUTHOR SEARCH PAGE"); */
+				
 			}
 		});
-		btnCoAuthorSearch.setForeground(new Color(0, 255, 0));
+		btnCoAuthorSearch.setForeground(new Color(0, 0, 102));
 		btnCoAuthorSearch.setBounds(275, 10, 200, 25);
 		frame.getContentPane().add(btnCoAuthorSearch);
 
-		btnSimilarAuthorSearch = new JButton("Similar Author Search");
+		btnSimilarAuthorSearch = new JButton("SIMILAR AUTHOR SEARCH");
+		btnSimilarAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnSimilarAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnSimilarAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				SimilarAuthorSearchPage sasp = new SimilarAuthorSearchPage();
 				JFrame similarAuthorSearchPageFrame = sasp.getFrame();
 
@@ -186,46 +207,53 @@ public class SearchPage {
 					similarAuthorSearchPageFrame.setVisible(true);
 					getFrame().setVisible(false);
 				}
-				
+			/*	else
+					lblError.setText("ERROR IN CREATING SIMILAR AUTHOR SEARCH PAGE"); */
+
 			}
 		});
-		btnSimilarAuthorSearch.setForeground(new Color(0, 255, 0));
-		btnSimilarAuthorSearch.setBounds(75, 10, 200, 25);
+		btnSimilarAuthorSearch.setForeground(new Color(0, 0, 102));
+		btnSimilarAuthorSearch.setBounds(475, 10, 200, 25);
 		frame.getContentPane().add(btnSimilarAuthorSearch);
 
-		lblAuthorSearch = new JLabel("Author Search");
+		lblAuthorSearch = new JLabel("AUTHOR SEARCH");
 		lblAuthorSearch.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAuthorSearch.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblAuthorSearch.setForeground(new Color(0, 255, 0));
-		lblAuthorSearch.setBounds(150, 60, 200, 28);
+		lblAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 24));
+		lblAuthorSearch.setForeground(new Color(0, 0, 102));
+		lblAuthorSearch.setBounds(573, 60, 200, 28);
 		frame.getContentPane().add(lblAuthorSearch);
 
 		ftfPublicationTitle = new JFormattedTextField();
-		ftfPublicationTitle.setForeground(new Color(0, 255, 0));
+		ftfPublicationTitle.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		ftfPublicationTitle.setForeground(new Color(0, 0, 102));
 		ftfPublicationTitle.setText("");
-		ftfPublicationTitle.setBounds(150, 120, 200, 20);
+		ftfPublicationTitle.setBounds(573, 120, 200, 20);
 		frame.getContentPane().add(ftfPublicationTitle);
 
 		ftfJournalName = new JFormattedTextField();
+		ftfJournalName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfJournalName.setText("");
-		ftfJournalName.setForeground(Color.GREEN);
-		ftfJournalName.setBounds(150, 151, 200, 20);
+		ftfJournalName.setForeground(new Color(0, 0, 102));
+		ftfJournalName.setBounds(573, 151, 200, 20);
 		frame.getContentPane().add(ftfJournalName);
 
 		ftfMinimumYear = new JFormattedTextField();
+		ftfMinimumYear.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfMinimumYear.setText("");
-		ftfMinimumYear.setForeground(Color.GREEN);
-		ftfMinimumYear.setBounds(150, 182, 200, 20);
+		ftfMinimumYear.setForeground(new Color(0, 0, 102));
+		ftfMinimumYear.setBounds(573, 182, 200, 20);
 		frame.getContentPane().add(ftfMinimumYear);
 
 		ftfAbsence = new JFormattedTextField();
+		ftfAbsence.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfAbsence.setText("");
-		ftfAbsence.setForeground(Color.GREEN);
-		ftfAbsence.setBounds(150, 213, 200, 20);
+		ftfAbsence.setForeground(new Color(0, 0, 102));
+		ftfAbsence.setBounds(573, 213, 200, 20);
 		frame.getContentPane().add(ftfAbsence);
 
 
-		btnSearch = new JButton("Search");
+		btnSearch = new JButton("SEARCH");
+		btnSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnSearch.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -241,29 +269,39 @@ public class SearchPage {
 				displayAndFilterSearchResults();
 			}
 		});
-		btnSearch.setForeground(Color.GREEN);
+		btnSearch.setForeground(new Color(0, 0, 102));
 		btnSearch.setBackground(Color.WHITE);
-		btnSearch.setBounds(192, 244, 110, 25);
+		btnSearch.setBounds(573, 244, 200, 30);
 		frame.getContentPane().add(btnSearch);
-
-		lblPublicationTitle = new JLabel("Publication Title");
-		lblPublicationTitle.setBounds(24, 123, 116, 14);
+		
+		lblPublicationTitle = new JLabel("PUBLICATION TITLE");
+		lblPublicationTitle.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		lblPublicationTitle.setForeground(new Color(0, 0, 102));
+		lblPublicationTitle.setBounds(275, 126, 247, 14);
 		frame.getContentPane().add(lblPublicationTitle);
 
-		lblJournalName = new JLabel("Journal Name");
-		lblJournalName.setBounds(24, 154, 116, 14);
+		lblJournalName = new JLabel("JOURNAL NAME");
+		lblJournalName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		lblJournalName.setForeground(new Color(0, 0, 102));
+		lblJournalName.setBounds(275, 157, 247, 14);
 		frame.getContentPane().add(lblJournalName);
 
-		lblMinimumYear = new JLabel("Minimum Year");
-		lblMinimumYear.setBounds(24, 185, 116, 14);
+		lblMinimumYear = new JLabel("MINIMUM STARTING YEAR");
+		lblMinimumYear.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		lblMinimumYear.setForeground(new Color(0, 0, 102));
+		lblMinimumYear.setBounds(275, 188, 247, 14);
 		frame.getContentPane().add(lblMinimumYear);
 
-		lblAbsenceFromCommittee = new JLabel("Absence from Committee");
-		lblAbsenceFromCommittee.setBounds(24, 216, 116, 14);
+		lblAbsenceFromCommittee = new JLabel("NUMBER OF YEARS SINCE ABSENCE");
+		lblAbsenceFromCommittee.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		lblAbsenceFromCommittee.setForeground(new Color(0, 0, 102));
+		lblAbsenceFromCommittee.setBounds(275, 219, 271, 14);
 		frame.getContentPane().add(lblAbsenceFromCommittee);
+
 	}
 
 	private void displayAndFilterSearchResults(){
+
 		if (scrollerFlag){
 			frame.getContentPane().remove(scroller);
 			frame.getContentPane().remove(btnaddFavoriteAuthor);
@@ -274,34 +312,42 @@ public class SearchPage {
 		}
 		
 		if (!authorNameContainsFlag){
-			JLabel lblAuthorNameContains = new JLabel("Author Name Contains:");
-			lblAuthorNameContains.setBounds(192, 300, 150, 25);
+			JLabel lblAuthorNameContains = new JLabel("AUTHOR NAME CONTAINS");
+			lblAuthorNameContains.setBounds(150, 300, 176, 20);
+			lblAuthorNameContains.setForeground(new Color(0, 0, 102));
+			lblAuthorNameContains.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 			frame.getContentPane().add(lblAuthorNameContains);
 			authorNameContainsFlag = true;
 		}
 
 		ftfAuthorNameContains = new JFormattedTextField();
-		ftfAuthorNameContains.setForeground(new Color(0, 255, 0));
+		ftfAuthorNameContains.setForeground(new Color(0, 0, 102));
+		ftfAuthorNameContains.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfAuthorNameContains.setText("");
-		ftfAuthorNameContains.setBounds(352, 300, 200, 25);
+		ftfAuthorNameContains.setBounds(326, 300, 200, 20);
 		frame.getContentPane().add(ftfAuthorNameContains);
 
 		if (!minimumPublicationFlag){
-			JLabel lblMinimumPublication = new JLabel("Minimum Publication:");
-			lblMinimumPublication.setBounds(572, 300, 150, 25);
+			JLabel lblMinimumPublication = new JLabel("MINIMUM PUBLICATION");
+			lblMinimumPublication.setBounds(573, 300, 165, 20);
+			lblMinimumPublication.setForeground(new Color(0, 0, 102));
+			lblMinimumPublication.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 			frame.getContentPane().add(lblMinimumPublication);
 			minimumPublicationFlag = true;
 		}
 			
 		ftfMinimumPublication = new JFormattedTextField();
-		ftfMinimumPublication.setForeground(new Color(0, 255, 0));
+		ftfMinimumPublication.setForeground(new Color(0, 0, 102));
+		ftfMinimumPublication.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfMinimumPublication.setText("");
-		ftfMinimumPublication.setBounds(732, 300, 200, 25);
+		ftfMinimumPublication.setBounds(738, 300, 200, 20);
 		frame.getContentPane().add(ftfMinimumPublication);
 		
 		if (!displayingResultsFlag){
-			lblDisplayingResults = new JLabel("Displaying Results");
-			lblDisplayingResults.setBounds(150, 345, 200, 14);
+			lblDisplayingResults = new JLabel("DISPLAYING RESULTS");
+			lblDisplayingResults.setBounds(150, 345, 200, 20);
+			lblDisplayingResults.setForeground(new Color(0, 0, 102));
+			lblDisplayingResults.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 			frame.getContentPane().add(lblDisplayingResults);
 			displayingResultsFlag = true;
 		}
@@ -314,7 +360,7 @@ public class SearchPage {
 		frame.getContentPane().add(scroller);
 		scrollerFlag = true;
 		
-		JButton btnFilter = new JButton("Apply Filters");
+		btnFilter = new JButton("APPLY FILTERS");
 		btnFilter.setBackground(new Color(255, 255, 255));
 		btnFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -324,8 +370,9 @@ public class SearchPage {
 				displayAndFilterSearchResults();
 			}
 		});
-		btnFilter.setForeground(new Color(0, 255, 0));
-		btnFilter.setBounds(952, 300, 200, 25);
+		btnFilter.setForeground(new Color(0, 0, 102));
+		btnFilter.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		btnFilter.setBounds(950, 295, 200, 30);
 		frame.getContentPane().add(btnFilter);
 
 		@SuppressWarnings("serial")
@@ -340,13 +387,14 @@ public class SearchPage {
 		searchResultTable.setRowSelectionAllowed(false);
 		authorDisplayArea.add(searchResultTable);  
 
-		JButton btnaddFavoriteAuthor = new JButton("Add to Favorites");
+		btnaddFavoriteAuthor = new JButton("ADD TO FAVORITES");
 		btnaddFavoriteAuthor.setBackground(new Color(255, 255, 255));
 		btnaddFavoriteAuthor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int row = searchResultTable.getSelectedRow();
 
-				if(row == 1){
+				if(row > 0){
 					String authorName = (String) searchResultTable.getValueAt(row,0);
 					
 					ResponseMessage rm = FavoriteAuthorUtils.addAuthorToFavouriteList(authorName);
@@ -354,11 +402,13 @@ public class SearchPage {
 						JOptionPane.showMessageDialog(getFrame(), rm.getMessage());
 					else
 						JOptionPane.showMessageDialog(getFrame(), authorName + " added!!");
+
 				}
 			}
 		});
-		btnaddFavoriteAuthor.setForeground(new Color(0, 255, 0));
-		btnaddFavoriteAuthor.setBounds(550, 345, 200, 15);
+		btnaddFavoriteAuthor.setForeground(new Color(0, 0, 102));
+		btnaddFavoriteAuthor.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		btnaddFavoriteAuthor.setBounds(573, 331, 200, 30);
 		frame.getContentPane().add(btnaddFavoriteAuthor);
 
 		model.addColumn("Person Name"); 
@@ -366,12 +416,27 @@ public class SearchPage {
 		model.addColumn("Publication Type");
 		model.addColumn("Publication Year");
 		model.addColumn("Journal/Publication/Conference");
+		
+		Font font = new Font("Microsoft JhengHei UI", Font.BOLD, 11);
+		
+		AttributedString personName = new AttributedString("PERSON NAME");
+		personName.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString publicationTitle = new AttributedString("PUBLICATION TITLE");
+		publicationTitle.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString publicationType = new AttributedString("PUBLICATION TYPE");
+		publicationType.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString publicationYear = new AttributedString("PUBLICATION YEAR");
+		publicationYear.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString journal = new AttributedString("JOURNAL/PUBLICATION/CONFERENCE");
+		journal.addAttribute(TextAttribute.FONT, font);
 
-		model.addRow(new Object[]{"Person Name","Publication Title",
-				"Publication Type", "Publication Year", "Journal/Publication/Conference"});
+		model.addRow(new Object[]{personName,publicationTitle,publicationType,publicationYear,journal});
 
 		List<IPerson> displayResult = (filterResult == null) ? searchResult : filterResult;
-		
 		if(displayResult != null && displayResult.size() > 0){
 			for( int i = 0; i < displayResult.size() ; i++ ){
 
@@ -386,7 +451,10 @@ public class SearchPage {
 				}
 			}
 		}
+		else
+			model.addRow(new Object[]{"NO RESULTS TO DISPLAY"});
 
 		frame.repaint();
+
 	}
 }

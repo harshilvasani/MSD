@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -25,6 +27,7 @@ import frontend.utils.FilterUtils;
 import queryengine.miscellaneous.ResponseMessage;
 import resources.personrecord.Author;
 import resources.personrecord.IPerson;
+import javax.swing.border.LineBorder;
 
 
 public class SimilarAuthorSearchPage {
@@ -71,11 +74,14 @@ public class SimilarAuthorSearchPage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(0, 0, 1350, 725);
+		frame.getContentPane().setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		scroller = new JScrollPane();
 		scrollerFlag = true;
@@ -88,7 +94,8 @@ public class SimilarAuthorSearchPage {
 		btnFilter = new JButton("");
 
 
-		btnLogout = new JButton("Logout");
+		btnLogout = new JButton("LOGOUT");
+		btnLogout.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnLogout.setBackground(new Color(255, 255, 255));
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -103,11 +110,12 @@ public class SimilarAuthorSearchPage {
 			}
 		});
 		frame.getContentPane().setLayout(null);
-		btnLogout.setForeground(new Color(0, 255, 0));
+		btnLogout.setForeground(new Color(0, 0, 102));
 		btnLogout.setBounds(1075, 10, 200, 25);
 		frame.getContentPane().add(btnLogout);
 
-		btnProfile = new JButton("Profile");
+		btnProfile = new JButton("PROFILE");
+		btnProfile.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnProfile.setBackground(new Color(255, 255, 255));
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,11 +129,12 @@ public class SimilarAuthorSearchPage {
 				}
 			}
 		});
-		btnProfile.setForeground(new Color(0, 255, 0));
+		btnProfile.setForeground(new Color(0, 0, 102));
 		btnProfile.setBounds(875, 10, 200, 25);
 		frame.getContentPane().add(btnProfile);
 
-		btnFavorites = new JButton("Favorites List");
+		btnFavorites = new JButton("FAVORITES LIST");
+		btnFavorites.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnFavorites.setBackground(new Color(255, 255, 255));
 		btnFavorites.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -138,11 +147,12 @@ public class SimilarAuthorSearchPage {
 				}
 			}
 		});
-		btnFavorites.setForeground(new Color(0, 255, 0));
+		btnFavorites.setForeground(new Color(0, 0, 102));
 		btnFavorites.setBounds(675, 10, 200, 25);
 		frame.getContentPane().add(btnFavorites);
 
-		btnAuthorSearch = new JButton("Author Search");
+		btnAuthorSearch = new JButton("AUTHOR SEARCH");
+		btnAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -155,11 +165,12 @@ public class SimilarAuthorSearchPage {
 				}
 			}
 		});
-		btnAuthorSearch.setForeground(new Color(0, 255, 0));
-		btnAuthorSearch.setBounds(475, 10, 200, 25);
+		btnAuthorSearch.setForeground(new Color(0, 0, 102));
+		btnAuthorSearch.setBounds(75, 10, 200, 25);
 		frame.getContentPane().add(btnAuthorSearch);
 
-		btnCoAuthorSearch = new JButton("Co-Author Search");
+		btnCoAuthorSearch = new JButton("CO AUTHOR SEARCH");
+		btnCoAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnCoAuthorSearch.setBackground(new Color(255, 255, 255));
 		btnCoAuthorSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -172,32 +183,35 @@ public class SimilarAuthorSearchPage {
 				}
 			}
 		});
-		btnCoAuthorSearch.setForeground(new Color(0, 255, 0));
+		btnCoAuthorSearch.setForeground(new Color(0, 0, 102));
 		btnCoAuthorSearch.setBounds(275, 10, 200, 25);
 		frame.getContentPane().add(btnCoAuthorSearch);
 
-		btnSimilarAuthorSearch = new JButton("Similar Author Search");
-		btnSimilarAuthorSearch.setBackground(new Color(255, 255, 255));
+		btnSimilarAuthorSearch = new JButton("SIMILAR AUTHOR SEARCH");
+		btnSimilarAuthorSearch.setBorder(new LineBorder(new Color(0, 0, 102)));
+		btnSimilarAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		btnSimilarAuthorSearch.setBackground(new Color(0, 0, 102));
 		
-		btnSimilarAuthorSearch.setForeground(new Color(0, 255, 0));
-		btnSimilarAuthorSearch.setBounds(75, 10, 200, 25);
+		btnSimilarAuthorSearch.setForeground(new Color(0, 0, 102));
+		btnSimilarAuthorSearch.setBounds(475, 10, 200, 25);
 		frame.getContentPane().add(btnSimilarAuthorSearch);
 		
-		lblSimilarAuthorSearch = new JLabel("Similar Author Search");
+		lblSimilarAuthorSearch = new JLabel("SIMILAR AUTHOR SEARCH");
 		lblSimilarAuthorSearch.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSimilarAuthorSearch.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblSimilarAuthorSearch.setForeground(new Color(0, 255, 0));
-		lblSimilarAuthorSearch.setBounds(150, 60, 200, 28);
+		lblSimilarAuthorSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 24));
+		lblSimilarAuthorSearch.setForeground(new Color(0, 0, 102));
+		lblSimilarAuthorSearch.setBounds(524, 60, 302, 28);
 		frame.getContentPane().add(lblSimilarAuthorSearch);
 
 		ftfAuthorName = new JFormattedTextField();
-		ftfAuthorName.setForeground(new Color(0, 255, 0));
+		ftfAuthorName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		ftfAuthorName.setForeground(new Color(0, 0, 102));
 		ftfAuthorName.setText("");
-		ftfAuthorName.setBounds(150, 120, 200, 20);
+		ftfAuthorName.setBounds(524, 120, 302, 20);
 		frame.getContentPane().add(ftfAuthorName);
 		
-		btnSearch = new JButton("Search");
-		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnSearch = new JButton("SEARCH");
+		btnSearch.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		btnSearch.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -210,21 +224,23 @@ public class SimilarAuthorSearchPage {
 				displayAndFilterSearchResults();
 			}
 		});
-		btnSearch.setForeground(new Color(0, 0, 0));
+		btnSearch.setForeground(new Color(0, 0, 102));
 		btnSearch.setBackground(Color.WHITE);
-		btnSearch.setBounds(192, 151, 110, 25);
+		btnSearch.setBounds(524, 160, 302, 30);
 		frame.getContentPane().add(btnSearch);
 
-		lblAuthorName = new JLabel("Author Name:");
+		lblAuthorName = new JLabel("AUTHOR NAME");
+		lblAuthorName.setForeground(new Color(0, 0, 102));
 		lblAuthorName.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblAuthorName.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblAuthorName.setBounds(24, 123, 116, 14);
+		lblAuthorName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		lblAuthorName.setBounds(359, 123, 116, 14);
 		frame.getContentPane().add(lblAuthorName);
 
 	}
 	
 	public void displayAndFilterSearchResults(){
-		if(scrollerFlag){
+
+		if (scrollerFlag){
 			frame.getContentPane().remove(scroller);
 			frame.getContentPane().remove(btnaddFavoriteAuthor);
 			frame.getContentPane().remove(ftfAuthorNameContains);
@@ -233,35 +249,43 @@ public class SimilarAuthorSearchPage {
 			scrollerFlag = false;
 		}
 		
-		if(authorNameContainsFlag == false){
-			JLabel lblAuthorNameContains = new JLabel("Author Name Contains:");
-			lblAuthorNameContains.setBounds(192, 300, 150, 25);
+		if (!authorNameContainsFlag){
+			JLabel lblAuthorNameContains = new JLabel("AUTHOR NAME CONTAINS");
+			lblAuthorNameContains.setBounds(150, 300, 176, 20);
+			lblAuthorNameContains.setForeground(new Color(0, 0, 102));
+			lblAuthorNameContains.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 			frame.getContentPane().add(lblAuthorNameContains);
 			authorNameContainsFlag = true;
 		}
 
 		ftfAuthorNameContains = new JFormattedTextField();
-		ftfAuthorNameContains.setForeground(new Color(0, 255, 0));
+		ftfAuthorNameContains.setForeground(new Color(0, 0, 102));
+		ftfAuthorNameContains.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfAuthorNameContains.setText("");
-		ftfAuthorNameContains.setBounds(352, 300, 200, 25);
+		ftfAuthorNameContains.setBounds(326, 300, 200, 20);
 		frame.getContentPane().add(ftfAuthorNameContains);
 
-		if(minimumPublicationFlag == false){
-			JLabel lblMinimumPublication = new JLabel("Minimum Publication:");
-			lblMinimumPublication.setBounds(572, 300, 150, 25);
+		if (!minimumPublicationFlag){
+			JLabel lblMinimumPublication = new JLabel("MINIMUM PUBLICATION");
+			lblMinimumPublication.setBounds(573, 300, 165, 20);
+			lblMinimumPublication.setForeground(new Color(0, 0, 102));
+			lblMinimumPublication.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 			frame.getContentPane().add(lblMinimumPublication);
 			minimumPublicationFlag = true;
 		}
 			
 		ftfMinimumPublication = new JFormattedTextField();
-		ftfMinimumPublication.setForeground(new Color(0, 255, 0));
+		ftfMinimumPublication.setForeground(new Color(0, 0, 102));
+		ftfMinimumPublication.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		ftfMinimumPublication.setText("");
-		ftfMinimumPublication.setBounds(732, 300, 200, 25);
+		ftfMinimumPublication.setBounds(738, 300, 200, 20);
 		frame.getContentPane().add(ftfMinimumPublication);
 		
-		if(displayingResultsFlag == false){
-			lblDisplayingResults = new JLabel("Displaying Results");
-			lblDisplayingResults.setBounds(150, 345, 200, 14);
+		if (!displayingResultsFlag){
+			lblDisplayingResults = new JLabel("DISPLAYING RESULTS");
+			lblDisplayingResults.setBounds(150, 345, 200, 20);
+			lblDisplayingResults.setForeground(new Color(0, 0, 102));
+			lblDisplayingResults.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 			frame.getContentPane().add(lblDisplayingResults);
 			displayingResultsFlag = true;
 		}
@@ -274,41 +298,41 @@ public class SimilarAuthorSearchPage {
 		frame.getContentPane().add(scroller);
 		scrollerFlag = true;
 		
-		btnFilter = new JButton("Apply Filters");
+		btnFilter = new JButton("APPLY FILTERS");
 		btnFilter.setBackground(new Color(255, 255, 255));
 		btnFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				filterResult = FilterUtils.getFilteredResult(ftfAuthorNameContains.getText(), ftfMinimumPublication.getText(), searchResult);
 
 				displayAndFilterSearchResults();
-
 			}
 		});
-		btnFilter.setForeground(new Color(0, 255, 0));
-		btnFilter.setBounds(952, 300, 200, 25);
+		btnFilter.setForeground(new Color(0, 0, 102));
+		btnFilter.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		btnFilter.setBounds(950, 295, 200, 30);
 		frame.getContentPane().add(btnFilter);
 
 		@SuppressWarnings("serial")
 		DefaultTableModel model = new DefaultTableModel(){
-
 		    @Override
 		    public boolean isCellEditable(int i, int i1) {
 		        return false; //To change body of generated methods, choose Tools | Templates.
 		    }
-
 		   };
-		
+		   
 		searchResultTable = new JTable(model);
-		authorDisplayArea.add(searchResultTable);  
 		searchResultTable.setRowSelectionAllowed(false);
+		authorDisplayArea.add(searchResultTable);  
 
-		btnaddFavoriteAuthor = new JButton("Add to Favorites");
+		btnaddFavoriteAuthor = new JButton("ADD TO FAVORITES");
 		btnaddFavoriteAuthor.setBackground(new Color(255, 255, 255));
 		btnaddFavoriteAuthor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int row = searchResultTable.getSelectedRow();
 
-				if(row == 1){
+				if(row > 0){
 					String authorName = (String) searchResultTable.getValueAt(row,0);
 					
 					ResponseMessage rm = FavoriteAuthorUtils.addAuthorToFavouriteList(authorName);
@@ -316,11 +340,13 @@ public class SimilarAuthorSearchPage {
 						JOptionPane.showMessageDialog(getFrame(), rm.getMessage());
 					else
 						JOptionPane.showMessageDialog(getFrame(), authorName + " added!!");
+
 				}
 			}
 		});
-		btnaddFavoriteAuthor.setForeground(new Color(0, 255, 0));
-		btnaddFavoriteAuthor.setBounds(550, 345, 200, 15);
+		btnaddFavoriteAuthor.setForeground(new Color(0, 0, 102));
+		btnaddFavoriteAuthor.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		btnaddFavoriteAuthor.setBounds(573, 331, 200, 30);
 		frame.getContentPane().add(btnaddFavoriteAuthor);
 
 		model.addColumn("Person Name"); 
@@ -328,13 +354,27 @@ public class SimilarAuthorSearchPage {
 		model.addColumn("Publication Type");
 		model.addColumn("Publication Year");
 		model.addColumn("Journal/Publication/Conference");
+		
+		Font font = new Font("Microsoft JhengHei UI", Font.BOLD, 11);
+		
+		AttributedString personName = new AttributedString("PERSON NAME");
+		personName.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString publicationTitle = new AttributedString("PUBLICATION TITLE");
+		publicationTitle.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString publicationType = new AttributedString("PUBLICATION TYPE");
+		publicationType.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString publicationYear = new AttributedString("PUBLICATION YEAR");
+		publicationYear.addAttribute(TextAttribute.FONT, font);
+		
+		AttributedString journal = new AttributedString("JOURNAL/PUBLICATION/CONFERENCE");
+		journal.addAttribute(TextAttribute.FONT, font);
 
-		model.addRow(new Object[]{"Person Name","Publication Title",
-				"Publication Type", "Publication Year", "Journal/Publication/Conference"});
-
+		model.addRow(new Object[]{personName,publicationTitle,publicationType,publicationYear,journal});
 
 		List<IPerson> displayResult = (filterResult == null) ? searchResult : filterResult;
-
 		if(displayResult != null && displayResult.size() > 0){
 			for( int i = 0; i < displayResult.size() ; i++ ){
 
@@ -349,10 +389,10 @@ public class SimilarAuthorSearchPage {
 				}
 			}
 		}
+		else
+			model.addRow(new Object[]{"NO RESULTS TO DISPLAY"});
 
 		frame.repaint();
-
+		
 	}
-
-
 }

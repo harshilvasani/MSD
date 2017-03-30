@@ -5,6 +5,7 @@ import java.util.List;
 import queryengine.app.App;
 import queryengine.miscellaneous.ResponseMessage;
 import resources.personrecord.FavouriteAuthor;
+import resources.personrecord.IPerson;
 import resources.personrecord.User;
 import validator.utils.Validator;
 
@@ -45,5 +46,10 @@ public class FavoriteAuthorUtils {
 
 		return  app.deleteFavoriteAuthor(favAuthor);
 
+	}
+	
+	public static List<IPerson> getFavriteAuthorStatistics(){
+		
+		return app.getFavoriteAuthorsStatistics();
 	}
 }

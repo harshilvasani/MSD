@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="queryengine.app.LoginTest" time="0.579" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="queryengine.app.LoginTest" time="0.577" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\bin"/>
@@ -28,7 +28,7 @@
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
     <property name="net.sourceforge.cobertura.datafile" value="C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\target\cobertura\cobertura.ser"/>
-    <property name="classworlds.conf" value="C:\Users\Harshil Vasani\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf9055941989831666064.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\Harshil Vasani\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8797277111152445699.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_111\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jdk1.8.0_111/bin/../jre/bin/server;C:/Program Files/Java/jdk1.8.0_111/bin/../jre/bin;C:/Program Files/Java/jdk1.8.0_111/bin/../jre/lib/amd64;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Liquid Technologies\Liquid Studio 2017\XmlDataBinder15\Redist15\cpp\win32\bin;C:\Program Files\Liquid Technologies\Liquid Studio 2017\XmlDataBinder15\Redist15\cpp\win64\bin;C:\Program Files (x86)\ValidatorBuddy;C:\Users\Harshil Vasani\AppData\Local\Microsoft\WindowsApps;;C:\WINDOWS\system32;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -63,9 +63,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="queryengine.app.LoginTest" name="testLoginSuccess1" time="0.198"/>
-  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure1" time="0.092"/>
-  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure2" time="0.092"/>
-  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure3" time="0.104"/>
-  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure4" time="0.093"/>
+  <testcase classname="queryengine.app.LoginTest" name="testLoginSuccess1" time="0.205"/>
+  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure1" time="0.091"/>
+  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure2" time="0.095"/>
+  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure3" time="0.092"/>
+  <testcase classname="queryengine.app.LoginTest" name="testLoginFailure4" time="0.094"/>
 </testsuite>

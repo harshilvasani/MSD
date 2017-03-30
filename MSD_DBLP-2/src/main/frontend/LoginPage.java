@@ -76,15 +76,15 @@ public class LoginPage {
 
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
-		frame.getContentPane().setForeground(new Color(0, 255, 0));
+		frame.getContentPane().setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		frame.setBounds(0, 0, 1350, 725);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		// register button used to go to the register page
-		btnRegister = new JButton("Register");
-		btnRegister.setForeground(new Color(0, 255, 0));
+		btnRegister = new JButton("REGISTER");
+		btnRegister.setForeground(new Color(0, 0, 102));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegisterPage rp = new RegisterPage();
@@ -96,63 +96,67 @@ public class LoginPage {
 					getFrame().setVisible(false);
 				}
 				else
-					lblError.setText("Error in creating L Page");
+					lblError.setText("ERROR IN CREATING PROFILE PAGE");
 			}
 		});
 		btnRegister.setBackground(new Color(255, 255, 255));
-		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnRegister.setBounds(575, 187, 200, 70);
+		btnRegister.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 30));
+		btnRegister.setBounds(575, 110, 200, 70);
 		frame.getContentPane().add(btnRegister);
 
 		lblOr = new JLabel("OR");
 		lblOr.setBackground(Color.WHITE);
-		lblOr.setForeground(new Color(0, 255, 0));
+		lblOr.setForeground(new Color(0, 0, 102));
 		lblOr.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblOr.setBounds(650, 282, 50, 30);
+		lblOr.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 30));
+		lblOr.setBounds(650, 200, 50, 70);
 		frame.getContentPane().add(lblOr);
 
-		lblLogin = new JLabel("Login");
-		lblLogin.setForeground(new Color(0, 255, 0));
-		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblLogin.setBounds(575, 312, 200, 70);
+		lblLogin = new JLabel("LOGIN");
+		lblLogin.setForeground(new Color(0, 0, 102));
+		lblLogin.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 30));
+		lblLogin.setBounds(575, 290, 200, 70);
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblLogin);
 
-		lblUsername = new JLabel("Username");
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblUsername.setForeground(new Color(0, 255, 0));
+		lblUsername = new JLabel("USERNAME");
+		lblUsername.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		lblUsername.setForeground(new Color(0, 0, 102));
 		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsername.setBounds(475, 392, 400, 15);
+		lblUsername.setBounds(475, 375, 400, 40);
 		frame.getContentPane().add(lblUsername);
 
 		ftfUsername = new JFormattedTextField();
-		ftfUsername.setBounds(635, 407, 80, 20);
+		ftfUsername.setForeground(new Color(0, 0, 102));
+		ftfUsername.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		ftfUsername.setBounds(575, 415, 200, 40);
 		frame.getContentPane().add(ftfUsername);
 
-		lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPassword.setForeground(new Color(0, 255, 0));
+		lblPassword = new JLabel("PASSWORD");
+		lblPassword.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		lblPassword.setForeground(new Color(0, 0, 102));
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setBounds(475, 437, 400, 15);
+		lblPassword.setBounds(475, 455, 400, 40);
 		frame.getContentPane().add(lblPassword);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(635, 452, 80, 20);
+		passwordField.setForeground(new Color(0, 0, 102));
+		passwordField.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		passwordField.setBounds(575, 495, 200, 40);
 		frame.getContentPane().add(passwordField);
 
 		lblError = new JLabel("");
-		lblError.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblError.setForeground(new Color(0, 255, 0));
+		lblError.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		lblError.setForeground(new Color(255, 0, 51));
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblError.setBounds(475, 482, 400, 20);
+		lblError.setBounds(475, 617, 400, 40);
 		frame.getContentPane().add(lblError);
 
 		// sign in button
-		btnSignIn = new JButton("Sign In");
-		btnSignIn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSignIn = new JButton("SIGN IN");
+		btnSignIn.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
 		btnSignIn.setBackground(new Color(255, 255, 255));
-		btnSignIn.setForeground(new Color(0, 255, 0));
+		btnSignIn.setForeground(new Color(0, 0, 102));
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// onclick it stores all the user information in the frontend user class
@@ -180,7 +184,7 @@ public class LoginPage {
 							getFrame().setVisible(false);
 						}
 						else
-							lblError.setText("Error in creating Profile Page");
+							lblError.setText("ERROR IN CREATING PROFILE PAGE");
 
 					}
 					else{
@@ -195,24 +199,32 @@ public class LoginPage {
 			}
 		});
 
-		btnSignIn.setBounds(625, 512, 100, 25);
+		btnSignIn.setBounds(575, 557, 200, 40);
 		frame.getContentPane().add(btnSignIn);	
 	}
 
 	private void changeLabels(Boolean isValidUsername, Boolean isValidPassword){
 
 		// function to change appropriate labels in case of syntax error in input from user
-		if(isValidUsername)	
-			lblUsername.setText("Username");
+		if(isValidUsername){	
+			lblUsername.setText("USERNAME");
+			lblUsername.setForeground(new Color(0, 0, 102));
+		}
 
-		else	
-			lblUsername.setText("Username <Should contain only letters, digits or '_'>");
+		else{	
+			lblUsername.setText("USERNAME <SHOULD CONTAIN ONLY LETTERS, DIGITS OR '_'>");
+			lblUsername.setForeground(new Color(255, 0, 51));	
+		}
 
-		if(isValidPassword)	
-			lblPassword.setText("Password");
+		if(isValidPassword){
+			lblPassword.setText("PASSWORD");
+			lblPassword.setForeground(new Color(0, 0, 102));	
+		}
 
-		else	
-			lblPassword.setText("Password should contain letters and digits. Length>7");
+		else{	
+			lblPassword.setText("PASSWORD <SHOULD CONTAIN LETTERS AND DIGITS. LENGTH > 7.");
+			lblPassword.setForeground(new Color(255, 0, 51));
+		}
 
 		lblError.setText("");
 

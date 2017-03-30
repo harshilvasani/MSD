@@ -11,12 +11,14 @@ C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\backend\parser\Parser.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\personrecord\Author.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\app\utils\SimilarAuthorsUtils.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\query\utils\Title.java
+C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\personrecord\SimilarAuthor.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\frontend\utils\FavoriteAuthorUtils.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\pubrec\Incollection.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\frontend\FavoriteAuthorPage.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\backend\IBackEnd.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\backend\parser\pubrec\Article.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\backend\parser\pubrec\Incollection.java
+C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\persistence\InstallPage.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\personrecord\FavouriteAuthor.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\app\App.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\backend\parser\pubrec\Proceeding.java
@@ -32,6 +34,7 @@ C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\interfaces\IFi
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\query\utils\Conferences.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\persistence\HibernateUtil.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\personrecord\User.java
+C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\personrecord\FavoriteStat.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\frontend\LoginPage.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\frontend\CoAuthorSearchPage.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\app\utils\CoAuthorUtils.java
@@ -45,6 +48,7 @@ C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\frontend\SimilarAuthorSear
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\resources\pubrec\PhdThesis.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\app\IApp.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\backend\parser\pubrec\DBLP.java
+C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\app\utils\FavoriteAuthorUtils.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\miscellaneous\ResponseMessage.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\tester\Tester.java
 C:\Users\Harshil Vasani\workspace\MSD_DBLP-2\src\main\queryengine\interfaces\ISimAuthorSearch.java

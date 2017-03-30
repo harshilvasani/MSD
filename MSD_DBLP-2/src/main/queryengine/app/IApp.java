@@ -27,5 +27,4 @@ public interface IApp {
 	List<IPerson> filter(List<IFilter> filterCriteria, List<IPerson> searchResult);
 	List<IPerson> getFavoriteAuthorsStatistics();
 
-	/*List<?> displayStatistic();*/
 }

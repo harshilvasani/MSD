@@ -63,6 +63,14 @@ public class App implements IApp{
 		return app;
 	}
 
+	public User getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(User loggedInUser) {
+			this.loggedInUser = loggedInUser;
+	}
+	
 	/*public static App getTestAppInstance(int rows) {
 		if (null == testApp) {
 			if(rows == 0)
@@ -129,13 +137,7 @@ public class App implements IApp{
 		return backend.getAllFavoriteAuthorsForLoggedInUser(loggedInUser.getUsername());
 	}
 
-	public User getLoggedInUser() {
-		return loggedInUser;
-	}
-
-	public void setLoggedInUser(User loggedInUser) {
-			this.loggedInUser = loggedInUser;
-	}
+	
 
 	public List<IPerson> search(List<ISearch> searchCriteria) {
 

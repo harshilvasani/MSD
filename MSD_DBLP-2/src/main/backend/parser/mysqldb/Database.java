@@ -18,9 +18,9 @@ import backend.parser.pubrec.*;
 public class Database {
 
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_CONNECTION = "jdbc:mysql://mysql-server.cyiy68i5rl4p.us-west-2.rds.amazonaws.com:3306/dblp?useServerPrepStmts=false&rewriteBatchedStatements=true";
-	private static final String DB_USER = "MSD_TEAM10";
-	private static final String DB_PASSWORD = "MSD_TEAM10";
+	public static String DB_CONNECTION;// = "jdbc:mysql://mysql-server.cyiy68i5rl4p.us-west-2.rds.amazonaws.com:3306/dblp?useServerPrepStmts=false&rewriteBatchedStatements=true";
+	public static String DB_USER;// = "MSD_TEAM10";
+	public static String DB_PASSWORD;// = "MSD_TEAM10";
 	
 	/*private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/dblp?useServerPrepStmts=false&rewriteBatchedStatements=true";
 	private static final String DB_USER = "root";
