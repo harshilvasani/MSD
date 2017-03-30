@@ -160,14 +160,14 @@ public class LoginPage {
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// onclick it stores all the user information in the frontend user class
-				
+
 				String username = ftfUsername.getText();
 				String password = String.valueOf(passwordField.getPassword());
-				
+
 				// syntax checks performed by the user class
 				Boolean isValidUsername = Validator.isValidUsername(username);
 				Boolean isValidPassword = Validator.isValidPassword(password);
-				
+
 				// if the syntax is correct pass the user information to the interfacing class
 				if(isValidUsername && isValidPassword){
 
